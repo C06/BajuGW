@@ -1,0 +1,1 @@
+Taruh aset (gambar, video, dll) disini.
