@@ -28,7 +28,7 @@ namespace BajuGW
                 sqlConnection = new SQLiteConnection("Data source=" + dbName + ";Version=3;");
                 /*
                  *  Create tabel-tabel yang ada di dalam database menurut ERD
-                 *  menggunakan method query.
+                 *  menggunakan method queryWithoutReturn.
                  */
                 connect();                   
 
