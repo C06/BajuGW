@@ -16,7 +16,7 @@ namespace BajuGW
         {
             sqlCommand = new SQLiteCommand();
             ///<summary>
-            ///Checking wether the database exist
+            ///Checking whether the database exist
             ///</summary>
             try
             {

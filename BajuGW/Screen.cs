@@ -31,7 +31,6 @@ namespace BajuGW
 		void showClothDetails(Cloth cloth) {
 		
 		}
-		
 		void showSuggestion(ArrayList<Cloth> clothes) {
 		
 		}
@@ -96,7 +95,7 @@ namespace BajuGW
     {
 
     }
-
+        
     class BodyScanScreen : Screen
     {
 		void updateProjection(Tuple<int, int>) {
