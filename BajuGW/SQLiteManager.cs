@@ -20,18 +20,16 @@ namespace BajuGW
             ///</summary>
             try
             {
-                sqlConnection = new SQLiteConnection("Data source=" + dbName + ";Version=3;FailIfMissing=True;");
+                sqlConnection = new SQLiteConnection("Data source=dbBajuGW.sqlite3;Version=3;FailIfMissing=True;");
                 connect();
+                sqlCommand.Connection = sqlConnection;
             }
-            catch (SQLiteException e)
+            catch (Exception e)
             {
-                sqlConnection = new SQLiteConnection("Data source=" + dbName + ";Version=3;");
-                /*
-                 *  Create tabel-tabel yang ada di dalam database menurut ERD
-                 *  menggunakan method queryWithoutReturn.
-                 */
-                connect();                   
-
+                sqlConnection = new SQLiteConnection("Data source=dbBajuGW.sqlite3;Version=3;");
+                connect();
+                sqlCommand.Connection = sqlConnection;
+                initialize();
             }            
         }
 
@@ -50,11 +48,11 @@ namespace BajuGW
         /// Executing query in parameter for returning-result query.
         /// </summary>
         /// <param name="q">the sql query</param>
-        /// <returns>number of infected rows.</returns>
-        int queryWithReturn(String q)
+        /// <returns>SQLiteDataReader</returns>
+        SQLiteDataReader queryWithReturn(String q)
         {
             sqlCommand.CommandText = q;
-            return sqlCommand.ExecuteNonQuery();
+            return sqlCommand.ExecuteReader();
         }
 
         /// <summary>
@@ -86,6 +84,21 @@ namespace BajuGW
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Initializing the database for first use.
+        /// </summary>
+        private void initialize()
+        {
+            String sql = "CREATE TABLE user (user_name [tipe-data], password_hashed [tipe-data], salt [tipe-data], nama [tipe-data], email [tipe-data], )";
+            queryWithoutReturn(sql);
+
+            sql = "CREATE TABLE pakaian (user_name [tipe-data], item_id [tipe-data], favorit [tipe-data], warna [tipe-data], merek [tipe-data], )";
+            queryWithoutReturn(sql);
+
+            sql = "CREATE TABLE kategori (user_name [tipe-data], item_id [tipe-data], tag_name [tipe-data])";
+            queryWithoutReturn(sql);
         }
     }
 }
