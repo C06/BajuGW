@@ -81,7 +81,7 @@ namespace BajuGW
 		
 		}
 		
-		void deleteCategory(String category) {
+		void deleteCategory(String) {
 		
 		}
 		
