@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Drawing;
+using System.Runtime.InteropServices;
+//using System.Drawing.Bitmap;
+
+
+//using System.Windows.Forms;
 //using System.Windows.Controls.Frame;
 //using System.Windows.Navigation;
 namespace Test1
@@ -20,19 +28,177 @@ namespace Test1
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    
+
+    //====== Control Pointer with hand //
+  
     public partial class MainWindow : Window 
     {
+        private Thread processingThread;
+        private PXCMSenseManager senseManager;
+        private PXCMHandModule hand;
+
+
+        private PXCMHandConfiguration handConfig;
+        private PXCMHandData handData;
+        private PXCMHandData.GestureData gestureData;
+        PXCMTouchlessController ptc;
+        
+
+        ScrollViewer myListscrollViwer;
+        double initialScrollPoint;
+        double initialScrollOffest;
+        const double scrollSensitivity = 10f;
+
+        // Scrolling Feature
+       
+
+        private bool handWaving;
+
+        private bool handTrigger;
+
+        private int msgTimer;
+
+
         bool isLoginBtnClicked=false;
         bool isAuthorizeBtnClicked = false;
         bool isRegisterBtnClicked=false;
         bool isAltLoginBtnClicked=false;
         NavigationService navService;
+        PXCMSenseManager sense;
         
         public MainWindow()
         {
             InitializeComponent();
             _NavigationFrame.Navigate(new Page());
+
+
+            InitializeComponent();
+            handWaving = false;
+            handTrigger = false;
+            msgTimer = 0;
+
+            // Instantiate and initialize the SenseManager
+            senseManager = PXCMSenseManager.CreateInstance();
+            senseManager.EnableStream(PXCMCapture.StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
+            senseManager.EnableHand();
+            senseManager.Init();
+
+            // Configure the Hand Module
+            hand = senseManager.QueryHand();
+            handConfig = hand.CreateActiveConfiguration();
+            handConfig.EnableGesture("wave");
+            handConfig.EnableAllAlerts();
+            handConfig.ApplyChanges();
+
+            // Start the worker thread
+            processingThread = new Thread(new ThreadStart(ProcessingThread));
+            processingThread.Start();
+
+
+            
+      
+            
+
         }
+
+
+        //=====Touchless Controller==================================================================================//
+
+        //======Touchless controller=============================================================================//
+
+
+        /* private void Window_Loaded(object sender, RoutedEventArgs e)
+         {
+             lblMessage.Content = "(Wave Your Hand)";
+         } 
+
+         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+         {
+             processingThread.Abort();
+             if (handData != null) handData.Dispose();
+             handConfig.Dispose();
+             senseManager.Dispose();
+         }*/
+
+        private void ProcessingThread()
+        {
+            // Start AcquireFrame/ReleaseFrame loop
+            while (senseManager.AcquireFrame(true) >= pxcmStatus.PXCM_STATUS_NO_ERROR)
+            {
+                PXCMCapture.Sample sample = senseManager.QuerySample();
+                Bitmap colorBitmap;
+                PXCMImage.ImageData colorData;
+
+                // Get color image data
+                sample.color.AcquireAccess(PXCMImage.Access.ACCESS_READ, PXCMImage.PixelFormat.PIXEL_FORMAT_RGB24, out colorData);
+                colorBitmap = colorData.ToBitmap(0, sample.color.info.width, sample.color.info.height);
+
+                // Retrieve gesture data
+                hand = senseManager.QueryHand();
+
+                if (hand != null)
+                {
+                    // Retrieve the most recent processed data
+                    handData = hand.CreateOutput();
+                    handData.Update();
+                    handWaving = handData.IsGestureFired("wave", out gestureData);
+                }
+
+                // Update the user interface
+                UpdateUI(colorBitmap);
+
+                // Release the frame
+                if (handData != null) handData.Dispose();
+                colorBitmap.Dispose();
+                sample.color.ReleaseAccess(colorData);
+                senseManager.ReleaseFrame();
+            }
+        }
+
+        private void UpdateUI(Bitmap bitmap)
+        {
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate()
+            {
+                if (bitmap != null)
+                {
+                    // Mirror the color stream Image control
+                    imgColorStream.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+                    ScaleTransform mainTransform = new ScaleTransform();
+                    mainTransform.ScaleX = -1;
+                    mainTransform.ScaleY = 1;
+                    imgColorStream.RenderTransform = mainTransform;
+
+                    // Display the color stream
+                    imgColorStream.Source = ConvertBitmap.BitmapToBitmapSource(bitmap);
+
+                    // Update the screen message
+                    if (handWaving)
+                    {
+                        lblMessage.Content = "Hello World!";
+                        handTrigger = true;
+                    }
+
+                    // Reset the screen message after ~50 frames
+                    if (handTrigger)
+                    {
+                        msgTimer++;
+
+                        if (msgTimer >= 50)
+                        {
+                            lblMessage.Content = "(Wave Your Hand)";
+                            msgTimer = 0;
+                            handTrigger = false;
+                        }
+                    }
+                }
+            }));
+        }
+
+        //=================================================================================================//
+
+        
 
 
         //======================================== Login Screen ============================================//
@@ -49,12 +215,16 @@ namespace Test1
             MainScreen2 main = new MainScreen2();
             main.Show();
             this.Visibility = System.Windows.Visibility.Hidden;
+
+
             //this.navService.Navigate(new Uri("MainScreen.xaml", UriKind.RelativeOrAbsolute));
             //this.Frame.Navigate(typeof(MainScreen));
             //Uri uri = new Uri("MainScreen.xaml", UriKind.Relative);
             //his.NavigationService.Navigate(uri);
             
         }
+
+       
 
 
         //Event yang terjadi saat Mouse berada di area LoginBtn
@@ -183,7 +353,7 @@ namespace Test1
             cancelBtn.Background = brush;
             //cancelBtn.Foreground = Brushes.;
             var bc = new BrushConverter();
-            cancelBtn.Foreground = (Brush)bc.ConvertFrom("#1F8492");
+            cancelBtn.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#1F8492");
         }
 
         //Event yang terjadi saat mouse berada di luar area cancelBtn
@@ -193,7 +363,7 @@ namespace Test1
             brush.ImageSource = (ImageSource)FindResource("cancelButton");
             cancelBtn.Background = brush;
             var bc = new BrushConverter();
-            cancelBtn.Foreground = (Brush)bc.ConvertFrom("#D07339");
+            cancelBtn.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#D07339");
         }
 
         //Definisi Event yang terjadi pada exitBtn
@@ -428,7 +598,7 @@ namespace Test1
             cancelAltLoginBtn.Background = brush;
             //cancelAltLoginBtn.Foreground = Brushes.;
             var bc = new BrushConverter();
-            cancelAltLoginBtn.Foreground = (Brush)bc.ConvertFrom("#D07339");
+            cancelAltLoginBtn.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#D07339");
         }
 
         //Event yang terjadi saat mouse berada di luar area cancelAltLoginBtn
@@ -438,7 +608,7 @@ namespace Test1
             brush.ImageSource = (ImageSource)FindResource("cancelAltLoginButton");
             cancelAltLoginBtn.Background = brush;
             var bc = new BrushConverter();
-            cancelAltLoginBtn.Foreground = (Brush)bc.ConvertFrom("#1F8492");
+            cancelAltLoginBtn.Foreground = (System.Windows.Media.Brush)bc.ConvertFrom("#1F8492");
         }
 
         //Definisi Event yang terjadi pada exitAltLoginBtn
@@ -532,4 +702,13 @@ namespace Test1
 
         
     }
+
+    // Realsense Face Recognition
+
+
+
+
+
 }
+
+

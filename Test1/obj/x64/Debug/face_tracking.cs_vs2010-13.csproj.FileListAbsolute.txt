@@ -1,0 +1,1 @@
+C:\Users\azkanurunala\Documents\RSSDK\Samples\face_tracking.cs\bin\x64\Debug\face_tracking.cs.exe.config

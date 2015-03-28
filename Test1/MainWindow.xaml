@@ -7,7 +7,7 @@
         WindowStyle="None" ResizeMode="NoResize" 
         
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
-   
+
     <Window.Resources >
         <ResourceDictionary >
             <ImageSource x:Key="loginButton">E:/PPL/UItest/Test1/Test1/assets/loginBtn.png</ImageSource>
@@ -37,25 +37,26 @@
 
         </ResourceDictionary>
     </Window.Resources >
-    
+
     <Grid x:Name="loginScreen" Height="768" VerticalAlignment="Top" Visibility="Visible">
-        
-       <Grid.ColumnDefinitions>
+
+        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="111*"/>
             <ColumnDefinition Width="572*"/>
         </Grid.ColumnDefinitions>
         <DockPanel>
             <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" />
-            
-        </DockPanel>
-        
-        
-        <Image Margin="-11,-67,-23,-165" Height="1021" Source="E:/PPL/UItest/Test1/Test1/assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2"/>
 
-        <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2"/>
+        </DockPanel>
+
+
+        <!--<Image Margin="-11,-67,-23,-165" Height="1021" Source="E:/PPL/UItest/Test1/Test1/assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2"/>-->
+        <Image x:Name="imgColorStream"  Width="1366" Height="768" Margin="-261,-186,-293,-126" Grid.ColumnSpan="2" />
+        <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-35,-57,-10,0" Grid.ColumnSpan="2"/>
         <Rectangle Opacity="0.4" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Left" Height="265" Margin="-135,-67,-128,0" Stroke="Transparent" VerticalAlignment="Top" Width="1629"/>
         <Rectangle Opacity="0.4" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Left" Height="265" Margin="-135,629,-128,-126" Stroke="Transparent" VerticalAlignment="Top" Width="1629"/>
         <Image Grid.Column="1" Margin="323,16,547,596" Source="E:/PPL/UItest/Test1/Test1/assets/logo.png" Stretch="Fill"/>
+
         <Button Opacity="0.8" x:Name="loginBtn" FontSize="24" Content="CLICK HERE TO LOGIN" Width="400" Height="400" Margin="261,215,483,153" Click="loginBtnClicked" MouseEnter="loginBtnHover" MouseLeave="loginBtnIdle" FontFamily="Big John" Foreground="#3498db"  Grid.Column="1" >
 
             <Button.Background>
@@ -82,6 +83,11 @@
             </Button.Style>
 
         </Button>
+
+
+        <Label x:Name="lblMessage"
+               HorizontalAlignment="Center"
+               FontSize="24" />
 
         <Button Opacity="0.8" Visibility="Collapsed" Height="300" Width="300" x:Name="altLoginBtn2" Margin="85,249,981,219" Click="altLogin2" Foreground="white" FontFamily="SLIM Joe" FontSize="32" Grid.ColumnSpan="2" MouseEnter="altLoginHover" MouseLeave="altLoginIdle" >
 
@@ -170,7 +176,7 @@
             </ProgressBar.Background>
         </ProgressBar>
 
-    
+
 
         <Rectangle x:Name="deactivator" Visibility="Collapsed" Opacity="0.8" Fill="Black" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2"/>
 

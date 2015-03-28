@@ -23,6 +23,7 @@ namespace MainScreen
         bool isMeasureBtnClicked = true;
         bool isWardrobeBtnClicked = false;
         bool isStoreBtnClicked = false;
+        
         //bool isAltLoginBtnClicked = false;
 
         public MainScreen2()

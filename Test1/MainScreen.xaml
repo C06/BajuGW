@@ -1,4 +1,4 @@
-﻿<Window Cursor="E:/PPL/UItest/Test1/Test1/assets/circleDouble.cur" x:Class="MainScreen.MainScreen2"
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  Cursor="E:/PPL/UItest/Test1/Test1/assets/circleDouble.cur" x:Class="MainScreen.MainScreen2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"       
         Title="MainWindow" Height="768" Width="1366" 
@@ -102,7 +102,18 @@
             </Button.Style>
 
         </Button>
+        <telerik:RadCarousel Padding="0" HorizontalAlignment="Center" Background="Transparent" HorizontalContentAlignment="Center" Margin="52,81,121,160" Grid.Column="1" Width="971"  >
+            <!--Background="Transparent"-->
+            <Image Height="160"  Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju4.png" RenderTransformOrigin="0.941,0.479"/>
+            <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju3.png"/>
+            <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju2.png"/>
+            <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju1.png"/>
 
+            <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju2.png"/>
+            <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju3.png"/>
+            <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju4.png"/>
+
+        </telerik:RadCarousel>
 
 
 
@@ -167,7 +178,7 @@
         <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,734,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81"/>
         <TextBlock x:Name="title"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,881,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
         <!-- Measure Screen -->
-        <Grid x:Name="measureScreen" Visibility="Visible">
+        <Grid x:Name="measureScreen" Visibility="Collapsed">
             <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
 
             <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="Big John" Foreground="#3498db" >
@@ -230,7 +241,10 @@
         </Grid>
 
         <!-- Wardrobe Screen -->
-        <Grid x:Name="wardrobeScreen" Visibility="Collapsed"/>
+        <Grid x:Name="wardrobeScreen" Visibility="Visible">
+
+
+        </Grid>
 
 
         <!-- Store Screen -->
