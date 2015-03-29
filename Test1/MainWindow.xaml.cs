@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Data.SQLite;
 //using System.Drawing.Bitmap;
 
 
@@ -296,6 +297,8 @@ namespace Test1
             addNewAccountBtn.Background = brush;
             if (password.Password == rpassword.Password)
             {
+                SQLiteManager manager = new SQLiteManager("data.db");
+                manager.queryWithoutReturn("insert into accounts values('"+username.Text+"','"+password.Password+"')");
                 warning.Visibility = System.Windows.Visibility.Hidden;
                 username.Text = "";
                 uLabel.Visibility = System.Windows.Visibility.Visible;
@@ -307,6 +310,7 @@ namespace Test1
                 rpLabel.Visibility = System.Windows.Visibility.Visible;
                 deactivator.Visibility = System.Windows.Visibility.Collapsed;
                 registerForm.Visibility = System.Windows.Visibility.Hidden;
+                
                 
             }
             else
@@ -544,14 +548,34 @@ namespace Test1
             altLoginBtn.Background = brush;
             if (passwordLogin.Password != "" && usernameLogin.Text !="")
             {
-                lwarning.Visibility = System.Windows.Visibility.Hidden;
-                usernameLogin.Text = "";
-                ulLabel.Visibility = System.Windows.Visibility.Visible;
-                passwordLogin.Password = "";
-                plLabel.Visibility = System.Windows.Visibility.Visible;
-                deactivator.Visibility = System.Windows.Visibility.Collapsed;
-                altLoginForm.Visibility = System.Windows.Visibility.Hidden;
+                SQLiteManager manager = new SQLiteManager("data.db");
+                String user = "";
+                String pass = "";
+                
+                SQLiteDataReader reader = manager.queryWithReturn("select * from accounts where username='" + usernameLogin.Text+"'");
+                if (reader.Read())
+                {
+                    user = "" + reader["username"];
+                    pass = "" + reader["password"];
 
+                    lwarning.Visibility = System.Windows.Visibility.Hidden;
+                    usernameLogin.Text = "";
+                    ulLabel.Visibility = System.Windows.Visibility.Visible;
+                    passwordLogin.Password = "";
+                    plLabel.Visibility = System.Windows.Visibility.Visible;
+                    deactivator.Visibility = System.Windows.Visibility.Collapsed;
+                    altLoginForm.Visibility = System.Windows.Visibility.Hidden;
+                    MainScreen2 main = new MainScreen2();
+                    main.Show();
+                    this.Visibility = System.Windows.Visibility.Hidden;
+
+                }
+                else
+                {
+                    loginFailedWarning.Visibility = System.Windows.Visibility.Visible;
+                }
+
+                manager.disconnect();
             }
             else
             {
