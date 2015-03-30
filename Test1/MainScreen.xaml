@@ -1,4 +1,4 @@
-﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  Cursor="E:/PPL/UItest/Test1/Test1/assets/circleDouble.cur" x:Class="MainScreen.MainScreen2"
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  Cursor="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/circleDouble.cur" x:Class="MainScreen.MainScreen2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"       
         Title="MainWindow" Height="768" Width="1366" 
@@ -9,53 +9,53 @@
 
     <Window.Resources >
         <ResourceDictionary >
-            <ImageSource x:Key="loginButton">E:/PPL/UItest/Test1/Test1/assets/loginBtn.png</ImageSource>
-            <ImageSource x:Key="loginButtonClicked">E:/PPL/UItest/Test1/Test1/assets/loginBtnClicked.png</ImageSource>
-            <ImageSource x:Key="loginButtonHover">E:/PPL/UItest/Test1/Test1/assets/loginBtnHover.png</ImageSource>
-            <ImageSource x:Key="registerButton">E:/PPL/UItest/Test1/Test1/assets/registerBtn.png</ImageSource>
-            <ImageSource x:Key="registerButtonClicked">E:/PPL/UItest/Test1/Test1/assets/registerBtnClicked.png</ImageSource>
-            <ImageSource x:Key="registerButtonHover">E:/PPL/UItest/Test1/Test1/assets/registerBtnHover.png</ImageSource>
+            <ImageSource x:Key="loginButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/loginBtn.png</ImageSource>
+            <ImageSource x:Key="loginButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/loginBtnClicked.png</ImageSource>
+            <ImageSource x:Key="loginButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/loginBtnHover.png</ImageSource>
+            <ImageSource x:Key="registerButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/registerBtn.png</ImageSource>
+            <ImageSource x:Key="registerButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/registerBtnClicked.png</ImageSource>
+            <ImageSource x:Key="registerButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/registerBtnHover.png</ImageSource>
 
-            <ImageSource x:Key="addNewAccountButton">E:/PPL/UItest/Test1/Test1/assets/addNewAccountBtn.png</ImageSource>
-            <ImageSource x:Key="addNewAccountButtonClicked">E:/PPL/UItest/Test1/Test1/assets/addNewAccountBtnClicked.png</ImageSource>
-            <ImageSource x:Key="addNewAccountButtonHover">E:/PPL/UItest/Test1/Test1/assets/addNewAccountBtnHover.png</ImageSource>
+            <ImageSource x:Key="addNewAccountButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/addNewAccountBtn.png</ImageSource>
+            <ImageSource x:Key="addNewAccountButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/addNewAccountBtnClicked.png</ImageSource>
+            <ImageSource x:Key="addNewAccountButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/addNewAccountBtnHover.png</ImageSource>
 
-            <ImageSource x:Key="cancelSettingButton">E:/PPL/UItest/Test1/Test1/assets/cancelSettingBtn.png</ImageSource>
-            <ImageSource x:Key="cancelSettingButtonClicked">E:/PPL/UItest/Test1/Test1/assets/cancelSettingBtn.png</ImageSource>
-            <ImageSource x:Key="cancelSettingButtonHover">E:/PPL/UItest/Test1/Test1/assets/cancelSettingBtnHover.png</ImageSource>
+            <ImageSource x:Key="cancelSettingButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelSettingBtn.png</ImageSource>
+            <ImageSource x:Key="cancelSettingButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelSettingBtn.png</ImageSource>
+            <ImageSource x:Key="cancelSettingButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelSettingBtnHover.png</ImageSource>
 
-            <ImageSource x:Key="saveSettingButton">E:/PPL/UItest/Test1/Test1/assets/saveBtn.png</ImageSource>
-            <ImageSource x:Key="saveSettingButtonClicked">E:/PPL/UItest/Test1/Test1/assets/saveBtn.png</ImageSource>
-            <ImageSource x:Key="saveSettingButtonHover">E:/PPL/UItest/Test1/Test1/assets/saveBtnHover.png</ImageSource>
+            <ImageSource x:Key="saveSettingButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/saveBtn.png</ImageSource>
+            <ImageSource x:Key="saveSettingButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/saveBtn.png</ImageSource>
+            <ImageSource x:Key="saveSettingButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/saveBtnHover.png</ImageSource>
 
 
-            <ImageSource x:Key="exitButton">E:/PPL/UItest/Test1/Test1/assets/exitBtn.png</ImageSource>
-            <ImageSource x:Key="exitButtonHover">E:/PPL/UItest/Test1/Test1/assets/exitBtnHover.png</ImageSource>
-            <ImageSource x:Key="formFieldActive">E:/PPL/UItest/Test1/Test1/assets/formFieldActive.png</ImageSource>
-            <ImageSource x:Key="formFieldInactive">E:/PPL/UItest/Test1/Test1/assets/formFieldInactive.png</ImageSource>
+            <ImageSource x:Key="exitButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/exitBtn.png</ImageSource>
+            <ImageSource x:Key="exitButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/exitBtnHover.png</ImageSource>
+            <ImageSource x:Key="formFieldActive">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/formFieldActive.png</ImageSource>
+            <ImageSource x:Key="formFieldInactive">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/formFieldInactive.png</ImageSource>
 
-            <ImageSource x:Key="altLoginButton">E:/PPL/UItest/Test1/Test1/assets/altLoginBtn.png</ImageSource>
-            <ImageSource x:Key="altLoginButtonClicked">E:/PPL/UItest/Test1/Test1/assets/altLoginBtn.png</ImageSource>
-            <ImageSource x:Key="altLoginButtonHover">E:/PPL/UItest/Test1/Test1/assets/altLoginBtnHover.png</ImageSource>
-            <ImageSource x:Key="cancelAltLoginButton">E:/PPL/UItest/Test1/Test1/assets/cancelBtn2.png</ImageSource>
-            <ImageSource x:Key="cancelAltLoginButtonClicked">E:/PPL/UItest/Test1/Test1/assets/cancelBtn4.png</ImageSource>
-            <ImageSource x:Key="cancelAltLoginButtonHover">E:/PPL/UItest/Test1/Test1/assets/cancelBtn1.png</ImageSource>
+            <ImageSource x:Key="altLoginButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/altLoginBtn.png</ImageSource>
+            <ImageSource x:Key="altLoginButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/altLoginBtn.png</ImageSource>
+            <ImageSource x:Key="altLoginButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/altLoginBtnHover.png</ImageSource>
+            <ImageSource x:Key="cancelAltLoginButton">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelBtn2.png</ImageSource>
+            <ImageSource x:Key="cancelAltLoginButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelBtn4.png</ImageSource>
+            <ImageSource x:Key="cancelAltLoginButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelBtn1.png</ImageSource>
 
-            <ImageSource x:Key="logoutButtonHover">E:/PPL/UItest/Test1/Test1/assets/logoutBtnHover.png</ImageSource>
-            <ImageSource x:Key="logoutButtonClicked">E:/PPL/UItest/Test1/Test1/assets/logoutBtn.png</ImageSource>
-            <ImageSource x:Key="logoutButtonIdle">E:/PPL/UItest/Test1/Test1/assets/logoutBtn.png</ImageSource>
+            <ImageSource x:Key="logoutButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/logoutBtnHover.png</ImageSource>
+            <ImageSource x:Key="logoutButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/logoutBtn.png</ImageSource>
+            <ImageSource x:Key="logoutButtonIdle">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/logoutBtn.png</ImageSource>
 
-            <ImageSource x:Key="settingButtonHover">E:/PPL/UItest/Test1/Test1/assets/settingBtnHover.png</ImageSource>
-            <ImageSource x:Key="settingButtonClicked">E:/PPL/UItest/Test1/Test1/assets/settingBtn.png</ImageSource>
-            <ImageSource x:Key="settingButtonIdle">E:/PPL/UItest/Test1/Test1/assets/settingBtn.png</ImageSource>
+            <ImageSource x:Key="settingButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/settingBtnHover.png</ImageSource>
+            <ImageSource x:Key="settingButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/settingBtn.png</ImageSource>
+            <ImageSource x:Key="settingButtonIdle">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/settingBtn.png</ImageSource>
 
-            <ImageSource x:Key="bodyButtonHover">E:/PPL/UItest/Test1/Test1/assets/bodyBtnHover.png</ImageSource>
-            <ImageSource x:Key="bodyButtonClicked">E:/PPL/UItest/Test1/Test1/assets/bodyBtn.png</ImageSource>
-            <ImageSource x:Key="bodyButtonIdle">E:/PPL/UItest/Test1/Test1/assets/bodyBtn.png</ImageSource>
+            <ImageSource x:Key="bodyButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/bodyBtnHover.png</ImageSource>
+            <ImageSource x:Key="bodyButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/bodyBtn.png</ImageSource>
+            <ImageSource x:Key="bodyButtonIdle">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/bodyBtn.png</ImageSource>
 
-            <ImageSource x:Key="clothButtonHover">E:/PPL/UItest/Test1/Test1/assets/clothBtnHover.png</ImageSource>
-            <ImageSource x:Key="clothButtonClicked">E:/PPL/UItest/Test1/Test1/assets/clothBtn.png</ImageSource>
-            <ImageSource x:Key="clothButtonIdle">E:/PPL/UItest/Test1/Test1/assets/clothBtn.png</ImageSource>
+            <ImageSource x:Key="clothButtonHover">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/clothBtnHover.png</ImageSource>
+            <ImageSource x:Key="clothButtonClicked">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/clothBtn.png</ImageSource>
+            <ImageSource x:Key="clothButtonIdle">C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/clothBtn.png</ImageSource>
 
         </ResourceDictionary>
     </Window.Resources >
@@ -66,7 +66,7 @@
             <ColumnDefinition Width="572*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Margin="-11,-67,-23,-165" Height="1021" Source="E:/PPL/UItest/Test1/Test1/assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2"/>
+        <Image Margin="-11,-67,-23,-165" Height="1021" Source="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2"/>
 
         <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2"/>
         <Rectangle IsHitTestVisible="False" StrokeThickness="4" Fill="Transparent" Opacity="1.0" HorizontalAlignment="Left" Height="697" Margin="29,53,0,0" Stroke="#ED2F59" VerticalAlignment="Top" Width="971" Grid.Column="1"/>
@@ -74,12 +74,12 @@
         <Rectangle Fill="Black" Opacity="0.5" HorizontalAlignment="Left" Height="100" Margin="-11,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223"/>
 
 
-        <Image Margin="35,11,50,679" Source="E:/PPL/UItest/Test1/Test1/assets/logo.png" Stretch="Fill"/>
+        <Image Margin="35,11,50,679" Source="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/logo.png" Stretch="Fill"/>
 
         <Button Opacity="1.0" x:Name="measureBtn" Height="160" Width="160" Margin="25,117,37,491" Click="measureBtnClicked" MouseEnter="measureBtnHover" MouseLeave="measureBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
             <Button.Background>
-                <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/measureActive.png"  />
+                <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/measureActive.png"  />
             </Button.Background>
 
             <Button.Style>
@@ -102,8 +102,9 @@
             </Button.Style>
 
         </Button>
+        <!--
         <telerik:RadCarousel Padding="0" HorizontalAlignment="Center" Background="Transparent" HorizontalContentAlignment="Center" Margin="52,81,121,160" Grid.Column="1" Width="971"  >
-            <!--Background="Transparent"-->
+            <Background="Transparent"
             <Image Height="160"  Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju4.png" RenderTransformOrigin="0.941,0.479"/>
             <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju3.png"/>
             <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju2.png"/>
@@ -113,7 +114,7 @@
             <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju3.png"/>
             <Image Height="160" Source="E:\PPL\UItest\Test1\Test1\assets\tester\baju4.png"/>
 
-        </telerik:RadCarousel>
+        </telerik:RadCarousel> -->
 
 
 
@@ -124,7 +125,7 @@
         <Button Opacity="0.5" x:Name="wardrobeBtn" Height="160" Width="160" Margin="27,332,35,276" MouseEnter="wardrobeBtnHover" MouseLeave="wardrobeBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="wardrobeBtnClicked" >
 
             <Button.Background>
-                <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/wardrobeActive.png"  />
+                <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/wardrobeActive.png"  />
             </Button.Background>
 
             <Button.Style>
@@ -152,7 +153,7 @@
         <Button Opacity="0.5" x:Name="storeBtn" Height="160" Width="160" Margin="25,560,37,48" Click="storeBtnClicked" MouseEnter="storeBtnHover" MouseLeave="storeBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
             <Button.Background>
-                <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/storeActive.png"  />
+                <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/storeActive.png"  />
             </Button.Background>
 
             <Button.Style>
@@ -184,7 +185,7 @@
             <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/bodyBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/bodyBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -211,7 +212,7 @@
             <Button Opacity="1.0" x:Name="clothBtn" Height="240" Width="240" Margin="802,273,-820,255" Click="clothBtnClicked" MouseEnter="clothBtnHover" MouseLeave="clothBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/clothBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/clothBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -255,7 +256,7 @@
         <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="1043,668,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="1" >
 
             <Button.Background>
-                <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/settingBtn.png"  />
+                <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/settingBtn.png"  />
             </Button.Background>
 
             <Button.Style>
@@ -281,7 +282,7 @@
         <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="1052,8,12,680" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="1" >
 
             <Button.Background>
-                <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/logoutBtn.png"  />
+                <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/logoutBtn.png"  />
             </Button.Background>
 
             <Button.Style>
@@ -333,7 +334,7 @@
             <Button Opacity="0.5" x:Name="exitBtn" Margin="544,75,-93,295" MouseEnter="exitBtnHover" MouseLeave="exitBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="exitBtnClicked" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/exitBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/exitBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -359,7 +360,7 @@
             <Button Content="SAVE" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="saveBtn" Margin="198,187,47,97" MouseEnter="saveBtnHover" MouseLeave="saveBtnIdle" FontFamily="Slim Joe" Foreground="White" Click="saveBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/saveBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/saveBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -386,7 +387,7 @@
             <Button Content="cancel" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="cancelBtn" Margin="-64,187,309,97" MouseEnter="cancelSettingBtnHover" MouseLeave="cancelSettingBtnIdle" FontFamily="Slim Joe" Foreground="#ED2F59" Click="cancelSettingBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/cancelSettingBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelSettingBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -422,7 +423,7 @@
             <Button Opacity="0.5" x:Name="exitLogoutBtn" Margin="544,211,-93,159" MouseEnter="exitLogoutBtnHover" MouseLeave="exitLogoutBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="exitLogoutBtnClicked" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/exitBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/exitBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -448,7 +449,7 @@
             <Button Content="LOGOUT" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="confirmLogoutBtn" Margin="210,27,35,257"  FontFamily="Slim Joe" Foreground="White" RenderTransformOrigin="1.148,6.37" Grid.Row="1" Click="confirmLogoutButtonClicked" MouseEnter="confirmLogoutButtonHover" MouseLeave="confirmLogoutButtonIdle" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/saveBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/saveBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
@@ -475,7 +476,7 @@
             <Button Content="cancel" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="cancelLogoutBtn" Margin="-50,27,295,257" MouseEnter="cancelLogoutBtnHover" MouseLeave="cancelLogoutBtnIdle" FontFamily="Slim Joe" Foreground="#ED2F59" Click="cancelLogoutBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="E:/PPL/UItest/Test1/Test1/assets/cancelSettingBtn.png"  />
+                    <ImageBrush ImageSource ="C:/Users/Kevin/Documents/GitHub/BajuGW/Test1/assets/cancelSettingBtn.png"  />
                 </Button.Background>
 
                 <Button.Style>
