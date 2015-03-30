@@ -44,6 +44,7 @@ namespace Test1
         private PXCMHandConfiguration handConfig;
         private PXCMHandData handData;
         private PXCMHandData.GestureData gestureData;
+        private BitmapSource bitmapSource;
         PXCMTouchlessController ptc;
         
 
@@ -172,7 +173,8 @@ namespace Test1
                     imgColorStream.RenderTransform = mainTransform;
 
                     // Display the color stream
-                    imgColorStream.Source = ConvertBitmap.BitmapToBitmapSource(bitmap);
+                    bitmapSource = ConvertBitmap.BitmapToBitmapSource(bitmap);
+                    streaming.ImageSource = bitmapSource;
 
                     // Update the screen message
                     if (handWaving)
@@ -210,12 +212,12 @@ namespace Test1
             isLoginBtnClicked = true;
             //loginText.Visibility = System.Windows.Visibility.Hidden;
             var brush = new ImageBrush();
-            brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
+            brush.ImageSource = bitmapSource;
             loginBtn.Background = brush;
             loadingBar.Visibility = System.Windows.Visibility.Visible;
             MainScreen2 main = new MainScreen2();
-            main.Show();
             this.Visibility = System.Windows.Visibility.Hidden;
+            main.Show();
 
 
             //this.navService.Navigate(new Uri("MainScreen.xaml", UriKind.RelativeOrAbsolute));
@@ -234,10 +236,10 @@ namespace Test1
             //Cursor = (Cursors)FindResource("E:/PPL/UItest/Test1/Test1/assets/circleTriple.cur");
             if (isLoginBtnClicked == false)
             {
-                var brush = new ImageBrush();
+                /* var brush = new ImageBrush();
                 brush.ImageSource = (ImageSource)FindResource("loginButtonHover");
                 loginBtn.Background = brush;
-                loginBtn.Opacity = 0.5;
+                loginBtn.Opacity = 0.5; */
             }
         }
 
@@ -249,10 +251,10 @@ namespace Test1
 
             // loginBtn.Content.Visibility = System.Windows.Visibility.Visible;
             {
-                var brush = new ImageBrush();
+                /* var brush = new ImageBrush();
                 brush.ImageSource = (ImageSource)FindResource("loginButton");
                 loginBtn.Background = brush;
-                loginBtn.Opacity = 0.8;
+                loginBtn.Opacity = 0.8; */
             }
         }
 
@@ -572,7 +574,7 @@ namespace Test1
                 }
                 else
                 {
-                    loginFailedWarning.Visibility = System.Windows.Visibility.Visible;
+                    //loginFailedWarning.Visibility = System.Windows.Visibility.Visible;
                 }
 
                 manager.disconnect();

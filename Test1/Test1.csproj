@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Test1</RootNamespace>
     <AssemblyName>Test1</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -34,38 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EQATEC.Analytics.Monitor, Version=3.2.1.0, Culture=neutral, PublicKeyToken=213c7c68adb58a17, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\EQATEC.Analytics.Monitor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="libpxcclr.cs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca106b2214526f83, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\libpxcclr.cs.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\SharpDX\SharpDX.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SharpDX.Direct2D1">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\SharpDX\SharpDX.Direct2D1.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D10">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\SharpDX\SharpDX.Direct3D10.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D9">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\SharpDX\SharpDX.Direct3D9.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SharpDX.DXGI">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\SharpDX\SharpDX.DXGI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>sqlite-netFx451-binary-x64-2013-1.0.96.0\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.79.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
@@ -76,242 +54,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Telerik.Pivot.Core, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Pivot.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Pivot.DataProviders.Adomd, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Pivot.DataProviders.Adomd.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Pivot.DataProviders.Queryable, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Pivot.DataProviders.Queryable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Pivot.DataProviders.Xmla, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Pivot.DataProviders.Xmla.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Analytics, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Analytics.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Cloud, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Cloud.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Cloud.Controls, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Cloud.Controls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Chart.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Chart.Direct2D, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Chart.Direct2D.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Charting, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Charting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Data, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.DataServices, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.DataServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.DataServices50, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.DataServices50.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Diagrams, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Diagrams.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Diagrams.Extensions, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Diagrams.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Docking, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Docking.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.EntityFramework, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.EntityFramework60, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.EntityFramework60.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Expressions, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Expressions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewers, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.FixedDocumentViewers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewersUI, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.FixedDocumentViewersUI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.GanttView, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.GanttView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.GridView, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.GridView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.ImageEditor, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.ImageEditor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Input, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Input.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Pivot, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Pivot.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.PivotFieldList, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.PivotFieldList.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.RibbonView, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.RibbonView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.RichTextBoxUI, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.RichTextBoxUI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.ScheduleView, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.ScheduleView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Spreadsheet, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Controls.Spreadsheet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Data, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Diagrams.Core, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Diagrams.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Core, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Fixed, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Fixed.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Flow, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Flow.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Flow.FormatProviders.Pdf, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.FormatProviders.Html, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.FormatProviders.Html.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.FormatProviders.MsRichTextBoxXaml, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.FormatProviders.MsRichTextBoxXaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.FormatProviders.OpenXml, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.FormatProviders.OpenXml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.FormatProviders.Pdf, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.FormatProviders.Pdf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.FormatProviders.Rtf, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.FormatProviders.Rtf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.FormatProviders.Xaml, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.FormatProviders.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Proofing, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Proofing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Proofing.DataGrid, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Proofing.DataGrid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Proofing.Dictionaries.En-US, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Proofing.Dictionaries.En-US.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Proofing.RadGridView, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Proofing.RadGridView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Spreadsheet, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Maths, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Maths.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.PersistenceFramework, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.PersistenceFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Scheduling.Core, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Scheduling.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Zip, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Zip.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Zip.Extensions, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Telerik\UI for WPF Q1 2015\Binaries\WPF45\Telerik.Windows.Zip.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -321,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SQLiteManager.cs" />
     <Page Include="MainScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

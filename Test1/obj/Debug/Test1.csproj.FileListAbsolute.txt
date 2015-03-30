@@ -168,3 +168,8 @@ C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\obj\Debug\Test1_MarkupCompile.cache
 C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\obj\Debug\Test1.g.resources
 C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\obj\Debug\Test1.Properties.Resources.resources
 C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\obj\Debug\Test1.csproj.GenerateResource.Cache
+C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\bin\Debug\Test1.exe
+C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\bin\Debug\Test1.pdb
+C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\bin\Debug\libpxcclr.cs.dll
+C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\bin\Debug\System.Data.SQLite.dll
+C:\Users\Kevin\Documents\GitHub\BajuGW\Test1\bin\Debug\System.Data.SQLite.xml
