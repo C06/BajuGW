@@ -6,7 +6,7 @@ namespace BajuGW
     {
 		Cloth getClothDetails()
 		{
-		
+            return null;
 		}
 		
 		void setFavorite() {

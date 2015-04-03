@@ -1,36 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Data.SQLite;
 
-
-namespace BajuGW
+namespace Test1
 {
     class SQLiteManager
     {
-        private SQLiteCommand sqlCommand;
         private SQLiteConnection sqlConnection;
+        private SQLiteCommand sqlCommand;
+
         public SQLiteManager(String dbName)
         {
-            sqlCommand = new SQLiteCommand();
-            ///<summary>
-            ///Checking whether the database exist
-            ///</summary>
-            try
-            {
-                sqlConnection = new SQLiteConnection("Data source=dbBajuGW.sqlite3;Version=3;FailIfMissing=True;");
-                connect();
-                sqlCommand.Connection = sqlConnection;
-            }
-            catch (Exception e)
-            {
-                sqlConnection = new SQLiteConnection("Data source=dbBajuGW.sqlite3;Version=3;");
-                connect();
-                sqlCommand.Connection = sqlConnection;
-                initialize();
-            }            
+            sqlConnection = new SQLiteConnection("Data Source=.\\" + dbName + ";Version=3;");
+            sqlCommand = new SQLiteCommand(sqlConnection);
+            
+            connect();
         }
 
         /// <summary>
@@ -38,27 +21,45 @@ namespace BajuGW
         /// </summary>
         /// <param name="q">the sql query</param>
         /// <returns>number of infected rows.</returns>
-        int queryWithoutReturn(String q)
+        public void queryWithoutReturn(String q)
         {
-            sqlCommand.CommandText = q;
-            return sqlCommand.ExecuteNonQuery();
+            try
+            {
+                sqlCommand.CommandText = q;
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            
         }
 
         /// <summary>
         /// Executing query in parameter for returning-result query.
         /// </summary>
         /// <param name="q">the sql query</param>
-        /// <returns>SQLiteDataReader</returns>
-        SQLiteDataReader queryWithReturn(String q)
+        /// <returns>number of infected rows.</returns>
+        public SQLiteDataReader queryWithReturn(String q)
         {
-            sqlCommand.CommandText = q;
-            return sqlCommand.ExecuteReader();
+            SQLiteDataReader reader;
+            try
+            {
+                sqlCommand.CommandText = q;
+                reader = sqlCommand.ExecuteReader();
+            }
+            catch
+            {
+                reader = null;
+            }
+            return reader;
+            
         }
 
         /// <summary>
         /// Method connect ini return type void. (Awalnya int)
         /// </summary>
-        private void connect()
+        public void connect()
         {
             sqlConnection.Open();
         }
@@ -66,7 +67,7 @@ namespace BajuGW
         /// <summary>
         /// Method disconnect ini return type void. (Awalnya int)
         /// </summary>
-        private void disconnect()
+        public void disconnect()
         {
             sqlConnection.Close();
         }
@@ -85,20 +86,13 @@ namespace BajuGW
                 return false;
             }
         }
-
-        /// <summary>
-        /// Initializing the database for first use.
-        /// </summary>
-        private void initialize()
+        
+        public void initDatabase(String[] queries)
         {
-            String sql = "CREATE TABLE user (user_name [tipe-data], password_hashed [tipe-data], salt [tipe-data], nama [tipe-data], email [tipe-data], )";
-            queryWithoutReturn(sql);
-
-            sql = "CREATE TABLE pakaian (user_name [tipe-data], item_id [tipe-data], favorit [tipe-data], warna [tipe-data], merek [tipe-data], )";
-            queryWithoutReturn(sql);
-
-            sql = "CREATE TABLE kategori (user_name [tipe-data], item_id [tipe-data], tag_name [tipe-data])";
-            queryWithoutReturn(sql);
+            for (int i=0; i<queries.length, i++)
+            {
+                queryWithoutReturn(queries[i]);
+            }
         }
     }
 }

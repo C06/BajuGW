@@ -6,19 +6,19 @@ namespace BajuGW
     class OnlineStore
     {
 		Cloth getOnlineClothDetails(String id) {
-		
+            return null;
 		}
 		
 		int connect() {
-		
+            return 0;
 		}
 		
 		int disconnect() {
-		
+            return 0;
 		}
 		
-		ArrayList<OnlineCloth> getOnlineClothes(String category) {
-		
+		ArrayList getOnlineClothes(String category) {
+            return null;
 		}
 		
 		void setFavorite(String id) {
@@ -26,15 +26,15 @@ namespace BajuGW
 		}
 		
 		int buy(String id) {
-		
+            return 0;
 		}
 		
 		int checkConnection() {
-		
+            return 0;
 		}
 		
-		ArrayList<OnlineCloth> search(String query) {
-		
+		ArrayList search(String query) {
+            return null;
 		}
     }
 }

@@ -6,47 +6,47 @@ namespace BajuGW
     class Account
     {
 		int setfavorite(String id) {
-		
+            return 0;
 		}
 		
 		Cloth getClothDetails(String id) {
-		
+            return null;
 		}
 		
-		ArrayList<Cloth> getSuggestion() {
-		
+		ArrayList getSuggestion() {
+            return null;
 		}
 		
-		ArrayList<String> getCategories() {
-		
+		ArrayList getCategories() {
+            return null;
 		}
 		
-		ArrayList<Cloth> getClothes(String categories) {
-		
+		ArrayList getClothes(String categories) {
+            return null;
 		}
 		
-		ArrayList<Cloth> searchWardrobe(String query) {
-		
+		ArrayList searchWardrobe(String query) {
+            return null;
 		}
 		
 		int deleteCloth(String id) {
-		
+            return 0;
 		}
 		
 		int createCloth(Tuple<int, int, File> data) {
-		
+            return 0;
 		}
 		
 		int addCategory(String category) {
-		
+            return 0;
 		}
 		
 		int deleteCategory(String category) {
-		
+            return 0;
 		}
 		
 		int editCategory(String category, String newName) {
-		
+            return 0;
 		}
     }
 }
