@@ -50,11 +50,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>BajuGW.App</StartupObject>
+    <StartupObject>BajuGW.Controller</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="libpxcclr.cs">
+      <HintPath>.\libpxcclr.cs.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,29 +75,25 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Controller.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="views\LoginScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="views\MainScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+    <Compile Include="ConvertBitmap.cs" />
+    <Compile Include="models\Wardrobe.cs" />
+    <Compile Include="models\Account.cs" />
+    <Compile Include="Controller.xaml.cs">
+      <DependentUpon>Controller.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models\ConvertBitmap.cs" />
-    <Compile Include="views\LoginScreen.xaml.cs">
-      <DependentUpon>LoginScreen.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="models\Cloth.cs" />
+    <Compile Include="models\OnlineStore.cs" />
+    <Compile Include="SQLiteManager.cs" />
     <Compile Include="views\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="views\LoginScreen.xaml.cs">
+      <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -139,252 +141,220 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\addNewAccountBtn.png">
+    <Content Include="assets\addNewAccountBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\addNewAccountBtn2.png">
+    </Content>
+    <Content Include="assets\addNewAccountBtn2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\addNewAccountBtn2Hover.png">
+    </Content>
+    <Content Include="assets\addNewAccountBtn2Hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\addNewAccountBtnClicked.png">
+    </Content>
+    <Content Include="assets\addNewAccountBtnClicked.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\addNewAccountBtnHover.png">
+    </Content>
+    <Content Include="assets\addNewAccountBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\altLogin2.png">
+    </Content>
+    <Content Include="assets\altLogin2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\altLogin2Hover.png">
+    </Content>
+    <Content Include="assets\altLogin2Hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\altLoginBtn.png">
+    </Content>
+    <Content Include="assets\altLoginBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\altLoginBtnHover.png">
+    </Content>
+    <Content Include="assets\altLoginBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\Beautiful-Scenery-Widescreen.jpg">
+    </Content>
+    <Content Include="assets\Beautiful-Scenery-Widescreen.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\bodyBtn.png">
+    </Content>
+    <Content Include="assets\bodyBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\bodyBtnHover.png">
+    </Content>
+    <Content Include="assets\bodyBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn1.png">
+    </Content>
+    <Content Include="assets\cancelBtn1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn2.png">
+    </Content>
+    <Content Include="assets\cancelBtn2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn3.png">
+    </Content>
+    <Content Include="assets\cancelBtn3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn4.png">
+    </Content>
+    <Content Include="assets\cancelBtn4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn5.png">
+    </Content>
+    <Content Include="assets\cancelBtn5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn5Hover.png">
+    </Content>
+    <Content Include="assets\cancelBtn5Hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn6.png">
+    </Content>
+    <Content Include="assets\cancelBtn6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelBtn6Hover.png">
+    </Content>
+    <Content Include="assets\cancelBtn6Hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelSettingBtn.png">
+    </Content>
+    <Content Include="assets\cancelSettingBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cancelSettingBtnHover.png">
+    </Content>
+    <Content Include="assets\cancelSettingBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\circle.cur">
+    </Content>
+    <Content Include="assets\circle.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\circleDouble.cur">
+    </Content>
+    <Content Include="assets\circleDouble.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\circleDouble.png">
+    </Content>
+    <Content Include="assets\circleDouble.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\circleTriple.cur">
+    </Content>
+    <Content Include="assets\circleTriple.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\clothBtn.png">
+    </Content>
+    <Content Include="assets\clothBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\clothBtnHover.png">
+    </Content>
+    <Content Include="assets\clothBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\cursorTriple.png">
+    </Content>
+    <Content Include="assets\cursorTriple.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\exitBtn.png">
+    </Content>
+    <Content Include="assets\exitBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\exitBtnHover.png">
+    </Content>
+    <Content Include="assets\exitBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\face.png">
+    </Content>
+    <Content Include="assets\face.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\face2.png">
+    </Content>
+    <Content Include="assets\face2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\formFieldActive.png">
+    </Content>
+    <Content Include="assets\formFieldActive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\formFieldActive2.png">
+    </Content>
+    <Content Include="assets\formFieldActive2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\formFieldInactive.png">
+    </Content>
+    <Content Include="assets\formFieldInactive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loadingPhase1.png">
+    </Content>
+    <Content Include="assets\loadingPhase1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loadingPhase2.png">
+    </Content>
+    <Content Include="assets\loadingPhase2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loadingPhase3.png">
+    </Content>
+    <Content Include="assets\loadingPhase3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loginBtn.png">
+    </Content>
+    <Content Include="assets\loginBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loginBtn2.png">
+    </Content>
+    <Content Include="assets\loginBtn2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loginBtnClicked.png">
+    </Content>
+    <Content Include="assets\loginBtnClicked.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loginBtnHover.png">
+    </Content>
+    <Content Include="assets\loginBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\loginBtnHover3.png">
+    </Content>
+    <Content Include="assets\loginBtnHover3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\logo.png">
+    </Content>
+    <Content Include="assets\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\logoutBtn.png">
+    </Content>
+    <Content Include="assets\logoutBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\logoutBtnHover.png">
+    </Content>
+    <Content Include="assets\logoutBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\measureActive.png">
+    </Content>
+    <Content Include="assets\measureActive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\measureInactive.png">
+    </Content>
+    <Content Include="assets\measureInactive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\registerBtn.png">
+    </Content>
+    <Content Include="assets\registerBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\registerBtnClicked.png">
+    </Content>
+    <Content Include="assets\registerBtnClicked.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\registerBtnHover.png">
+    </Content>
+    <Content Include="assets\registerBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\saveBtn.png">
+    </Content>
+    <Content Include="assets\saveBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\saveBtnHover.png">
+    </Content>
+    <Content Include="assets\saveBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\settingBtn.png">
+    </Content>
+    <Content Include="assets\settingBtn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\settingBtnHover.png">
+    </Content>
+    <Content Include="assets\settingBtnHover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\storeActive.png">
+    </Content>
+    <Content Include="assets\storeActive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\storeInactive.png">
+    </Content>
+    <Content Include="assets\storeInactive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\baju1.png">
+    </Content>
+    <Content Include="assets\theme.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\baju2.png">
+    </Content>
+    <Content Include="assets\theme2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\baju3.png">
+    </Content>
+    <Content Include="assets\wardrobe.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\baju4.png">
+    </Content>
+    <Content Include="assets\wardrobeActive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw.png">
+    </Content>
+    <Content Include="assets\wardrobeClicked.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw1.png">
+    </Content>
+    <Content Include="assets\wardrobeInactive.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw10.png">
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libpxccpp2c.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw11.png">
+    </Content>
+    <Content Include="query.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw12.png">
+    </Content>
+    <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw13.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw6.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw7.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw8.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\tester\idgw9.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\theme.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\theme2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\wardrobe.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\wardrobeActive.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\wardrobeClicked.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="assets\wardrobeInactive.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="views\MainScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="views\LoginScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

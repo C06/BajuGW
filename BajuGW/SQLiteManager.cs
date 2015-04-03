@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Data.SQLite;
 
-namespace Test1
+namespace BajuGW
 {
     class SQLiteManager
     {
@@ -12,8 +13,6 @@ namespace Test1
         {
             sqlConnection = new SQLiteConnection("Data Source=.\\" + dbName + ";Version=3;");
             sqlCommand = new SQLiteCommand(sqlConnection);
-            
-            connect();
         }
 
         /// <summary>
@@ -34,15 +33,10 @@ namespace Test1
             }
             
         }
-
-        /// <summary>
-        /// Executing query in parameter for returning-result query.
-        /// </summary>
-        /// <param name="q">the sql query</param>
-        /// <returns>number of infected rows.</returns>
-        public SQLiteDataReader queryWithReturn(String q)
+        
+        public System.Collections.Generic.IEnumerable<NameValueCollection> queryWithReturn(String q)
         {
-            SQLiteDataReader reader;
+            SQLiteDataReader reader = null;
             try
             {
                 sqlCommand.CommandText = q;
@@ -50,10 +44,11 @@ namespace Test1
             }
             catch
             {
-                reader = null;
+                
             }
-            return reader;
-            
+            while (reader.Read()) {
+                yield return reader.GetValues(); ;   
+            }
         }
 
         /// <summary>
@@ -87,11 +82,12 @@ namespace Test1
             }
         }
         
-        public void initDatabase(String[] queries)
+        public void initDatabase()
         {
-            for (int i=0; i<queries.length, i++)
+            string[] queries = System.IO.File.ReadAllLines(".\\query.txt");
+            foreach (String query in queries)
             {
-                queryWithoutReturn(queries[i]);
+                queryWithoutReturn(query);
             }
         }
     }

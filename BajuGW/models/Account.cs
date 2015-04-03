@@ -33,7 +33,7 @@ namespace BajuGW
             return 0;
 		}
 		
-		int createCloth(Tuple<int, int, File> data) {
+		int createCloth(Tuple<int, int, Object> data) {
             return 0;
 		}
 		
