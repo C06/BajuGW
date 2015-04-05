@@ -81,11 +81,19 @@ namespace BajuGW
             List<Cloth> suggestion = new List<Cloth>();
             Random random = new Random();
 
-            for (int i = 0; i < 3; i++)
+            int i = 5;
+            int n;
+            List<int> blacklist = new List<int>();
+            while (i > 0)
             {
-                suggestion.Add(clothes[random.Next(0, clothes.Count+1)]);
+                n = random.Next(clothes.Count);
+                if (!blacklist.Contains(n))
+                {
+                    suggestion.Add(clothes[n]);
+                    n--;
+                }
             }
-
+            
             return suggestion;
 		}
 		
@@ -170,7 +178,6 @@ namespace BajuGW
         }
 
 
-        //TODO: Implementasi method ini secara lebih baik
         /**
          * Kembalikan daftar pakaian yang sesuai dengan kriteria pencarian
          * 
