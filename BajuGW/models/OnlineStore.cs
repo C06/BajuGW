@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace BajuGW
 {
     class OnlineStore
     {
+        private List<Cloth> clothes;
+
 		Cloth getOnlineClothDetails(String id) {
             return null;
 		}
@@ -16,8 +18,9 @@ namespace BajuGW
 		int disconnect() {
             return 0;
 		}
-		
-		ArrayList getOnlineClothes(String category) {
+
+        List<Cloth> getOnlineClothes(String category)
+        {
             return null;
 		}
 		
@@ -32,8 +35,9 @@ namespace BajuGW
 		int checkConnection() {
             return 0;
 		}
-		
-		ArrayList search(String query) {
+
+        List<Cloth> search(String query)
+        {
             return null;
 		}
     }

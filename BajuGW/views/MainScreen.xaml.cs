@@ -272,10 +272,11 @@ namespace BajuGW
             this.Visibility = System.Windows.Visibility.Hidden;
              */
 
-            controller.showLoginScreen(this);
+            
 
-            //logoutConfirm.Visibility = System.Windows.Visibility.Collapsed;
-            //deactivator.Visibility = System.Windows.Visibility.Collapsed;
+            logoutConfirm.Visibility = System.Windows.Visibility.Collapsed;
+            deactivator.Visibility = System.Windows.Visibility.Collapsed;
+            controller.showLoginScreen(this);
         }
 
         private void confirmLogoutButtonHover(object sender, MouseEventArgs e)

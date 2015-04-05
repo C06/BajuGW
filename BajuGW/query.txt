@@ -1,37 +1,42 @@
-CREATE TABLE User_Kategori (username VARCHAR (8) REFERENCES User (username) ON DELETE CASCADE ON UPDATE CASCADE, kategori_nama TEXT REFERENCES Kategori_List (kategori_nama) ON DELETE CASCADE ON UPDATE CASCADE, UNIQUE (username, kategori_nama));
-CREATE TABLE Toko_Online_List (nama_toko TEXT PRIMARY KEY);
-CREATE TABLE Kategori_Pakaian (username VARCHAR (8) REFERENCES User (username) ON DELETE CASCADE ON UPDATE CASCADE, kategori_nama TEXT REFERENCES Kategori_List (kategori_nama) ON DELETE CASCADE ON UPDATE CASCADE, item_id INTEGER REFERENCES Pakaian (item_id) ON DELETE CASCADE ON UPDATE CASCADE, UNIQUE (username, kategori_nama, item_id));
-CREATE TABLE Connected_Store (username VARCHAR (8) REFERENCES User (username) ON DELETE CASCADE ON UPDATE CASCADE, nama_toko TEXT REFERENCES Toko_Online_List (nama_toko) ON DELETE NO ACTION ON UPDATE NO ACTION, UNIQUE (username, nama_toko));
-CREATE TABLE User (username VARCHAR (8) PRIMARY KEY, data_wajah BLOB NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL, salt TEXT UNIQUE NOT NULL, ukuran_badan NUMERIC, warna TEXT DEFAULT black_iron) WITHOUT ROWID;
-CREATE TABLE Pakaian (item_id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, name TEXT DEFAULT Unidentified_Object, favorit BOOLEAN, ukuran_pakaian NUMERIC, warna TEXT, merek TEXT, file_pakaian BLOB NOT NULL, username VARCHAR (8) REFERENCES User (username) ON DELETE CASCADE ON UPDATE CASCADE);
-CREATE TABLE Kategori_List (kategori_nama TEXT PRIMARY KEY) WITHOUT ROWID;
-INSERT INTO Toko_Online_List VALUES ('allowable');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('command');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('blame');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('apology');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('agreeable');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('hover');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('cannon');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('godsent');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('balcony');
-INSERT INTO Toko_Online_List (nama_toko) VALUES ('deer');
-INSERT INTO Connected_Store (username, nama_toko) VALUES ('noscope', 'balcony');
-INSERT INTO Connected_Store (username, nama_toko) VALUES ('noscope', 'hover');
-INSERT INTO Connected_Store (username, nama_toko) VALUES ('noscope', 'apology');
-INSERT INTO Connected_Store (username, nama_toko) VALUES ('noscope', 'allowable');
-INSERT INTO User (username, data_wajah, email, password, salt, ukuran_badan, warna) VALUES ('noscope', 'something', 'mlg360@headshot.com', '42619', 'aspx', '', 'black_iron');
-INSERT INTO Pakaian (item_id, name, favorit, ukuran_pakaian, warna, merek, file_pakaian, username) VALUES (1, 'vv3p16gpk37111', NULL, NULL, NULL, NULL, 'dup', 'noscope');
-INSERT INTO Pakaian (item_id, name, favorit, ukuran_pakaian, warna, merek, file_pakaian, username) VALUES (2, '1ybjgdddk    buz', NULL, NULL, NULL, NULL, 'con0jlxqxokibjpu24', 'noscope');
-INSERT INTO Pakaian (item_id, name, favorit, ukuran_pakaian, warna, merek, file_pakaian, username) VALUES (3, '1 l6    7    x', NULL, NULL, NULL, NULL, 'jtgkkglp', 'noscope');
-INSERT INTO Pakaian (item_id, name, favorit, ukuran_pakaian, warna, merek, file_pakaian, username) VALUES (4, '6w5rrne5b jpvv', NULL, NULL, NULL, NULL, '59ic', 'noscope');
-INSERT INTO Pakaian (item_id, name, favorit, ukuran_pakaian, warna, merek, file_pakaian, username) VALUES (5, 'v n    z12ils    ixef2xl', NULL, NULL, NULL, NULL, 'uphsd2w u', 'noscope');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('absorbing');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('barbaric');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('blunder');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('combat');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('end');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('extra');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('falcon');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('four');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('gushing');
-INSERT INTO Kategori_List (kategori_nama) VALUES ('hate');
+CREATE TABLE User (
+    username VARCHAR(10) PRIMARY KEY,
+    password VARCHAR(10) NOT NULL,
+    salt TEXT UNIQUE NOT NULL,
+    email TEXT NOT NULL,
+    cloth_width NUMERIC,
+    cloth_height NUMERIC,
+    face BLOB,
+    theme TEXT
+);
+
+CREATE TABLE Store (
+    id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT
+);
+
+CREATE TABLE User_Activate_Store (
+    username VARCHAR(10) PRIMARY KEY REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    store_id INTEGER PRIMARY KEY REFERENCES Store(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+CREATE TABLE Cloth (
+    username VARCHAR(10) PRIMARY KEY REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT,
+    name TEXT,
+    brand TEXT,
+    favorite BOOLEAN,
+    color TEXT,
+    cloth_width NUMERIC NOT NULL,
+    cloth_height NUMERIC NOT NULL,
+    picture BLOB NOT NULL
+);
+
+CREATE TABLE Category (
+    username VARCHAR(10) PRIMARY KEY REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    id TEXT PRIMARY KEY
+);
+
+CREATE TABLE Cloth_Has_Category (
+    username VARCHAR(10) PRIMARY KEY REFERENCES Cloth(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    cloth_id INTEGER PRIMARY KEY REFERENCES Cloth(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    category_id TEXT PRIMARY KEY REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE
+);

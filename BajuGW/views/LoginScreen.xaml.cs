@@ -77,7 +77,7 @@ namespace BajuGW
 
 
             InitializeComponent();
-            handWaving = false;
+            /*handWaving = false;
             handTrigger = false;
             msgTimer = 0;
 
@@ -96,7 +96,7 @@ namespace BajuGW
 
             // Start the worker thread
             processingThread = new Thread(new ThreadStart(ProcessingThread));
-            processingThread.Start();
+            processingThread.Start();*/
 
             this.controller = controller;
             
@@ -213,8 +213,8 @@ namespace BajuGW
             var brush = new ImageBrush();
             brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
             loginBtn.Background = brush;
-            loadingBar.Visibility = System.Windows.Visibility.Visible;
-            /*LoginScreen main = new LoginScreen();
+            /*loadingBar.Visibility = System.Windows.Visibility.Visible;
+            LoginScreen main = new LoginScreen();
             main.Show();
             this.Visibility = System.Windows.Visibility.Hidden;
             */
@@ -548,20 +548,13 @@ namespace BajuGW
             var brush = new ImageBrush();
             brush.ImageSource = (ImageSource)FindResource("altLoginButtonClicked");
             altLoginBtn.Background = brush;
-            if (passwordLogin.Password != "" && usernameLogin.Text !="")
+
+
+            String password = passwordLogin.Password;
+            String username = usernameLogin.Text;
+            if (!username.Equals("") && !password.Equals(""))
             {
-                SQLiteManager manager = new SQLiteManager("data.db");
-                manager.connect();
-                String user = "";
-                String pass = "";
-                String query = "select * from accounts where username='" + usernameLogin.Text + "'";
-
-                foreach (NameValueCollection row in manager.queryWithReturn(query)) {
-                    user = "" + row["username"];
-                    pass = "" + row["password"];
-                }
-
-                if (!user.Equals(""))
+                if (controller.login(username, password))
                 {
                     lwarning.Visibility = System.Windows.Visibility.Hidden;
                     usernameLogin.Text = "";
@@ -579,8 +572,6 @@ namespace BajuGW
                 {
                     //loginFailedWarning.Visibility = System.Windows.Visibility.Visible;
                 }
-
-                manager.disconnect();
             }
             else
             {

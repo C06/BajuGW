@@ -75,20 +75,20 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="Controller.xaml">
+    <ApplicationDefinition Include="controller\Controller.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConvertBitmap.cs" />
+    <Compile Include="models\misc\ConvertBitmap.cs" />
     <Compile Include="models\Wardrobe.cs" />
     <Compile Include="models\Account.cs" />
-    <Compile Include="Controller.xaml.cs">
+    <Compile Include="controller\Controller.xaml.cs">
       <DependentUpon>Controller.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\Cloth.cs" />
     <Compile Include="models\OnlineStore.cs" />
-    <Compile Include="SQLiteManager.cs" />
+    <Compile Include="models\misc\SQLiteManager.cs" />
     <Compile Include="views\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
@@ -336,9 +336,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libpxccpp2c.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="query.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SQLite.Interop.dll">

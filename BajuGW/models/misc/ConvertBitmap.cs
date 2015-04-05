@@ -24,6 +24,7 @@ namespace BajuGW
         public static extern bool DeleteObject(IntPtr handle);
         public static BitmapSource bitmapSource;
         public static IntPtr intPointer;
+
         public static BitmapSource BitmapToBitmapSource(System.Drawing.Bitmap bitmap)
         {
             intPointer = bitmap.GetHbitmap();
