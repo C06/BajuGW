@@ -97,12 +97,6 @@ namespace Test1
             // Start the worker thread
             processingThread = new Thread(new ThreadStart(ProcessingThread));
             processingThread.Start();
-
-
-            
-      
-            
-
         }
 
 
@@ -217,6 +211,7 @@ namespace Test1
             loadingBar.Visibility = System.Windows.Visibility.Visible;
             MainScreen2 main = new MainScreen2();
             this.Visibility = System.Windows.Visibility.Hidden;
+            senseManager.Dispose();
             main.Show();
 
 
