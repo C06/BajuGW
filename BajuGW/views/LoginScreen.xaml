@@ -51,7 +51,7 @@
 
 
         <!--<Image Margin="-11,-67,-23,-165" Height="1021" Source="../assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2"/>-->
-        <!--<Image x:Name="imgColorStream"  Width="1366" Height="768" Margin="-261,-186,-293,-126" Grid.ColumnSpan="2" />-->
+        <Image x:Name="imgColorStream"  Width="1366" Height="768" Margin="-261,-186,-293,-126" Grid.ColumnSpan="2" />
         <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-35,-57,-10,0" Grid.ColumnSpan="2"/>
         <Rectangle Opacity="0.4" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Left" Height="265" Margin="-135,-67,-128,0" Stroke="Transparent" VerticalAlignment="Top" Width="1629"/>
         <Rectangle Opacity="0.4" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Left" Height="265" Margin="-135,629,-128,-126" Stroke="Transparent" VerticalAlignment="Top" Width="1629"/>
@@ -60,7 +60,7 @@
         <Button Opacity="0.8" x:Name="loginBtn" FontSize="24" Content="CLICK HERE TO LOGIN" Width="400" Height="400" Margin="261,215,483,153" Click="loginBtnClicked" MouseEnter="loginBtnHover" MouseLeave="loginBtnIdle" FontFamily="Big John" Foreground="#3498db"  Grid.Column="1" >
 
             <Button.Background>
-                <ImageBrush x:Name="imgColorStream" />
+                <ImageBrush ImageSource ="../assets/loginBtn.png"  />
             </Button.Background>
 
             <Button.Style>
@@ -412,5 +412,6 @@
                 </Button.Style>
             </Button>
         </Grid>
+        <Button x:Name="quitBtn" Content="Quit" Grid.Column="1" HorizontalAlignment="Left" Margin="1059,16,0,0" VerticalAlignment="Top" Width="75" Click="quitClicked"/>
     </Grid>
 </Window>

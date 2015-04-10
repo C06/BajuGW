@@ -21,9 +21,10 @@ namespace BajuGW
         public SQLiteManager(string databaseName)
         {
             sqlConnection = new SQLiteConnection(
-                "Data Source=.\\" + databaseName +";Version=3;foreign keys=true;");
+                "Data Source=./" + databaseName +";Version=3;foreign keys=true;");
             
             sqlCommand = new SQLiteCommand(sqlConnection);
+            connect();
         }
 
         
@@ -41,10 +42,11 @@ namespace BajuGW
             catch (Exception exception)
             {
                 using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter("log.txt", true))
+                    new System.IO.StreamWriter("db.log", true))
                 {
                     file.WriteLine(exception.Message);
                 }
+                return false;
             }
             return true;
         }
@@ -66,7 +68,7 @@ namespace BajuGW
             catch (Exception exception)
             {
                 using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter("log.txt", true))
+                    new System.IO.StreamWriter("db.log", true))
                 {
                     file.WriteLine(exception.Message);
                 }
@@ -74,8 +76,10 @@ namespace BajuGW
                 yield break;
             }
             while (reader.Read()) {
-                yield return reader.GetValues(); ;   
+                yield return reader.GetValues();
             }
+            reader.Dispose();
+            yield break;
         }
 
         
@@ -118,13 +122,13 @@ namespace BajuGW
         public void initDatabase()
         {
             string query =
-                "CREATE TABLE User (username VARCHAR(10) PRIMARY KEY,password VARCHAR(10) NOT NULL,salt TEXT UNIQUE NOT NULL,email TEXT NOT NULL,cloth_width NUMERIC,cloth_height NUMERIC,face BLOB,theme TEXT);" +
-                "CREATE TABLE Store (id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT);" +
-                "CREATE TABLE User_Activate_Store (username VARCHAR(10) PRIMARY KEY REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,store_id INTEGER PRIMARY KEY REFERENCES Store(id) ON DELETE NO ACTION ON UPDATE NO ACTION);" +
-                "CREATE TABLE Cloth (username VARCHAR(10) PRIMARY KEY REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT,name TEXT,brand TEXT,favorite BOOLEAN,color TEXT,cloth_width NUMERIC NOT NULL,cloth_height NUMERIC NOT NULL,picture BLOB NOT NULL);" +
-                "CREATE TABLE Category (username VARCHAR(10) PRIMARY KEY REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,id TEXT PRIMARY KEY);" +
-                "CREATE TABLE Cloth_Has_Category (username VARCHAR(10) PRIMARY KEY REFERENCES Cloth(username) ON DELETE CASCADE ON UPDATE CASCADE,cloth_id INTEGER PRIMARY KEY REFERENCES Cloth(id) ON DELETE CASCADE ON UPDATE CASCADE,category_id TEXT PRIMARY KEY REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE";
-
+                "CREATE TABLE User (username VARCHAR(10) PRIMARY KEY,password VARCHAR(10) NOT NULL,email TEXT NOT NULL,cloth_width NUMERIC,cloth_height NUMERIC,picture_path TEXT,theme TEXT);" +
+                "CREATE TABLE Store (id INTEGER PRIMARY KEY);" +
+                "CREATE TABLE User_Activate_Store (username VARCHAR(10) REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,store_id INTEGER REFERENCES Store(id) ON DELETE NO ACTION ON UPDATE NO ACTION,PRIMARY KEY (username, store_id));" +
+                "CREATE TABLE Cloth (username VARCHAR(10) REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,id INTEGER,name TEXT,brand TEXT,favorite BOOLEAN,color TEXT,cloth_width NUMERIC NOT NULL,cloth_height NUMERIC NOT NULL,picture_path TEXT NOT NULL,PRIMARY KEY (username, id));" +
+                "CREATE TABLE Category (username VARCHAR(10) REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,id TEXT,PRIMARY KEY (username, id));" +
+                "CREATE TABLE Cloth_Has_Category (username VARCHAR(10) REFERENCES Cloth(username) ON DELETE CASCADE ON UPDATE CASCADE,cloth_id INTEGER REFERENCES Cloth(id) ON DELETE CASCADE ON UPDATE CASCADE,category_id TEXT REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE, PRIMARY KEY (username, cloth_id, category_id));";
+                ;
             queryWithoutReturn(query);
         }
     }

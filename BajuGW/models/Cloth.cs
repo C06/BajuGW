@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
 namespace BajuGW
 {
@@ -17,7 +18,8 @@ namespace BajuGW
         public double clothHeight;
         public string color;
         public string brand;
-        public object picture; //TODO: Ubah menjadi kelas "Bitmap"
+        public BitmapSource picture;
+        public string picture_path;
         public List<string> categories;
 
 
@@ -26,7 +28,7 @@ namespace BajuGW
          * 
          */
         public Cloth(int id, string name, string brand, int isFavorite, string color,
-            double clothWidth, double clothHeight, object picture, List<string> categories)
+            double clothWidth, double clothHeight, string picture_path, List<string> categories)
         {
             this.id = id;
             this.name = name;
@@ -35,7 +37,8 @@ namespace BajuGW
             this.color = color;
             this.clothWidth = clothWidth;
             this.clothHeight = clothHeight;
-            this.picture = picture;
+            this.picture_path = picture_path;
+            this.picture = new BitmapImage(new Uri(picture_path));
             this.categories = categories;
         }
 
@@ -106,10 +109,10 @@ namespace BajuGW
          * 
          */
         public OnlineCloth(int id, string name, string brand, int isFavorite,
-            string color, double clothWidth, double clothHeight, object picture,
+            string color, double clothWidth, double clothHeight, string picture_path,
             List<string> categories, int store, int price) :
             base (id, name, brand, isFavorite, color, clothWidth, clothHeight,
-            picture, categories)
+            picture_path, categories)
         {
             this.store = store;
             this.price = price;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BajuGW
 {
@@ -32,7 +33,11 @@ namespace BajuGW
         public Controller()
         {
             dbmanager = new SQLiteManager(DBNAME);
-            dbmanager.initDatabase();
+
+            if (!File.Exists(Controller.DBNAME))
+            {
+                dbmanager.initDatabase();
+            }
 
             mainScreen = new MainScreen(this);
             loginScreen = new LoginScreen(this);
@@ -80,14 +85,19 @@ namespace BajuGW
             return false;
         }
 
+        public void logout()
+        {
+            this.account = null;
+        }
+
 
         /**
          * Simpan akun yang baru saja diregister ke dalam database
          * 
          */
-        public bool register(string username, string password, string email)//, Object face)
+        public bool register(string username, string password, string email)
         {
-            if (Account.register(username, password, email))//, face))
+            if (Account.register(username, password, email))
             {
                 return true;
             }

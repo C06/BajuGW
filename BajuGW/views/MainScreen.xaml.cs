@@ -276,6 +276,7 @@ namespace BajuGW
 
             logoutConfirm.Visibility = System.Windows.Visibility.Collapsed;
             deactivator.Visibility = System.Windows.Visibility.Collapsed;
+            controller.logout();
             controller.showLoginScreen(this);
         }
 

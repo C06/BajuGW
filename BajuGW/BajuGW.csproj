@@ -56,6 +56,9 @@
     <Reference Include="libpxcclr.cs">
       <HintPath>.\libpxcclr.cs.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">

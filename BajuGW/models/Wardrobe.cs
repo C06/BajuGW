@@ -22,10 +22,13 @@ namespace BajuGW
         public Wardrobe(string username)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
             
+
+            clothes = new List<Cloth>();
+            categories = new List<string>();
+
             string query = "select id, name, brand, favorite, color, cloth_width, " +
-                "cloth_height, picture from cloth where username='" + username + "'";
+                "cloth_height, picture_path from cloth where username='" + username + "'";
             foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
             {
                 int id = int.Parse(row["id"]);
@@ -35,9 +38,9 @@ namespace BajuGW
                 string color = row["color"];
                 double clothWidth = double.Parse(row["cloth_width"]);
                 double clothHeight = double.Parse(row["cloth_height"]);
-                Object picture = row["picture"]; //TODO: Ubah menjadi kelas "Bitmap"
+                string picture_path = row["picture_path"];
                 clothes.Add(new Cloth(id, name, brand, isFavorite, color,
-                    clothWidth, clothHeight, picture, new List<string>()));
+                    clothWidth, clothHeight, picture_path, new List<string>()));
             }
 
             foreach (Cloth cloth in clothes)
@@ -56,20 +59,10 @@ namespace BajuGW
                 categories.Add(row["id"]);
             }
 
-            dbmanager.disconnect();
+            
 
             this.username = username;
         }
-
-
-        /**
-         * Kembalikan detail dari baju yang diinginkan
-         * 
-         */
-		public Cloth getClothDetails(int id)
-        {
-            return getCloth(id).getDetails();
-		}
 		
 
         /**
@@ -150,7 +143,6 @@ namespace BajuGW
         }
 
 
-        //TODO: ubah return type
         /**
          * Tambahkan pakaian baru ke database
          * 
@@ -159,16 +151,16 @@ namespace BajuGW
         public bool addCloth(Cloth cloth)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
+            
 
             string query = "insert into cloth(username, name, brand, favorite, "+
-                "color, cloth_width, cloth_height, picture) values ('" + username +
-                "','" + cloth.name + "','" + cloth.brand + "'," + cloth.isFavorite + "," +
-                cloth.color + "," + cloth.clothWidth + "," + cloth.clothHeight +
-                "," + cloth.picture + ")";
+                "color, cloth_width, cloth_height, picture_path) values ('" + username +
+                "','" + cloth.name + "','" + cloth.brand + "'," + cloth.isFavorite + ",'" +
+                cloth.color + "'," + cloth.clothWidth + "," + cloth.clothHeight +
+                ",'" + cloth.picture_path + "')";
 
             bool status = dbmanager.queryWithoutReturn(query);
-            dbmanager.disconnect();
+            
 
             if (!status)
                 return false;
@@ -194,7 +186,6 @@ namespace BajuGW
 		}
 
 
-        //TODO: Ubah return type
         /**
          * Hapus pakaian dari database
          * 
@@ -203,12 +194,12 @@ namespace BajuGW
         public bool deleteCloth(int id)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
+            
 
             string query = "delete from cloth where username='" + username +
                 "' and id=" + id;
             bool status = dbmanager.queryWithoutReturn(query);
-            dbmanager.disconnect();
+            
 
             if (!status)
                 return false;
@@ -227,7 +218,6 @@ namespace BajuGW
 		}
 
 
-        //TODO: Ubah return type
         /**
          * Tambah kategori baru ke database
          * 
@@ -235,12 +225,12 @@ namespace BajuGW
         public bool addCategory(String category)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
+            
             
             string query = "insert into category values('" + username + "','" +
                 category + "')";
             bool status = dbmanager.queryWithoutReturn(query);
-            dbmanager.disconnect();
+            
 
             if (!status)
                 return false;
@@ -250,7 +240,6 @@ namespace BajuGW
 		}
 
 
-        //TODO: Ubah return type
         /**
          * Hapus kategori dari database
          * 
@@ -258,12 +247,12 @@ namespace BajuGW
         public bool deleteCategory(String category)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
+            
 
             string query = "delete from category where username='" + username +
                 "' and id='" + category + "'";
             bool status = dbmanager.queryWithoutReturn(query);
-            dbmanager.disconnect();
+            
 
             if (!status)
                 return false;
@@ -282,7 +271,6 @@ namespace BajuGW
 		}
 
 
-        //TODO: Ubah return type
         /**
          * Ubah kategori yang ada di database
          * 
@@ -290,12 +278,12 @@ namespace BajuGW
         public bool editCategory(String category, String newName)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
+            
 
             string query = "update category id='"+ newName + "' where username='" +
                 username + "' and id='" + category + "'";
             bool status = dbmanager.queryWithoutReturn(query);
-            dbmanager.disconnect();
+            
 
             if (!status)
                 return false;
@@ -314,7 +302,6 @@ namespace BajuGW
 		}
 
 
-        //TODO: Ubah return type
         /**
          * Ubah pakaian menjadi pakaian favorit pengguna
          * 
@@ -322,12 +309,12 @@ namespace BajuGW
         public bool setFavorite(int id)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            dbmanager.connect();
+            
 
             string query = "update cloth favorite=" + 1 + " where username='" +
                 username + "' and id=" + id;
             bool status = dbmanager.queryWithoutReturn(query);
-            dbmanager.disconnect();
+            
 
             if (!status)
                 return false;
