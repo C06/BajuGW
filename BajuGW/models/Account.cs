@@ -47,13 +47,14 @@ namespace BajuGW
          * Daftarkan akun yang baru saja melakukan register
          * 
          */
-        public static bool register(string username, string password, string email, Object face)
+        public static bool register(string username, string password, string email)//, Object face)
         {
             Tuple<string, string> hashed = encrypt(password);
             if (hashed == null)
                 return false;
 
             SQLiteManager manager = Controller.dbmanager;
+            Console.WriteLine(manager);
             manager.connect();
 
             string query = "insert into User values (" + username + "," +
@@ -131,7 +132,7 @@ namespace BajuGW
                 return null;
 
             string hashed = password.Substring(0, password.Length - 3);
-            string salt = password.Substring(3, password.Length);
+            string salt = password.Substring(3);
             Tuple<string, string> result = new Tuple<string, string>(hashed, salt);
 
             return result;

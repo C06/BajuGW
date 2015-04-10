@@ -32,6 +32,7 @@ namespace BajuGW
         public Controller()
         {
             dbmanager = new SQLiteManager(DBNAME);
+            dbmanager.initDatabase();
 
             mainScreen = new MainScreen(this);
             loginScreen = new LoginScreen(this);
@@ -84,9 +85,9 @@ namespace BajuGW
          * Simpan akun yang baru saja diregister ke dalam database
          * 
          */
-        public bool register(string username, string password, string email, Object face)
+        public bool register(string username, string password, string email)//, Object face)
         {
-            if (Account.register(username, password, email, face))
+            if (Account.register(username, password, email))//, face))
             {
                 return true;
             }

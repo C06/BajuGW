@@ -79,30 +79,27 @@ namespace BajuGW
             InitializeComponent();
             /*handWaving = false;
             handTrigger = false;
-            msgTimer = 0;
+            msgTimer = 0;*/
 
             // Instantiate and initialize the SenseManager
             senseManager = PXCMSenseManager.CreateInstance();
-            senseManager.EnableStream(PXCMCapture.StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
-            senseManager.EnableHand();
+            senseManager.EnableStream(PXCMCapture.StreamType.STREAM_TYPE_COLOR, 480, 480, 30);
+            //senseManager.EnableHand();
             senseManager.Init();
 
+            /*
             // Configure the Hand Module
             hand = senseManager.QueryHand();
             handConfig = hand.CreateActiveConfiguration();
             handConfig.EnableGesture("wave");
             handConfig.EnableAllAlerts();
-            handConfig.ApplyChanges();
+            handConfig.ApplyChanges();*/
 
             // Start the worker thread
             processingThread = new Thread(new ThreadStart(ProcessingThread));
-            processingThread.Start();*/
+            processingThread.Start();
 
             this.controller = controller;
-            
-      
-            
-
         }
 
 
@@ -138,21 +135,21 @@ namespace BajuGW
                 colorBitmap = colorData.ToBitmap(0, sample.color.info.width, sample.color.info.height);
 
                 // Retrieve gesture data
-                hand = senseManager.QueryHand();
+                //hand = senseManager.QueryHand();
 
-                if (hand != null)
+                /*if (hand != null)
                 {
                     // Retrieve the most recent processed data
                     handData = hand.CreateOutput();
                     handData.Update();
                     handWaving = handData.IsGestureFired("wave", out gestureData);
-                }
+                }*/
 
                 // Update the user interface
                 UpdateUI(colorBitmap);
 
                 // Release the frame
-                if (handData != null) handData.Dispose();
+                //if (handData != null) handData.Dispose();
                 colorBitmap.Dispose();
                 sample.color.ReleaseAccess(colorData);
                 senseManager.ReleaseFrame();
@@ -166,16 +163,23 @@ namespace BajuGW
                 if (bitmap != null)
                 {
                     // Mirror the color stream Image control
+                    imgColorStream.ImageSource = ConvertBitmap.BitmapToBitmapSource(bitmap);
+                    TranslateTransform transformation = new TranslateTransform();
+                    transformation.X = -1;
+                    transformation.Y = 1;
+                    imgColorStream.RelativeTransform = transformation;
+                    /*
                     imgColorStream.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
                     ScaleTransform mainTransform = new ScaleTransform();
                     mainTransform.ScaleX = -1;
                     mainTransform.ScaleY = 1;
-                    imgColorStream.RenderTransform = mainTransform;
+                     * */
+                    //imgColorStream.RenderTransform = mainTransform;
 
                     // Display the color stream
-                    imgColorStream.Source = ConvertBitmap.BitmapToBitmapSource(bitmap);
 
                     // Update the screen message
+                    /*
                     if (handWaving)
                     {
                         lblMessage.Content = "Hello World!";
@@ -194,6 +198,7 @@ namespace BajuGW
                             handTrigger = false;
                         }
                     }
+                     */
                 }
             }));
         }
@@ -299,21 +304,24 @@ namespace BajuGW
             addNewAccountBtn.Background = brush;
             if (password.Password == rpassword.Password)
             {
-                SQLiteManager manager = new SQLiteManager("data.db");
-                manager.queryWithoutReturn("insert into accounts values('"+username.Text+"','"+password.Password+"')");
-                warning.Visibility = System.Windows.Visibility.Hidden;
-                username.Text = "";
-                uLabel.Visibility = System.Windows.Visibility.Visible;
-                email.Text = "";
-                eLabel.Visibility = System.Windows.Visibility.Visible;
-                password.Password = "";
-                pLabel.Visibility = System.Windows.Visibility.Visible;
-                rpassword.Password = "";
-                rpLabel.Visibility = System.Windows.Visibility.Visible;
-                deactivator.Visibility = System.Windows.Visibility.Collapsed;
-                registerForm.Visibility = System.Windows.Visibility.Hidden;
-                
-                
+                //SQLiteManager manager = new SQLiteManager("data.db");
+                //manager.queryWithoutReturn("insert into accounts values('"+username.Text+"','"+password.Password+"')");
+                if (password.Password.Equals(rpassword.Password)) {
+                    controller.register(username.Text, password.Password, email.Text);
+                    warning.Visibility = System.Windows.Visibility.Hidden;
+                    username.Text = "";
+                    uLabel.Visibility = System.Windows.Visibility.Visible;
+                    email.Text = "";
+                    eLabel.Visibility = System.Windows.Visibility.Visible;
+                    password.Password = "";
+                    pLabel.Visibility = System.Windows.Visibility.Visible;
+                    rpassword.Password = "";
+                    rpLabel.Visibility = System.Windows.Visibility.Visible;
+                    deactivator.Visibility = System.Windows.Visibility.Collapsed;
+                    registerForm.Visibility = System.Windows.Visibility.Hidden;
+                } else {
+
+                }
             }
             else
             {
