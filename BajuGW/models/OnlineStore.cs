@@ -33,7 +33,7 @@ namespace BajuGW
                 }
                 
                 foreach (OnlineCloth cloth in clothes) {
-                    string filename = this.name + "_" +cloth.id+".jpg";
+                    string filename = this.name + "_" +cloth.id+".png";
                     Client.DownloadFile(address+cloth.picture_path, filename);
                     cloth.picture = new BitmapImage(new Uri(filename, UriKind.Relative));
                 }

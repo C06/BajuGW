@@ -38,29 +38,57 @@ namespace BajuGW
         {
             clothGallery.Children.Clear();
             
-            //TODO: selesaikan pembuatan daftar baju
             List<Cloth> clothes = controller.getClothes("");
             foreach (Cloth cloth in clothes)
             {
-                /*Button btn = new Button();
-                btn.Height = 215;
-                btn.Width = 180;
-                btn.CommandParameter = cloth;
-                btn.Click += showDetails;
-                btn.Content = cloth.name;
-                btn.FontSize = 30.0;
-                btn.Margin = new Thickness(5.0, 5.0, 5.0, 5.0);
-                clothGallery.Children.Add(btn);*/
-
                 Grid grid = new Grid();
-                grid.Height = 215;
-                grid.Width = 175;
-                grid.Margin = new Thickness(5.0, 5.0, 5.0, 5.0);
-                grid.Background = new SolidColorBrush(Colors.White);
+                grid.Background = new ImageBrush(cloth.picture);
+                grid.Height = 140;
+                grid.Width = 120;
+                grid.Margin = new Thickness(15.0);
+                grid.ShowGridLines = true;
+
+                grid.HorizontalAlignment = HorizontalAlignment.Left;
+                grid.VerticalAlignment = VerticalAlignment.Top;
+                
+                RowDefinition row = new RowDefinition();
+                row.Height = new GridLength(20);
+                grid.RowDefinitions.Add(row);
+                row = new RowDefinition();
+                row.Height = new GridLength(100);
+                grid.RowDefinitions.Add(row);
+                row = new RowDefinition();
+                row.Height = new GridLength(20);
+                grid.RowDefinitions.Add(row);
+
+                /* TextBlock name = new TextBlock();
+                name.Text = cloth.name;
+                name.Visibility = Visibility.Hidden;
+                name.Name = "clothName";
+                Grid.SetRow(name, 0);
+                grid.Children.Add(name);
+                */
+
+                grid.MouseEnter += showDetails;
+                grid.MouseLeave += hideDetails;
 
                 clothGallery.Children.Add(grid);
             }
         }
+
+
+
+        private void hideDetails(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void showDetails(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+
 
         private void measureBtnClicked(object sender, RoutedEventArgs e)
         {
@@ -100,15 +128,6 @@ namespace BajuGW
             measureBtn.Opacity = 0.5;
             storeBtn.Opacity = 0.5;
         }
-
-        //TODO: ganti isi dari fungsi ini
-        private void showDetails(object sender, RoutedEventArgs e)
-        {
-            /*Button button = (Button) sender;
-            Cloth cloth = (Cloth) button.CommandParameter;
-            button.Content = cloth.picture_path;*/
-        }
-
 
         private void wardrobeBtnHover(object sender, MouseEventArgs e)
         {

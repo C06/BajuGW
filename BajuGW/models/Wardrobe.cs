@@ -39,7 +39,8 @@ namespace BajuGW
             SQLiteManager dbmanager = Controller.dbmanager;
 
             string query = "select id, name, brand, favorite, color, cloth_width, " +
-                "cloth_height, picture_path from cloth where username='" + this.username + "'";
+                "cloth_height, picture_path from cloth where username='" +
+                this.username + "'";
             foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
             {
                 int id = int.Parse(row["id"]);
@@ -158,11 +159,19 @@ namespace BajuGW
         public bool addCloth(Cloth cloth)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            
 
-            string query = "insert into cloth(username, name, brand, favorite, "+
-                "color, cloth_width, cloth_height, picture_path) values ('" + username +
-                "','" + cloth.name + "','" + cloth.brand + "'," + cloth.isFavorite + ",'" +
+            int max = 0;
+
+            string query = "select max(id) from cloth where username='" + username + "'";
+            foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
+            {
+                if (("" + row[0]).Equals(""))
+                    break;
+                max = int.Parse(row[0]);
+            }
+
+            query = "insert into cloth values ('" + username + "', " + max+1 + ",'" +
+                cloth.name + "','" + cloth.brand + "'," + cloth.isFavorite + ",'" +
                 cloth.color + "'," + cloth.clothWidth + "," + cloth.clothHeight +
                 ",'" + cloth.picture_path + "')";
 

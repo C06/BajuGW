@@ -80,7 +80,7 @@
 
         <Image Margin="35,11,50,280" Source="../assets/logo.png" Stretch="Fill"/>
 
-        <Button Opacity="1.0" x:Name="measureBtn" Height="160" Width="160" Margin="25,117,37,92" Click="measureBtnClicked" MouseEnter="measureBtnHover" MouseLeave="measureBtnIdle" FontFamily="Big John" Foreground="#3498db" >
+        <Button Opacity="1.0" x:Name="measureBtn" Height="160" Width="160" Margin="25,117,37,92" Click="measureBtnClicked" MouseEnter="measureBtnHover" MouseLeave="measureBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/measureActive.png"  />
@@ -108,8 +108,8 @@
         </Button>
 
         <Rectangle x:Name="mHighlight" Fill="Black" Opacity="0.4" HorizontalAlignment="Left" Height="10" Margin="-11,316,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223"/>
-        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="51,286,57,0" TextWrapping="Wrap" Text="MEASURE" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="114"/>
-        <Button Opacity="0.5" x:Name="wardrobeBtn" Height="160" Width="160" Margin="27,332,35,276" MouseEnter="wardrobeBtnHover" MouseLeave="wardrobeBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="wardrobeBtnClicked" Grid.RowSpan="2" >
+        <TextBlock Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="51,286,57,0" TextWrapping="Wrap" Text="MEASURE" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="114"/>
+        <Button Opacity="0.5" x:Name="wardrobeBtn" Height="160" Width="160" Margin="27,332,35,276" MouseEnter="wardrobeBtnHover" MouseLeave="wardrobeBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="wardrobeBtnClicked" Grid.RowSpan="2" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/wardrobeActive.png"  />
@@ -136,8 +136,8 @@
 
         </Button>
         <Rectangle x:Name="wHighlight" Fill="Black" Opacity="0.4" HorizontalAlignment="Left" Height="10" Margin="-11,170,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223" Grid.Row="1"/>
-        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="36,135,39,0" TextWrapping="Wrap" Text="wardrobe" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="147" Grid.Row="1"/>
-        <Button Opacity="0.5" x:Name="storeBtn" Height="160" Width="160" Margin="25,191,37,48" Click="storeBtnClicked" MouseEnter="storeBtnHover" MouseLeave="storeBtnIdle" FontFamily="Big John" Foreground="#3498db" Grid.Row="1" >
+        <TextBlock Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="36,135,39,0" TextWrapping="Wrap" Text="wardrobe" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="147" Grid.Row="1"/>
+        <Button Opacity="0.5" x:Name="storeBtn" Height="160" Width="160" Margin="25,191,37,48" Click="storeBtnClicked" MouseEnter="storeBtnHover" MouseLeave="storeBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Grid.Row="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/storeActive.png"  />
@@ -163,13 +163,13 @@
             </Button.Style>
 
         </Button>
-        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,365,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81" Grid.Row="1"/>
-        <TextBlock x:Name="title"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,881,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
+        <TextBlock Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,365,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81" Grid.Row="1"/>
+        <TextBlock x:Name="title"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,881,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
         <!-- Measure Screen -->
         <Grid x:Name="measureScreen" Visibility="Visible" Grid.RowSpan="2">
-            <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
+            <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
 
-            <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="Big John" Foreground="#3498db" >
+            <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/bodyBtn.png"  />
@@ -196,7 +196,7 @@
 
             </Button>
 
-            <Button Opacity="1.0" x:Name="clothBtn" Height="240" Width="240" Margin="802,273,-820,255" Click="clothBtnClicked" MouseEnter="clothBtnHover" MouseLeave="clothBtnIdle" FontFamily="Big John" Foreground="#3498db" >
+            <Button Opacity="1.0" x:Name="clothBtn" Height="240" Width="240" Margin="802,273,-820,255" Click="clothBtnClicked" MouseEnter="clothBtnHover" MouseLeave="clothBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/clothBtn.png"  />
@@ -222,8 +222,8 @@
                 </Button.Style>
 
             </Button>
-            <TextBlock x:Name="bodyText"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="448,534,-485,0" TextWrapping="Wrap" Text="body measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
-            <TextBlock x:Name="clothText"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="802,534,-839,0" TextWrapping="Wrap" Text="cloth measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
+            <TextBlock x:Name="bodyText"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="448,534,-485,0" TextWrapping="Wrap" Text="body measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
+            <TextBlock x:Name="clothText"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="802,534,-839,0" TextWrapping="Wrap" Text="cloth measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
 
 
         </Grid>
@@ -241,7 +241,7 @@
 
         </Grid>
 
-        <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="1043,299,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="1" Grid.Row="1" >
+        <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="1043,299,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="1" Grid.Row="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/settingBtn.png"  />
@@ -267,7 +267,7 @@
             </Button.Style>
 
         </Button>
-        <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="1052,8,12,281" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="1" >
+        <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="1052,8,12,281" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/logoutBtn.png"  />
@@ -301,15 +301,15 @@
                 <RowDefinition Height="91*"/>
             </Grid.RowDefinitions>
             <Rectangle Opacity="1.0" Stroke="Transparent" Fill="LightGray" Margin="-185,70,-104,82" Grid.RowSpan="2"/>
-            <Label IsHitTestVisible="False" Foreground="Black" FontFamily="Slim Joe" FontSize="36" Content="setting" Margin="100,70,188,269"/>
+            <Label IsHitTestVisible="False" Foreground="Black" FontFamily="../assets/#Slim Joe" FontSize="36" Content="setting" Margin="100,70,188,269"/>
             <TabControl HorizontalAlignment="Left" Height="440" Margin="-160,140,-75,0" VerticalAlignment="Top" Width="720" Grid.RowSpan="2">
-                <TabItem x:Name="displayTab" FontFamily="Slim Joe" FontSize="36" Header="display" Margin="-2,-2,-36,0" >
+                <TabItem x:Name="displayTab" FontFamily="../assets/#Slim Joe" FontSize="36" Header="display" Margin="-2,-2,-36,0" >
                     <Grid Background="#FFE5E5E5" Margin="-5,-3,-21,-2"/>
                 </TabItem>
-                <TabItem x:Name="storeTab" FontFamily="Slim Joe" FontSize="36" Header="store" Margin="36,-2,-86,0">
+                <TabItem x:Name="storeTab" FontFamily="../assets/#Slim Joe" FontSize="36" Header="store" Margin="36,-2,-86,0">
                     <Grid Background="#FFE5E5E5"/>
                 </TabItem>
-                <TabItem x:Name="connectionTab" FontFamily="Slim Joe" FontSize="36" Header="connection" Margin="0,-2,-86,0" HorizontalAlignment="Right" Width="332">
+                <TabItem x:Name="connectionTab" FontFamily="../assets/#Slim Joe" FontSize="36" Header="connection" Margin="0,-2,-86,0" HorizontalAlignment="Right" Width="332">
                     <Grid Background="#FFE5E5E5" Margin="-3,-2,-18,-110">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="293*"/>
@@ -319,7 +319,7 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            <Button Opacity="0.5" x:Name="exitBtn" Margin="544,75,-93,295" MouseEnter="exitBtnHover" MouseLeave="exitBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="exitBtnClicked" >
+            <Button Opacity="0.5" x:Name="exitBtn" Margin="544,75,-93,295" MouseEnter="exitBtnHover" MouseLeave="exitBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="exitBtnClicked" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/exitBtn.png"  />
@@ -345,7 +345,7 @@
                 </Button.Style>
 
             </Button>
-            <Button Content="SAVE" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="saveBtn" Margin="198,187,47,97" MouseEnter="saveBtnHover" MouseLeave="saveBtnIdle" FontFamily="Slim Joe" Foreground="White" Click="saveBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
+            <Button Content="SAVE" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="saveBtn" Margin="198,187,47,97" MouseEnter="saveBtnHover" MouseLeave="saveBtnIdle" FontFamily="../assets/#Slim Joe" Foreground="White" Click="saveBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/saveBtn.png"  />
@@ -372,7 +372,7 @@
 
             </Button>
 
-            <Button Content="cancel" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="cancelBtn" Margin="-64,187,309,97" MouseEnter="cancelSettingBtnHover" MouseLeave="cancelSettingBtnIdle" FontFamily="Slim Joe" Foreground="#ED2F59" Click="cancelSettingBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
+            <Button Content="cancel" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="cancelBtn" Margin="-64,187,309,97" MouseEnter="cancelSettingBtnHover" MouseLeave="cancelSettingBtnIdle" FontFamily="../assets/#Slim Joe" Foreground="#ED2F59" Click="cancelSettingBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/cancelSettingBtn.png"  />
@@ -406,9 +406,9 @@
                 <RowDefinition Height="91*"/>
             </Grid.RowDefinitions>
             <Rectangle Opacity="0.9" Stroke="Transparent" Fill="#4F4F4F" Margin="-185,206,-104,228" Grid.RowSpan="2"/>
-            <Label IsHitTestVisible="False" Foreground="White" FontFamily="Slim Joe" FontSize="36" Content="confirm logout" Margin="8,208,92,131"/>
+            <Label IsHitTestVisible="False" Foreground="White" FontFamily="../assets/#Slim Joe" FontSize="36" Content="confirm logout" Margin="8,208,92,131"/>
 
-            <Button Opacity="0.5" x:Name="exitLogoutBtn" Margin="544,211,-93,159" MouseEnter="exitLogoutBtnHover" MouseLeave="exitLogoutBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="exitLogoutBtnClicked" >
+            <Button Opacity="0.5" x:Name="exitLogoutBtn" Margin="544,211,-93,159" MouseEnter="exitLogoutBtnHover" MouseLeave="exitLogoutBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="exitLogoutBtnClicked" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/exitBtn.png"  />
@@ -434,7 +434,7 @@
                 </Button.Style>
 
             </Button>
-            <Button Content="LOGOUT" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="confirmLogoutBtn" Margin="210,27,35,257"  FontFamily="Slim Joe" Foreground="White" RenderTransformOrigin="1.148,6.37" Grid.Row="1" Click="confirmLogoutButtonClicked" MouseEnter="confirmLogoutButtonHover" MouseLeave="confirmLogoutButtonIdle" >
+            <Button Content="LOGOUT" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="confirmLogoutBtn" Margin="210,27,35,257"  FontFamily="../assets/#Slim Joe" Foreground="White" RenderTransformOrigin="1.148,6.37" Grid.Row="1" Click="confirmLogoutButtonClicked" MouseEnter="confirmLogoutButtonHover" MouseLeave="confirmLogoutButtonIdle" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/saveBtn.png"  />
@@ -461,7 +461,7 @@
 
             </Button>
 
-            <Button Content="cancel" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="cancelLogoutBtn" Margin="-50,27,295,257" MouseEnter="cancelLogoutBtnHover" MouseLeave="cancelLogoutBtnIdle" FontFamily="Slim Joe" Foreground="#ED2F59" Click="cancelLogoutBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
+            <Button Content="cancel" FontSize="36" Opacity="1.0" Height="80" Width="240" x:Name="cancelLogoutBtn" Margin="-50,27,295,257" MouseEnter="cancelLogoutBtnHover" MouseLeave="cancelLogoutBtnIdle" FontFamily="../assets/#Slim Joe" Foreground="#ED2F59" Click="cancelLogoutBtnClicked" RenderTransformOrigin="1.148,6.37" Grid.Row="1" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/cancelSettingBtn.png"  />
@@ -487,7 +487,7 @@
                 </Button.Style>
 
             </Button>
-            <Label HorizontalContentAlignment="Center" IsHitTestVisible="False" Foreground="White" FontFamily="Slim Joe" FontSize="36" Content="are you sure want to logout&#xD;&#xA;from your account?" Margin="-150,282,-64,6"/>
+            <Label HorizontalContentAlignment="Center" IsHitTestVisible="False" Foreground="White" FontFamily="../assets/#Slim Joe" FontSize="36" Content="are you sure want to logout&#xD;&#xA;from your account?" Margin="-150,282,-64,6"/>
         </Grid>
 
     </Grid>

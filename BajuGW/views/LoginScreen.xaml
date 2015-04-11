@@ -57,7 +57,7 @@
         <Rectangle Opacity="0.4" Grid.ColumnSpan="2" Fill="Black" HorizontalAlignment="Left" Height="265" Margin="-135,629,-128,-126" Stroke="Transparent" VerticalAlignment="Top" Width="1629"/>
         <Image Grid.Column="1" Margin="323,16,547,596" Source="../assets/logo.png" Stretch="Fill"/>
 
-        <Button Opacity="0.8" x:Name="loginBtn" FontSize="24" Content="CLICK HERE TO LOGIN" Width="400" Height="400" Margin="261,215,483,153" Click="loginBtnClicked" MouseEnter="loginBtnHover" MouseLeave="loginBtnIdle" FontFamily="Big John" Foreground="#3498db"  Grid.Column="1" >
+        <Button Opacity="0.8" x:Name="loginBtn" FontSize="24" Content="CLICK HERE TO LOGIN" Width="400" Height="400" Margin="261,215,483,153" Click="loginBtnClicked" MouseEnter="loginBtnHover" MouseLeave="loginBtnIdle" FontFamily="../assets/#Big Jhon" Foreground="#3498db"  Grid.Column="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/loginBtn.png"  />
@@ -89,7 +89,7 @@
                HorizontalAlignment="Center"
                FontSize="24" />
 
-        <Button Opacity="0.8" Visibility="Collapsed" Height="300" Width="300" x:Name="altLoginBtn2" Margin="85,249,981,219" Click="altLogin2" Foreground="white" FontFamily="SLIM Joe" FontSize="32" Grid.ColumnSpan="2" MouseEnter="altLoginHover" MouseLeave="altLoginIdle" >
+        <Button Opacity="0.8" Visibility="Collapsed" Height="300" Width="300" x:Name="altLoginBtn2" Margin="85,249,981,219" Click="altLogin2" Foreground="white" FontFamily="../assets/#Slim Joe" FontSize="32" Grid.ColumnSpan="2" MouseEnter="altLoginHover" MouseLeave="altLoginIdle" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/altLogin2.png"  />
@@ -116,7 +116,7 @@
 
         </Button>
 
-        <Button Opacity="0.8" Visibility="Collapsed"  Height="300" Width="300" x:Name="regBtn2" Margin="748,249,96,219" Click="registerBtnClicked" MouseEnter="registerBtnHover" MouseLeave="registerBtnIdle" Foreground="white" FontFamily="SLIM Joe" FontSize="32" Grid.Column="1" >
+        <Button Opacity="0.8" Visibility="Collapsed"  Height="300" Width="300" x:Name="regBtn2" Margin="748,249,96,219" Click="registerBtnClicked" MouseEnter="registerBtnHover" MouseLeave="registerBtnIdle" Foreground="white" FontFamily="../assets/#Slim Joe" FontSize="32" Grid.Column="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/addNewAccountBtn2.png"  />
@@ -144,7 +144,7 @@
         </Button>
 
 
-        <Button x:Name="registerBtn" Opacity="0.5" Foreground="white" Margin="547,647,317,41" Width="280" Height="80" FontFamily="SLIM Joe" FontSize="30" Click="registerBtnClicked" MouseEnter="registerBtnHover" MouseLeave="registerBtnIdle" Grid.Column="1"  >
+        <Button x:Name="registerBtn" Opacity="0.5" Foreground="white" Margin="547,647,317,41" Width="280" Height="80" FontFamily="../assets/#Slim Joe" FontSize="30" Click="registerBtnClicked" MouseEnter="registerBtnHover" MouseLeave="registerBtnIdle" Grid.Column="1"  >
             <Button.Background >
                 <ImageBrush ImageSource ="../assets/registerBtn.png"  />
             </Button.Background>
@@ -167,9 +167,9 @@
                 </Style>
             </Button.Style> REGISTER
         </Button>
-        <Label Height="38" Foreground="white" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="288" FontFamily="SLIM Joe" FontSize="24" Margin="89,647,767,83" Content="can't authorize?&#xA;" Grid.Column="1" />
-        <Label Height="38" Foreground="white" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="288" FontFamily="SLIM Joe" FontSize="24" Margin="89,685,767,45" Content="alternative login" MouseDown="altLogin" Grid.Column="1"/>
-        <Label Height="38" Foreground="white" Background="Transparent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" FontFamily="SLIM Joe" FontSize="24" Margin="421,667,643,63" Content="or" Grid.Column="1" />
+        <Label Height="38" Foreground="white" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="288" FontFamily="../assets/#Slim Joe" FontSize="24" Margin="89,647,767,83" Content="can't authorize?&#xA;" Grid.Column="1" />
+        <Label Height="38" Foreground="white" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="288" FontFamily="../assets/#Slim Joe" FontSize="24" Margin="89,685,767,45" Content="alternative login" MouseDown="altLogin" Grid.Column="1"/>
+        <Label Height="38" Foreground="white" Background="Transparent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" FontFamily="../assets/#Slim Joe" FontSize="24" Margin="421,667,643,63" Content="or" Grid.Column="1" />
         <ProgressBar x:Name="loadingBar" HorizontalAlignment="Left" Width="400" Height="56" Margin="263,453,0,0" Visibility="Hidden" VerticalAlignment="Top" Grid.Column="1" >
             <ProgressBar.Background>
                 <ImageBrush ImageSource ="../assets/loadingPhase1.png"  />
@@ -182,7 +182,7 @@
 
         <Grid x:Name="registerForm" Visibility="Collapsed" Grid.ColumnSpan="2">
             <Rectangle Opacity="0.9" Fill="WhiteSmoke" HorizontalAlignment="Center" Height="694"  Stroke="Transparent" VerticalAlignment="Center" Width="1165" Margin="100,40,101,34"/>
-            <Button x:Name="addNewAccountBtn" Foreground="white" Margin="706,626,380,62" Width="280" Height="80" FontFamily="SLIM Joe" FontSize="30" Click="addNewAccountBtnClicked" MouseEnter="addNewAccountBtnHover" MouseLeave="addNewAccountBtnIdle"  >
+            <Button x:Name="addNewAccountBtn" Foreground="white" Margin="706,626,380,62" Width="280" Height="80" FontFamily="../assets/#Slim Joe" FontSize="30" Click="addNewAccountBtnClicked" MouseEnter="addNewAccountBtnHover" MouseLeave="addNewAccountBtnIdle"  >
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/addNewAccountBtn.png"  />
                 </Button.Background>
@@ -206,7 +206,7 @@
                 </Button.Style> REGISTER
             </Button>
 
-            <Button x:Name="cancelBtn" Foreground="#D07339" Margin="391,626,695,62" Width="280" Height="80" FontFamily="SLIM Joe" FontSize="30" Click="cancelBtnClicked" MouseEnter="cancelBtnHover" MouseLeave="cancelBtnIdle"  >
+            <Button x:Name="cancelBtn" Foreground="#D07339" Margin="391,626,695,62" Width="280" Height="80" FontFamily="../assets/#Slim Joe" FontSize="30" Click="cancelBtnClicked" MouseEnter="cancelBtnHover" MouseLeave="cancelBtnIdle"  >
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/cancelBtn1.png"  />
                 </Button.Background>
@@ -230,7 +230,7 @@
                 </Button.Style> CANCEL
             </Button>
 
-            <Button x:Name="exitBtn" Margin="1211,54,119,678" Width="36" Height="36" FontFamily="SLIM Joe" FontSize="30" Click="exitBtnClicked" MouseEnter="exitBtnHover" MouseLeave="exitBtnIdle" RenderTransformOrigin="2.204,-3.1"  >
+            <Button x:Name="exitBtn" Margin="1211,54,119,678" Width="36" Height="36" FontFamily="../assets/#Slim Joe" FontSize="30" Click="exitBtnClicked" MouseEnter="exitBtnHover" MouseLeave="exitBtnIdle" RenderTransformOrigin="2.204,-3.1"  >
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/exitBtn.png"  />
                 </Button.Background>
@@ -253,7 +253,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Label Height="80" Foreground="Black" Background="Transparent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" FontFamily="SLIM Joe" FontSize="30" Content="ADD NEW ACCOUNT" Margin="333,41,333,647" />
+            <Label Height="80" Foreground="Black" Background="Transparent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" FontFamily="../assets/#Slim Joe" FontSize="30" Content="ADD NEW ACCOUNT" Margin="333,41,333,647" />
 
             <TextBox x:Name="username"  BorderThickness="0" Height="80" Padding="20,0,20,0" Foreground="Black"   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="520" FontFamily="Arial" FontSize="36" Margin="195,179,651,509" GotFocus="formFieldActive" LostFocus="formFieldInactive"  >
                 <TextBox.Background>
@@ -287,7 +287,7 @@
 
             <Label x:Name="warning" Visibility="Hidden" IsHitTestVisible="False" Height="47" Padding="20,0,20,0" Foreground="Red" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="512" FontFamily="Arial" FontSize="30" Content="*Password retype doesn't match!" Margin="159,553,695,168" />
 
-            <Button x:Name="authorizeBtn" Height="400" Width="400" Margin="778,166,188,202" Click="authorizeBtnClicked" MouseEnter="authorizeBtnHover" MouseLeave="authorizeBtnIdle" FontFamily="Big John" Foreground="#3498db"  FontSize="24" HorizontalContentAlignment="Center" Content="click here to authorize" >
+            <Button x:Name="authorizeBtn" Height="400" Width="400" Margin="778,166,188,202" Click="authorizeBtnClicked" MouseEnter="authorizeBtnHover" MouseLeave="authorizeBtnIdle" FontFamily="../assets/#Big Jhon" Foreground="#3498db"  FontSize="24" HorizontalContentAlignment="Center" Content="click here to authorize" >
 
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/loginBtn.png"  />
@@ -318,7 +318,7 @@
 
         <Grid x:Name="altLoginForm" Visibility="Collapsed" Grid.ColumnSpan="2">
             <Rectangle Opacity="0.9" Fill="WhiteSmoke" HorizontalAlignment="Center" Height="508"  Stroke="Transparent" VerticalAlignment="Center" Width="649" Margin="363,121,354,139"/>
-            <Button x:Name="altLoginBtn" Foreground="white" Margin="708,503,418,185" Width="240" Height="80" FontFamily="SLIM Joe" FontSize="30" Click="altLoginBtnClicked" MouseEnter="altLoginBtnHover" MouseLeave="altLoginBtnIdle"  >
+            <Button x:Name="altLoginBtn" Foreground="white" Margin="708,503,418,185" Width="240" Height="80" FontFamily="../assets/#Slim Joe" FontSize="30" Click="altLoginBtnClicked" MouseEnter="altLoginBtnHover" MouseLeave="altLoginBtnIdle"  >
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/altLoginBtn.png"  />
                 </Button.Background>
@@ -342,7 +342,7 @@
                 </Button.Style> LOGIN
             </Button>
 
-            <Button x:Name="cancelAltLoginBtn" Foreground="#1F8492" Margin="429,503,697,185" Width="240" Height="80" FontFamily="SLIM Joe" FontSize="30" Click="cancelAltLoginBtnClicked" MouseEnter="cancelAltLoginBtnHover" MouseLeave="cancelAltLoginBtnIdle"  >
+            <Button x:Name="cancelAltLoginBtn" Foreground="#1F8492" Margin="429,503,697,185" Width="240" Height="80" FontFamily="../assets/#Slim Joe" FontSize="30" Click="cancelAltLoginBtnClicked" MouseEnter="cancelAltLoginBtnHover" MouseLeave="cancelAltLoginBtnIdle"  >
                 <Button.Background>
                     <ImageBrush ImageSource ="../assets/cancelBtn2.png"  />
                 </Button.Background>
@@ -365,7 +365,7 @@
                     </Style>
                 </Button.Style> CANCEL
             </Button>
-            <Label Height="80" Foreground="Black" Background="Transparent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="637" FontFamily="SLIM Joe" FontSize="30" Content="LOGIN WITH PASSWORD" Margin="366,122,363,566" />
+            <Label Height="80" Foreground="Black" Background="Transparent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="637" FontFamily="../assets/#Slim Joe" FontSize="30" Content="LOGIN WITH PASSWORD" Margin="366,122,363,566" />
 
             <TextBox x:Name="usernameLogin"  BorderThickness="0" Height="80" Padding="20,0,20,0" Foreground="Black"   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="520" FontFamily="Arial" FontSize="36" Margin="429,260,417,428" GotFocus="ulformFieldActive" LostFocus="ulformFieldInactive"  >
                 <TextBox.Background>
