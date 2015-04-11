@@ -60,23 +60,27 @@
         </ResourceDictionary>
     </Window.Resources >
     <Grid x:Name="mainScreen" Height="768" VerticalAlignment="Top" Visibility="Visible">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="123*"/>
+            <RowDefinition Height="133*"/>
+        </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="111*"/>
             <ColumnDefinition Width="572*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Margin="-11,-67,-23,-165" Height="1021" Source="../assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2"/>
+        <Image Margin="-11,-67,-123,-186" Height="1021" Source="../assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-        <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2"/>
-        <Rectangle IsHitTestVisible="False" StrokeThickness="4" Fill="Transparent" Opacity="1.0" HorizontalAlignment="Left" Height="697" Margin="29,53,0,0" Stroke="#ED2F59" VerticalAlignment="Top" Width="971" Grid.Column="1"/>
-        <Rectangle Opacity="0.4" Fill="Black" HorizontalAlignment="Left" Height="865" Margin="-66,-47,0,-50" Stroke="Transparent" VerticalAlignment="Top" Width="278"/>
+        <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Rectangle IsHitTestVisible="False" StrokeThickness="4" Fill="Transparent" Opacity="1.0" HorizontalAlignment="Left" Height="697" Margin="29,53,0,0" Stroke="#ED2F59" VerticalAlignment="Top" Width="971" Grid.Column="1" Grid.RowSpan="2"/>
+        <Rectangle Opacity="0.4" Fill="Black" HorizontalAlignment="Left" Height="865" Margin="-66,-47,0,-50" Stroke="Transparent" VerticalAlignment="Top" Width="278" Grid.RowSpan="2"/>
         <Rectangle Fill="Black" Opacity="0.5" HorizontalAlignment="Left" Height="100" Margin="-11,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223"/>
 
 
-        <Image Margin="35,11,50,679" Source="../assets/logo.png" Stretch="Fill"/>
+        <Image Margin="35,11,50,280" Source="../assets/logo.png" Stretch="Fill"/>
 
-        <Button Opacity="1.0" x:Name="measureBtn" Height="160" Width="160" Margin="25,117,37,491" Click="measureBtnClicked" MouseEnter="measureBtnHover" MouseLeave="measureBtnIdle" FontFamily="Big John" Foreground="#3498db" >
+        <Button Opacity="1.0" x:Name="measureBtn" Height="160" Width="160" Margin="25,117,37,92" Click="measureBtnClicked" MouseEnter="measureBtnHover" MouseLeave="measureBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/measureActive.png"  />
@@ -105,7 +109,7 @@
 
         <Rectangle x:Name="mHighlight" Fill="Black" Opacity="0.4" HorizontalAlignment="Left" Height="10" Margin="-11,316,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223"/>
         <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="51,286,57,0" TextWrapping="Wrap" Text="MEASURE" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="114"/>
-        <Button Opacity="0.5" x:Name="wardrobeBtn" Height="160" Width="160" Margin="27,332,35,276" MouseEnter="wardrobeBtnHover" MouseLeave="wardrobeBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="wardrobeBtnClicked" >
+        <Button Opacity="0.5" x:Name="wardrobeBtn" Height="160" Width="160" Margin="27,332,35,276" MouseEnter="wardrobeBtnHover" MouseLeave="wardrobeBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="wardrobeBtnClicked" Grid.RowSpan="2" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/wardrobeActive.png"  />
@@ -131,9 +135,9 @@
             </Button.Style>
 
         </Button>
-        <Rectangle x:Name="wHighlight" Fill="Black" Opacity="0.4" HorizontalAlignment="Left" Height="10" Margin="-11,539,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223"/>
-        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="36,504,39,0" TextWrapping="Wrap" Text="wardrobe" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="147"/>
-        <Button Opacity="0.5" x:Name="storeBtn" Height="160" Width="160" Margin="25,560,37,48" Click="storeBtnClicked" MouseEnter="storeBtnHover" MouseLeave="storeBtnIdle" FontFamily="Big John" Foreground="#3498db" >
+        <Rectangle x:Name="wHighlight" Fill="Black" Opacity="0.4" HorizontalAlignment="Left" Height="10" Margin="-11,170,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223" Grid.Row="1"/>
+        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="36,135,39,0" TextWrapping="Wrap" Text="wardrobe" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="147" Grid.Row="1"/>
+        <Button Opacity="0.5" x:Name="storeBtn" Height="160" Width="160" Margin="25,191,37,48" Click="storeBtnClicked" MouseEnter="storeBtnHover" MouseLeave="storeBtnIdle" FontFamily="Big John" Foreground="#3498db" Grid.Row="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/storeActive.png"  />
@@ -159,10 +163,10 @@
             </Button.Style>
 
         </Button>
-        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,734,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81"/>
+        <TextBlock Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,365,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81" Grid.Row="1"/>
         <TextBlock x:Name="title"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,881,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
         <!-- Measure Screen -->
-        <Grid x:Name="measureScreen" Visibility="Collapsed">
+        <Grid x:Name="measureScreen" Visibility="Visible" Grid.RowSpan="2">
             <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
 
             <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="Big John" Foreground="#3498db" >
@@ -224,19 +228,20 @@
 
         </Grid>
 
+
         <!-- Wardrobe Screen -->
-        <Grid x:Name="wardrobeScreen" Visibility="Visible">
-
-
+        <Grid x:Name="wardrobeScreen" Visibility="Hidden" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2">
+            <ScrollViewer Name="gallery" VerticalScrollBarVisibility="Auto">
+                <WrapPanel Name="clothGallery" Orientation="Horizontal" Margin="10"/>
+            </ScrollViewer>
         </Grid>
-
-
+        
         <!-- Store Screen -->
-        <Grid x:Name="storeScreen" Visibility="Collapsed">
+        <Grid x:Name="storeScreen" Visibility="Collapsed" Grid.RowSpan="2">
 
         </Grid>
 
-        <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="1043,668,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="1" >
+        <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="1043,299,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="1" Grid.Row="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/settingBtn.png"  />
@@ -262,7 +267,7 @@
             </Button.Style>
 
         </Button>
-        <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="1052,8,12,680" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="1" >
+        <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="1052,8,12,281" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/logoutBtn.png"  />
@@ -288,9 +293,9 @@
             </Button.Style>
 
         </Button>
-        <Rectangle x:Name="deactivator" Visibility="Collapsed" Opacity="0.8" Fill="Black" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2"/>
+        <Rectangle x:Name="deactivator" Visibility="Collapsed" Opacity="0.8" Fill="Black" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-        <Grid x:Name="settingScreen" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9">
+        <Grid x:Name="settingScreen" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="101*"/>
                 <RowDefinition Height="91*"/>
@@ -395,7 +400,7 @@
             </Button>
         </Grid>
 
-        <Grid x:Name="logoutConfirm" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9">
+        <Grid x:Name="logoutConfirm" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="101*"/>
                 <RowDefinition Height="91*"/>

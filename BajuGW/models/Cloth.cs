@@ -9,7 +9,7 @@ namespace BajuGW
      * Representasi data dari baju yang dimiliki pengguna
      * 
      */
-    class Cloth
+    public class Cloth
     {
         public int id;
         public string name;
@@ -38,8 +38,23 @@ namespace BajuGW
             this.clothWidth = clothWidth;
             this.clothHeight = clothHeight;
             this.picture_path = picture_path;
-            this.picture = new BitmapImage(new Uri(picture_path));
+            this.picture = new BitmapImage(new Uri(picture_path, UriKind.Relative));
             this.categories = categories;
+        }
+
+
+        public Cloth(OnlineCloth cloth)
+        {
+            this.id = cloth.id;
+            this.name = cloth.name;
+            this.brand = cloth.brand;
+            this.isFavorite = 0;
+            this.color = cloth.color;
+            this.clothWidth = cloth.clothWidth;
+            this.clothHeight = cloth.clothHeight;
+            this.picture_path = cloth.picture_path;
+            this.picture = new BitmapImage(new Uri(this.picture_path, UriKind.Relative));
+            this.categories = cloth.categories;
         }
 
 
@@ -98,7 +113,7 @@ namespace BajuGW
      * Representasi data dari baju yang ada di toko online
      * 
      */
-    class OnlineCloth : Cloth
+    public class OnlineCloth : Cloth
     { 
 	    private int store;
         private int price;

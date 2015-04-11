@@ -15,20 +15,31 @@ namespace BajuGW
         private List<string> categories;
         private string username;
 
+
         /**
          * Constructor utama dari kelas wardrobe
          * 
          */
         public Wardrobe(string username)
         {
-            SQLiteManager dbmanager = Controller.dbmanager;
-            
+            this.username = username;
+            refresh();
+        }
 
-            clothes = new List<Cloth>();
-            categories = new List<string>();
+
+        /**
+         * Muat ulang baju-baju di wardrobe
+         * 
+         */
+        public void refresh()
+        {
+            this.clothes = new List<Cloth>();
+            this.categories = new List<string>();
+
+            SQLiteManager dbmanager = Controller.dbmanager;
 
             string query = "select id, name, brand, favorite, color, cloth_width, " +
-                "cloth_height, picture_path from cloth where username='" + username + "'";
+                "cloth_height, picture_path from cloth where username='" + this.username + "'";
             foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
             {
                 int id = int.Parse(row["id"]);
@@ -46,22 +57,18 @@ namespace BajuGW
             foreach (Cloth cloth in clothes)
             {
                 query = "select category_id from cloth_has_category where username='" +
-                    username + "' and cloth_id='" + cloth.id + "'";
+                    this.username + "' and cloth_id='" + cloth.id + "'";
                 foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
                 {
                     cloth.addCategory(row["category_id"]);
                 }
             }
 
-            query = "select id from category where username='" + username + "'";
+            query = "select id from category where username='" + this.username + "'";
             foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
             {
                 categories.Add(row["id"]);
             }
-
-            
-
-            this.username = username;
         }
 		
 
@@ -83,6 +90,7 @@ namespace BajuGW
                 if (!blacklist.Contains(n))
                 {
                     suggestion.Add(clothes[n]);
+                    blacklist.Add(n);
                     n--;
                 }
             }
@@ -114,7 +122,7 @@ namespace BajuGW
 
             foreach (Cloth cloth in clothes)
             {
-                if (cloth.categories.Contains(category))
+                if (cloth.categories.Equals(category))
                 {
                     result.Add(cloth);
                 }
@@ -146,7 +154,6 @@ namespace BajuGW
         /**
          * Tambahkan pakaian baru ke database
          * 
-         * 
          */
         public bool addCloth(Cloth cloth)
         {
@@ -160,12 +167,11 @@ namespace BajuGW
                 ",'" + cloth.picture_path + "')";
 
             bool status = dbmanager.queryWithoutReturn(query);
-            
-
             if (!status)
                 return false;
 
-            clothes.Add(cloth);
+            refresh();
+
             return true;
         }
 

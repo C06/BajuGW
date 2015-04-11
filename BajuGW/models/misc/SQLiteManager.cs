@@ -115,6 +115,7 @@ namespace BajuGW
         }
         
 
+        //TODO: tambahkan tabel online store favorit
         /**
          * Buat tabel yang akan dipakai
          * 
@@ -124,11 +125,11 @@ namespace BajuGW
             string query =
                 "CREATE TABLE User (username VARCHAR(10) PRIMARY KEY,password VARCHAR(10) NOT NULL,email TEXT NOT NULL,cloth_width NUMERIC,cloth_height NUMERIC,picture_path TEXT,theme TEXT);" +
                 "CREATE TABLE Store (id INTEGER PRIMARY KEY);" +
-                "CREATE TABLE User_Activate_Store (username VARCHAR(10) REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,store_id INTEGER REFERENCES Store(id) ON DELETE NO ACTION ON UPDATE NO ACTION,PRIMARY KEY (username, store_id));" +
-                "CREATE TABLE Cloth (username VARCHAR(10) REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,id INTEGER,name TEXT,brand TEXT,favorite BOOLEAN,color TEXT,cloth_width NUMERIC NOT NULL,cloth_height NUMERIC NOT NULL,picture_path TEXT NOT NULL,PRIMARY KEY (username, id));" +
-                "CREATE TABLE Category (username VARCHAR(10) REFERENCES User(username) ON DELETE CASCADE ON UPDATE CASCADE,id TEXT,PRIMARY KEY (username, id));" +
-                "CREATE TABLE Cloth_Has_Category (username VARCHAR(10) REFERENCES Cloth(username) ON DELETE CASCADE ON UPDATE CASCADE,cloth_id INTEGER REFERENCES Cloth(id) ON DELETE CASCADE ON UPDATE CASCADE,category_id TEXT REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE, PRIMARY KEY (username, cloth_id, category_id));";
-                ;
+                "CREATE TABLE User_Activate_Store (username VARCHAR(10),store_id INTEGER,PRIMARY KEY (username, store_id),FOREIGN KEY (username) REFERENCES user(username),FOREIGN KEY (store_id) REFERENCES store(id));" +
+                "CREATE TABLE Cloth (username VARCHAR(10),id INTEGER,name TEXT,brand TEXT,favorite BOOLEAN,color TEXT,cloth_width NUMERIC NOT NULL,cloth_height NUMERIC NOT NULL,picture_path TEXT NOT NULL,PRIMARY KEY (username, id),FOREIGN KEY (username) REFERENCES user(username));" +
+                "CREATE TABLE Category (username VARCHAR(10),id TEXT,PRIMARY KEY (username, id),FOREIGN KEY (username) REFERENCES user(username));" +
+                "CREATE TABLE Cloth_Has_Category (username VARCHAR(10),cloth_id INTEGER,creator VARCHAR(10),category_id TEXT,PRIMARY KEY (username, cloth_id, category_id),FOREIGN KEY (username, cloth_id) REFERENCES cloth(username, id),FOREIGN KEY (creator, category_id) REFERENCES cateogry(username, id));";
+
             queryWithoutReturn(query);
         }
     }

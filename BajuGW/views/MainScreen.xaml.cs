@@ -34,6 +34,34 @@ namespace BajuGW
             this.controller = controller;
         }
 
+        public void refresh()
+        {
+            clothGallery.Children.Clear();
+            
+            //TODO: selesaikan pembuatan daftar baju
+            List<Cloth> clothes = controller.getClothes("");
+            foreach (Cloth cloth in clothes)
+            {
+                /*Button btn = new Button();
+                btn.Height = 215;
+                btn.Width = 180;
+                btn.CommandParameter = cloth;
+                btn.Click += showDetails;
+                btn.Content = cloth.name;
+                btn.FontSize = 30.0;
+                btn.Margin = new Thickness(5.0, 5.0, 5.0, 5.0);
+                clothGallery.Children.Add(btn);*/
+
+                Grid grid = new Grid();
+                grid.Height = 215;
+                grid.Width = 175;
+                grid.Margin = new Thickness(5.0, 5.0, 5.0, 5.0);
+                grid.Background = new SolidColorBrush(Colors.White);
+
+                clothGallery.Children.Add(grid);
+            }
+        }
+
         private void measureBtnClicked(object sender, RoutedEventArgs e)
         {
             isMeasureBtnClicked = true;
@@ -72,6 +100,15 @@ namespace BajuGW
             measureBtn.Opacity = 0.5;
             storeBtn.Opacity = 0.5;
         }
+
+        //TODO: ganti isi dari fungsi ini
+        private void showDetails(object sender, RoutedEventArgs e)
+        {
+            /*Button button = (Button) sender;
+            Cloth cloth = (Cloth) button.CommandParameter;
+            button.Content = cloth.picture_path;*/
+        }
+
 
         private void wardrobeBtnHover(object sender, MouseEventArgs e)
         {

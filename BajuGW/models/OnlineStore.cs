@@ -35,9 +35,11 @@ namespace BajuGW
                 foreach (OnlineCloth cloth in clothes) {
                     string filename = this.name + "_" +cloth.id+".jpg";
                     Client.DownloadFile(address+cloth.picture_path, filename);
-                    cloth.picture = new BitmapImage(new Uri(filename));
+                    cloth.picture = new BitmapImage(new Uri(filename, UriKind.Relative));
                 }
             }
+
+            
         }
 
 
@@ -73,7 +75,7 @@ namespace BajuGW
 
             foreach (OnlineCloth cloth in clothes)
             {
-                if (cloth.categories.Contains(category))
+                if (cloth.categories.Equals(category))
                 {
                     result.Add(cloth);
                 }
@@ -81,13 +83,14 @@ namespace BajuGW
 
             return result;
 		}
-		
 
+
+        //TODO: selesaikan method ini
         /**
          * Menandakan pakaian yang diinginkan sebagai pakaian favorit
          * 
          */
-		bool setFavorite(int id)
+		bool setFavorite(Account account, int id)
         {
             OnlineCloth result = getOnlineCloth(id);
             if (result == null)
@@ -98,15 +101,13 @@ namespace BajuGW
 		}
 		
 
-        //TODO: selesaikan method ini
         /**
          * Membeli sebuah pakaian yang tersedia di toko online tujuan
-         * 
          * 
          */
 		bool buy(Account account, int id)
         {
-            return false;
+            return account.addCloth(getOnlineCloth(id));
 		}
 
 

@@ -32,12 +32,31 @@ namespace BajuGW
          */
         public Controller()
         {
-            dbmanager = new SQLiteManager(DBNAME);
-
             if (!File.Exists(Controller.DBNAME))
             {
+                dbmanager = new SQLiteManager(DBNAME);
                 dbmanager.initDatabase();
             }
+            else
+            {
+                dbmanager = new SQLiteManager(DBNAME);
+            }
+
+            /*dbmanager.queryWithoutReturn(
+                "insert into cloth values" +
+                /*"('rebby', 0, 'kaos', 'fasilkom', 0, 'blue', 0.0, 0.0, '0.png')," +
+                "('rebby', 1, 'kemeja', 'fasilkom', 0, 'blue', 0.0, 0.0, '1.png')," +
+                "('rebby', 2, 'polo', 'fasilkom', 0, 'blue', 0.0, 0.0, '2.png')," +
+                "('rebby', 3, 'jubah', 'fasilkom', 0, 'blue', 0.0, 0.0, '3.png')," +
+                "('rebby', 4, 'zirah', 'fasilkom', 0, 'blue', 0.0, 0.0, '4.png')," +
+                "('rebby', 5, 'ponco', 'fasilkom', 0, 'blue', 0.0, 0.0, '5.png')," +
+                "('rebby', 6, 'gamis', 'fasilkom', 0, 'blue', 0.0, 0.0, '6.png')," +
+                "('rebby', 7, 'koko', 'fasilkom', 0, 'blue', 0.0, 0.0, '7.png')," +
+                "('rebby', 8, 'seragam', 'fasilkom', 0, 'blue', 0.0, 0.0, '8.png'),"
+                "('rebby', 9, 'chainmail', 'fasilkom', 0, 'blue', 0.0, 0.0, '9.png'),"+
+                "('rebby', 10, 'v-neck', 'fasilkom', 0, 'blue', 0.0, 0.0, '10.png'),"+
+                "('rebby', 11, 'kutang', 'fasilkom', 0, 'blue', 0.0, 0.0, '11.png');"
+            );*/
 
             mainScreen = new MainScreen(this);
             loginScreen = new LoginScreen(this);
@@ -63,6 +82,7 @@ namespace BajuGW
          */
         public void showMainScreen(Window caller) {
             this.MainWindow = mainScreen;
+            mainScreen.refresh();
             this.MainWindow.Show();
             caller.Hide();
         }
@@ -109,7 +129,7 @@ namespace BajuGW
          * Memfavoritkan pakaian yang diinginkan
          * 
          */
-        bool setfavorite(int id)
+        public bool setfavorite(int id)
         {
             return account.setFavorite(id);
         }
@@ -119,7 +139,7 @@ namespace BajuGW
          * Kembalikan daftar pakaian yang disarankan oleh BajuGW
          * 
          */
-        List<Cloth> getSuggestion()
+        public List<Cloth> getSuggestion()
         {
             return account.getSuggestion();
         }
@@ -129,7 +149,7 @@ namespace BajuGW
          * Kembalikan daftar kategori yang dimiliki pengguna
          * 
          */
-        List<string> getCategories()
+        public List<string> getCategories()
         {
             return account.getCategories();
         }
@@ -139,7 +159,7 @@ namespace BajuGW
          * Kembalikan daftar pakaian yang sesuai dengan kategori yang diinginkan
          * 
          */
-        List<Cloth> getClothes(String category)
+        public List<Cloth> getClothes(String category)
         {
             return account.getClothes(category);
         }
@@ -149,7 +169,7 @@ namespace BajuGW
          * Kembalikan daftar pakaian yang sesuai dengan kriteria pencarian
          * 
          */
-        List<Cloth> searchWardrobe(String query)
+        public List<Cloth> searchWardrobe(String query)
         {
             return account.search(query);
         }
@@ -159,7 +179,7 @@ namespace BajuGW
          * Kembalikan daftar pakaian yang disarankan oleh BajuGW
          * 
          */
-        bool deleteCloth(int id)
+        public bool deleteCloth(int id)
         {
             return account.deleteCloth(id);
         }
@@ -169,7 +189,7 @@ namespace BajuGW
          * Buat sebuah pakaian baru
          * 
          */
-        bool addCloth(Cloth cloth)
+        public bool addCloth(Cloth cloth)
         {
             return account.addCloth(cloth);
         }
@@ -179,7 +199,7 @@ namespace BajuGW
          * Buat sebuah kategori baru
          * 
          */
-        bool addCategory(String category)
+        public bool addCategory(String category)
         {
             return account.addCategory(category);
         }
@@ -189,7 +209,7 @@ namespace BajuGW
          * Hapus kategori
          * 
          */
-        bool deleteCategory(String category)
+        public bool deleteCategory(String category)
         {
             return account.deleteCategory(category);
         }
@@ -199,7 +219,7 @@ namespace BajuGW
          * Ubah nama kategori yang diinginkan
          * 
          */
-        bool editCategory(String category, String newName)
+        public bool editCategory(String category, String newName)
         {
             return account.editCategory(category, newName);
         }

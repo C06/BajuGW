@@ -38,7 +38,7 @@ namespace BajuGW
             this.clothHeight = clothHeight;
 
             if (!picture_path.Equals(""))
-                this.picture = new BitmapImage(new Uri(picture_path));
+                this.picture = new BitmapImage(new Uri(picture_path, UriKind.Relative));
             
             this.theme = theme;
             this.wardrobe = new Wardrobe(username);
@@ -106,16 +106,6 @@ namespace BajuGW
 
             return new Account(username, email, clothWidth, clothHeight, picture_path, theme, connectedStore);
         }
-
-
-        /**
-         * Memfavoritkan pakaian yang diinginkan
-         * 
-         */
-		public bool setfavorite(int id)
-        {
-            return wardrobe.setFavorite(id);
-		}
 		
 
         /**
