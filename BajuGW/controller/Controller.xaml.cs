@@ -63,6 +63,8 @@ namespace BajuGW
             loginScreen = new LoginScreen(this);
             this.MainWindow = loginScreen;
             this.MainWindow.Show();
+
+            new OnlineStore("mahal", "http://ppl-c06.cs.ui.ac.id");
         }
 
 
