@@ -14,8 +14,8 @@ namespace BajuGW
         public int id;
         public string name;
         public int isFavorite;
-        public double clothWidth;
-        public double clothHeight;
+        public double cloth_width;
+        public double cloth_height;
         public string color;
         public string brand;
         public BitmapSource picture;
@@ -35,8 +35,8 @@ namespace BajuGW
             this.brand = brand;
             this.isFavorite = isFavorite;
             this.color = color;
-            this.clothWidth = clothWidth;
-            this.clothHeight = clothHeight;
+            this.cloth_width = clothWidth;
+            this.cloth_height = clothHeight;
             this.picture_path = picture_path;
             this.picture = new BitmapImage(new Uri(picture_path, UriKind.Relative));
             this.categories = categories;
@@ -50,8 +50,8 @@ namespace BajuGW
             this.brand = cloth.brand;
             this.isFavorite = 0;
             this.color = cloth.color;
-            this.clothWidth = cloth.clothWidth;
-            this.clothHeight = cloth.clothHeight;
+            this.cloth_width = cloth.cloth_width;
+            this.cloth_height = cloth.cloth_height;
             this.picture_path = cloth.picture_path;
             this.picture = new BitmapImage(new Uri(this.picture_path, UriKind.Relative));
             this.categories = cloth.categories;

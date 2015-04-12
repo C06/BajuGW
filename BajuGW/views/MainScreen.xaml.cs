@@ -23,6 +23,7 @@ namespace BajuGW
         bool isMeasureBtnClicked = true;
         bool isWardrobeBtnClicked = false;
         bool isStoreBtnClicked = false;
+        string wardrobeCategory = "";
 
         private Controller controller;
         
@@ -34,23 +35,22 @@ namespace BajuGW
             this.controller = controller;
         }
 
+
+
+
+
         public void refresh()
         {
             clothGallery.Children.Clear();
             
-            List<Cloth> clothes = controller.getClothes("");
+            List<Cloth> clothes = controller.getClothes(wardrobeCategory);
             foreach (Cloth cloth in clothes)
             {
+                //definisi grid
                 Grid grid = new Grid();
-                grid.Background = new ImageBrush(cloth.picture);
                 grid.Height = 140;
                 grid.Width = 120;
                 grid.Margin = new Thickness(15.0);
-                grid.ShowGridLines = true;
-
-                grid.HorizontalAlignment = HorizontalAlignment.Left;
-                grid.VerticalAlignment = VerticalAlignment.Top;
-                
                 RowDefinition row = new RowDefinition();
                 row.Height = new GridLength(20);
                 grid.RowDefinitions.Add(row);
@@ -61,32 +61,74 @@ namespace BajuGW
                 row.Height = new GridLength(20);
                 grid.RowDefinitions.Add(row);
 
-                /* TextBlock name = new TextBlock();
-                name.Text = cloth.name;
-                name.Visibility = Visibility.Hidden;
-                name.Name = "clothName";
-                Grid.SetRow(name, 0);
-                grid.Children.Add(name);
-                */
+                //gambar pakaian
+                Rectangle clothPicture = new Rectangle();
+                clothPicture.Fill = new ImageBrush(cloth.picture);
+                Grid.SetRow(clothPicture, 1);
+                grid.Children.Add(clothPicture);
 
-                grid.MouseEnter += showDetails;
-                grid.MouseLeave += hideDetails;
+                //tombol untuk menampilkan popup window
+                Button pictureButton = new Button();
+                pictureButton.Opacity = 0.0;
+                Grid.SetRow(pictureButton, 0);
+                Grid.SetRowSpan(pictureButton, 3);
+                pictureButton.Click += pictureButton_Click;
 
+                //popup window untuk menampilkan keterangan dari pakaian
+                Grid detailWindow = new Grid();
+                detailWindow.Background = new SolidColorBrush(Colors.White);
+                detailWindow.Margin = new Thickness(100, 100, 100, 100);
+                Grid.SetColumn(detailWindow, 1);
+                Grid.SetRowSpan(detailWindow, 3);
+                detailWindow.Visibility = Visibility.Collapsed;
+                pictureButton.CommandParameter = detailWindow;
+                
+                //panel untuk menampung semua tombol
+                WrapPanel detailPanel = new WrapPanel();
+                detailWindow.Children.Add(detailPanel);
+
+                TextBlock status = new TextBlock();
+                status.Text = cloth.isFavorite == 1 ? "love" : "hate";
+                detailPanel.Children.Add(status);
+
+                //tombol untuk menutup popup window
+                Button closeButton = new Button();
+                closeButton.Content = "close";
+                closeButton.CommandParameter = detailWindow;
+                closeButton.Click += closeButton_Click;
+                detailPanel.Children.Add(closeButton);
+
+                //tombol untuk melakukan "add to favorite"
+                Button addToFavoriteButton = new Button();
+                addToFavoriteButton.Content = "add to favorite";
+                addToFavoriteButton.CommandParameter = cloth;
+                addToFavoriteButton.Click += addToFavoriteButton_Click;
+                detailPanel.Children.Add(addToFavoriteButton);
+
+                grid.Children.Add(pictureButton);
                 clothGallery.Children.Add(grid);
+                mainScreen.Children.Add(detailWindow);
             }
         }
 
-
-
-        private void hideDetails(object sender, MouseEventArgs e)
+        void addToFavoriteButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button button = ((Button)sender);
+            controller.setFavorite( ((Cloth) button.CommandParameter).id );
+            this.refresh(); //TODO: ganti implementasi baris ini
         }
 
-        private void showDetails(object sender, MouseEventArgs e)
+        void pictureButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            ((Grid)((Button)sender).CommandParameter).Visibility = Visibility.Visible;
         }
+
+        void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((Grid)((Button)sender).CommandParameter).Visibility = Visibility.Collapsed;
+        }
+
+
 
 
 

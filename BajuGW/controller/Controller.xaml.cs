@@ -130,7 +130,7 @@ namespace BajuGW
          * Memfavoritkan pakaian yang diinginkan
          * 
          */
-        public bool setfavorite(int id)
+        public bool setFavorite(int id)
         {
             return account.setFavorite(id);
         }

@@ -172,7 +172,7 @@ namespace BajuGW
 
             query = "insert into cloth values ('" + username + "', " + max+1 + ",'" +
                 cloth.name + "','" + cloth.brand + "'," + cloth.isFavorite + ",'" +
-                cloth.color + "'," + cloth.clothWidth + "," + cloth.clothHeight +
+                cloth.color + "'," + cloth.cloth_width + "," + cloth.cloth_height +
                 ",'" + cloth.picture_path + "')";
 
             bool status = dbmanager.queryWithoutReturn(query);
@@ -324,9 +324,9 @@ namespace BajuGW
         public bool setFavorite(int id)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            
 
-            string query = "update cloth favorite=" + 1 + " where username='" +
+
+            string query = "update cloth set favorite=" + 1 + " where username='" +
                 username + "' and id=" + id;
             bool status = dbmanager.queryWithoutReturn(query);
             
