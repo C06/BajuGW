@@ -57,6 +57,15 @@
             <ImageSource x:Key="clothButtonClicked">../assets/clothBtn.png</ImageSource>
             <ImageSource x:Key="clothButtonIdle">../assets/clothBtn.png</ImageSource>
 
+            <ImageSource x:Key="backButtonHover">../assets/backBtnHover.png</ImageSource>
+            <ImageSource x:Key="backButton">../assets/backBtn.png</ImageSource>
+
+            <ImageSource x:Key="loveButtonHover">../assets/loveBtnHover.png</ImageSource>
+            <ImageSource x:Key="loveButton">../assets/loveBtn.png</ImageSource>
+
+            <ImageSource x:Key="hateButton">../assets/hateBtn.png</ImageSource>
+
+
         </ResourceDictionary>
     </Window.Resources >
     <Grid x:Name="mainScreen" Height="768" VerticalAlignment="Top" Visibility="Visible">
@@ -166,76 +175,276 @@
         <TextBlock Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,365,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81" Grid.Row="1"/>
         <TextBlock x:Name="title"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,881,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
         <!-- Measure Screen -->
-        <Grid x:Name="measureScreen" Visibility="Visible" Grid.RowSpan="2">
-            <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
+        <Grid x:Name="measureScreen" Visibility="Collapsed" Grid.RowSpan="2">
+            <Grid x:Name="homeMeasureScreen" Visibility="Visible" Grid.RowSpan="2">
+                <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
 
-            <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" >
+                <Button Opacity="1.0" x:Name="bodyBtn" Height="240" Width="240" Margin="441,273,-459,255" Click="bodyBtnClicked" MouseEnter="bodyBtnHover" MouseLeave="bodyBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
-                <Button.Background>
-                    <ImageBrush ImageSource ="../assets/bodyBtn.png"  />
-                </Button.Background>
+                    <Button.Background>
+                        <ImageBrush ImageSource ="../assets/bodyBtn.png"  />
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
 
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Transparent"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
 
-            </Button>
+                </Button>
 
-            <Button Opacity="1.0" x:Name="clothBtn" Height="240" Width="240" Margin="802,273,-820,255" Click="clothBtnClicked" MouseEnter="clothBtnHover" MouseLeave="clothBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" >
+                <Button Opacity="1.0" x:Name="clothBtn" Height="240" Width="240" Margin="802,273,-820,255" Click="clothBtnClicked" MouseEnter="clothBtnHover" MouseLeave="clothBtnIdle" FontFamily="Big John" Foreground="#3498db" >
 
-                <Button.Background>
-                    <ImageBrush ImageSource ="../assets/clothBtn.png"  />
-                </Button.Background>
+                    <Button.Background>
+                        <ImageBrush ImageSource ="../assets/clothBtn.png"  />
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
 
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Transparent"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+                </Button>
+                <TextBlock x:Name="bodyText"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="448,534,-485,0" TextWrapping="Wrap" Text="body measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
+                <TextBlock x:Name="clothText"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="802,534,-839,0" TextWrapping="Wrap" Text="cloth measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
+            </Grid>
+            <Grid x:Name="bodyMeasureScreen" Visibility="Collapsed" Grid.RowSpan="2">
+                <TextBlock x:Name="bodyMeasureText"  Foreground="White" FontFamily="Big John" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="Body Measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
+                <Button  Opacity="1.0" x:Name="bBackBtn" Height="80" Width="80" Margin="268,64,-126,624" Click="bBackBtnClicked" MouseEnter="bBackBtnHover" MouseLeave="bBackBtnIdle" RenderTransformOrigin="-6.942,-2.885" >
 
-            </Button>
-            <TextBlock x:Name="bodyText"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="448,534,-485,0" TextWrapping="Wrap" Text="body measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
-            <TextBlock x:Name="clothText"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="802,534,-839,0" TextWrapping="Wrap" Text="cloth measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="259"/>
+                    <Button.Background>
+                        <ImageBrush ImageSource ="../assets/backBtn.png"  />
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+            <Grid x:Name="clothMeasureScreen" Visibility="Collapsed" Grid.RowSpan="2">
+                <TextBlock x:Name="clothMeasureText"  Foreground="White" FontFamily="Big John" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="Cloth Measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
+                <Button  Opacity="1.0" x:Name="cBackBtn" Height="80" Width="80" Margin="268,64,-126,624" Click="cBackBtnClicked" MouseEnter="cBackBtnHover" MouseLeave="cBackBtnIdle" RenderTransformOrigin="-6.942,-2.885" >
 
+                    <Button.Background>
+                        <ImageBrush ImageSource ="../assets/backBtn.png"  />
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
 
         </Grid>
+
 
 
         <!-- Wardrobe Screen -->
-        <Grid x:Name="wardrobeScreen" Visibility="Hidden" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2">
-            <ScrollViewer Name="gallery" VerticalScrollBarVisibility="Auto">
-                <WrapPanel Name="clothGallery" Orientation="Horizontal" Margin="10"/>
-            </ScrollViewer>
+        <Grid x:Name="wardrobeScreen" Visibility="Visible" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel Orientation="Vertical">
+                <Grid Height="40">
+                    <Image x:Name="favImage" Source="../assets/loveBtn.png" Margin="14,9,911,6"/>
+                    <TextBlock x:Name="favText"  Foreground="White" FontFamily="../assets/Big John.otf" FontSize="20" HorizontalAlignment="Center" Margin="71,9,392,0" TextWrapping="Wrap" Text="favorit" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
+                </Grid>
+                <ScrollViewer Name="favGallery" VerticalScrollBarVisibility="Auto">
+                    <WrapPanel Name="favDisplay" Orientation="Horizontal" Margin="10">
+                        <!--<Grid x:Name="favItem">
+                            <Image x:Name="iFavItem" Height="140" Width="120"></Image>
+                            <Button x:Name="hoverFavItem" Background="Black" Opacity="0.7" Height="140" Width="120"></Button>
+                            <TextBlock x:Name="nameFavItem" Foreground="White" IsHitTestVisible="False" VerticalAlignment="Center" TextAlignment="Center" FontFamily="../assets/Aleo-Regular.otf" Margin="0,48,0,78">Nama Itemnya</TextBlock>
+                            <Button  Opacity="1.0" x:Name="hateBtn" Height="40" Width="40" Margin="40,80,40,20" >
+
+                                <Button.Background>
+                                    <ImageBrush ImageSource ="../assets/hateBtn.png"  />
+                                </Button.Background>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>-->
+                    </WrapPanel>
+                </ScrollViewer>
+                <Grid Height="180">
+                    <Button VerticalAlignment="Top" FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="14" HorizontalAlignment="Right" Opacity="1.0" x:Name="suggestBtn" Height="40" Width="140" Margin="0,10,30,10"  >
+
+                        <Button.Background>
+                            <ImageBrush ImageSource ="../assets/suggestBtn.png"  />
+                        </Button.Background>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        Suggest Fashion
+                    </Button>
+                    <TextBlock x:Name="catDisplayText" Height="40" Width="240"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="48,79,683,61">DISPLAY CATEGORY</TextBlock>
+                    <ComboBox VerticalContentAlignment="Center" Margin="288,73,454,67" x:Name="catDisplayOption" FontFamily="../assets/Slim Joe.otf" FontSize="20" SelectionChanged="catDisplayOption_SelectionChanged">
+                        <!--<ComboBoxItem>all</ComboBoxItem>-->
+                    </ComboBox>
+                    <TextBlock x:Name="searchText" Height="40"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="564,79,296,61">SEARCH</TextBlock>
+                    <TextBox x:Name="searchArea" Margin="690,73,52,67" FontFamily="../assets/BIG JOHN.otf"  FontSize="24" GotFocus="searchAreaActive" LostFocus="searchAreaInactive" >
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="../assets/formFieldInactive.png" />
+                        </TextBox.Background>
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+
+                    </TextBox>
+                    <Button Opacity="1.0" x:Name="searchBtn" Height="40" Width="40" Margin="879,73,52,67" Click="searchBtn_Click"  >
+
+                        <Button.Background>
+                            <ImageBrush ImageSource ="../assets/searchBtn.png"  />
+                        </Button.Background>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        
+                    </Button>
+                    <TextBlock x:Name="catNameDisplayText" Height="30" Width="240"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="21,130,710,10">all</TextBlock>
+
+                </Grid>
+                <ScrollViewer x:Name="gallery" VerticalScrollBarVisibility="Auto" Height="295">
+                    <WrapPanel x:Name="itemDisplay" Orientation="Horizontal" Margin="10">
+                        <!--<Grid x:Name="item">
+                            <Image x:Name="iItem" Height="140" Width="120"/>
+                            <Rectangle x:Name="hoverItem" Fill="Black" Opacity="0.7" Height="140" Width="120"/>
+                            <TextBlock x:Name="nameItem" Foreground="White" IsHitTestVisible="False" VerticalAlignment="Center" TextAlignment="Center" FontFamily="../assets/Aleo-Regular.otf" Margin="0,48,0,78"><Run Text="Nama Itemnya"/></TextBlock>
+                            <Button  Opacity="1.0" x:Name="loveBtn" Height="40" Width="40" Margin="40,80,40,20" >
+
+                                <Button.Background>
+                                    <ImageBrush ImageSource ="../assets/loveBtn.png"  />
+                                </Button.Background>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>-->
+                    </WrapPanel>
+                </ScrollViewer>
+
+
+            </StackPanel>
         </Grid>
-        
+
         <!-- Store Screen -->
         <Grid x:Name="storeScreen" Visibility="Collapsed" Grid.RowSpan="2">
 

@@ -42,23 +42,6 @@ namespace BajuGW
                 dbmanager = new SQLiteManager(DBNAME);
             }
 
-            /*dbmanager.queryWithoutReturn("insert into user values ('rebby', 'rebby','rebby@gmail.com',0.0,0.0,'','');");
-            dbmanager.queryWithoutReturn(
-                "insert into cloth values" +
-                "('rebby', 0, 'kaos', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/0.png')," +
-                "('rebby', 1, 'kemeja', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/1.png')," +
-                "('rebby', 2, 'polo', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/2.png')," +
-                "('rebby', 3, 'jubah', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/3.png')," +
-                "('rebby', 4, 'zirah', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/4.png')," +
-                "('rebby', 5, 'ponco', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/5.png')," +
-                "('rebby', 6, 'gamis', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/6.png')," +
-                "('rebby', 7, 'koko', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/7.png')," +
-                "('rebby', 8, 'seragam', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/8.png')," +
-                "('rebby', 9, 'chainmail', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/9.png')," +
-                "('rebby', 10, 'v-neck', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/10.png')," +
-                "('rebby', 11, 'kutang', 'fasilkom', 0, 'blue', 0.0, 0.0, 'data/11.png');"
-            );*/
-
             mainScreen = new MainScreen(this);
             loginScreen = new LoginScreen(this);
             this.MainWindow = loginScreen;
@@ -130,9 +113,15 @@ namespace BajuGW
          * Memfavoritkan pakaian yang diinginkan
          * 
          */
-        public bool setfavorite(int id)
+        public bool setFavorite(int id)
         {
             return account.setFavorite(id);
+        }
+
+
+        public bool setUnfavorite(int id)
+        {
+            return account.setUnfavorite(id);
         }
 
 
@@ -223,6 +212,24 @@ namespace BajuGW
         public bool editCategory(String category, String newName)
         {
             return account.editCategory(category, newName);
+        }
+
+
+        public void refresh()
+        {
+            account.refresh();
+        }
+
+
+        public List<Cloth> getFavorites()
+        {
+            return account.getFavorites();
+        }
+
+
+        public List<Cloth> getClothesFromWardrobe(string query, string category)
+        {
+            return account.getClothes(query, category);
         }
     }
 }

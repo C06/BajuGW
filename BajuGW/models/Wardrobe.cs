@@ -123,7 +123,7 @@ namespace BajuGW
 
             foreach (Cloth cloth in clothes)
             {
-                if (cloth.categories.Equals(category))
+                if (cloth.categories.Contains(category))
                 {
                     result.Add(cloth);
                 }
@@ -131,6 +131,19 @@ namespace BajuGW
 
             return result;
 		}
+
+
+        public List<Cloth> getClothes(string query, string category)
+        {
+            List<Cloth> clothes = getClothes(category);
+            List<Cloth> result = new List<Cloth>();
+            foreach (Cloth cloth in clothes)
+            {
+                if (cloth.name.Contains(query))
+                    result.Add(cloth);
+            }
+            return result;
+        }
 
 
         /**
@@ -295,7 +308,7 @@ namespace BajuGW
             SQLiteManager dbmanager = Controller.dbmanager;
             
 
-            string query = "update category id='"+ newName + "' where username='" +
+            string query = "update category set id='"+ newName + "' where username='" +
                 username + "' and id='" + category + "'";
             bool status = dbmanager.queryWithoutReturn(query);
             
@@ -326,7 +339,7 @@ namespace BajuGW
             SQLiteManager dbmanager = Controller.dbmanager;
             
 
-            string query = "update cloth favorite=" + 1 + " where username='" +
+            string query = "update cloth set favorite=" + 1 + " where username='" +
                 username + "' and id=" + id;
             bool status = dbmanager.queryWithoutReturn(query);
             
@@ -345,6 +358,46 @@ namespace BajuGW
                 clothes[i].isFavorite = 1;
             
             return true;
+        }
+
+
+        public bool setUnfavorite(int id)
+        {
+            SQLiteManager dbmanager = Controller.dbmanager;
+
+
+            string query = "update cloth set favorite=" + 0 + " where username='" +
+                username + "' and id=" + id;
+            bool status = dbmanager.queryWithoutReturn(query);
+
+
+            if (!status)
+                return false;
+
+            int i = 0;
+            foreach (Cloth cloth in clothes)
+            {
+                if (cloth.id == id)
+                    break;
+                i++;
+            }
+            if (i < clothes.Count)
+                clothes[i].isFavorite = 1;
+
+            return true;
+        }
+
+
+
+        public List<Cloth> getFavorites() {
+            List<Cloth> clothes = getClothes("");
+            List<Cloth> result = new List<Cloth>();
+            foreach (Cloth cloth in clothes)
+            {
+                if (cloth.isFavorite == 1)
+                    result.Add(cloth);
+            }
+            return result;
         }
     }
 }
