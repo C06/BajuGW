@@ -223,11 +223,16 @@ namespace BajuGW
         public bool deleteCloth(int id)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            
 
-            string query = "delete from cloth where username='" + username +
-                "' and id=" + id;
+            string query = "delete from cloth_has_category where username='" +
+                username + "' and cloth_id='" + id + "'";
             bool status = dbmanager.queryWithoutReturn(query);
+            if (!status)
+                return false;
+
+            query = "delete from cloth where username='" + username +
+                "' and id=" + id;
+            status = dbmanager.queryWithoutReturn(query);
             
 
             if (!status)
@@ -417,6 +422,21 @@ namespace BajuGW
                     result.Add(cloth);
             }
             return result;
+        }
+
+        internal bool setClothCategory(int id, string category)
+        {
+            SQLiteManager dbmanager = Controller.dbmanager;
+            string query = "insert into cloth_has_category values ('" +
+                username + "'," + id + " , '" + username + "', '" + category + "')";
+
+            bool status = dbmanager.queryWithoutReturn(query);
+            if (!status)
+                return false;
+
+            refresh();
+
+            return true;
         }
     }
 }

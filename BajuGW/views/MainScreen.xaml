@@ -179,7 +179,7 @@
         <TextBlock Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,365,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81" Grid.Row="1"/>
         <TextBlock x:Name="title"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,118,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
         <!-- Measure Screen -->
-        <Grid x:Name="measureScreen" Visibility="Collapsed" Grid.RowSpan="2">
+        <Grid x:Name="measureScreen" Visibility="Visible" Grid.RowSpan="2">
             <Grid x:Name="homeMeasureScreen" Visibility="Visible" Grid.RowSpan="2">
                 <TextBlock x:Name="measureIns"  Foreground="White" FontFamily="Big John" FontSize="20" HorizontalAlignment="Center" Margin="501,82,-787,0" TextWrapping="Wrap" Text="choose the measurement you like to do" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
 
@@ -298,7 +298,7 @@
 
 
         <!-- Wardrobe Screen -->
-        <Grid x:Name="wardrobeScreen" Visibility="Visible" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <Grid x:Name="wardrobeScreen" Visibility="Collapsed" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical">
                 <Grid Height="40">
                     <Image x:Name="favImage" Source="../assets/loveBtn.png" Margin="14,9,911,6"/>
@@ -729,57 +729,20 @@
             <Label HorizontalContentAlignment="Center" IsHitTestVisible="False" Foreground="White" FontFamily="../assets/#Slim Joe" FontSize="36" Content="are you sure want to logout&#xD;&#xA;from your account?" Margin="-150,282,-64,6"/>
         </Grid>
 
-        <Grid x:Name="popupScreen" Visibility="Visible">
+        <Grid x:Name="popupScreen" Visibility="Collapsed">
             <Rectangle x:Name="deactivate" IsHitTestVisible="False"  Fill="Black" Opacity="0.7" Margin="-90,-45,-1173,-441"></Rectangle>
             <Grid x:Name="suggestionScreen" Visibility="Collapsed">
 
                 <Rectangle Fill="WhiteSmoke" Opacity="0.8" Margin="282,213,-957,-135"/>
                 <TextBlock x:Name="suggestText" TextAlignment="Center"  Margin="309,233,-942,111">Fashion Suggestion</TextBlock>
                 <Button x:Name="pExitBtn" Margin="1044,225,-942,111" Click="pExitBtnClicked">Exit</Button>
-                <WrapPanel x:Name="suggestDisplay" Orientation="Horizontal" Margin="351,286,-889,-110">
-                    <!-- <Grid x:Name="item">
-                        <Image x:Name="iItem" Height="140" Width="120"/>
-                        <Rectangle x:Name="hoverItem" Fill="Black" Opacity="0.7" Height="140" Width="120"/>
-                        <TextBlock x:Name="nameItem" Foreground="White" IsHitTestVisible="False" VerticalAlignment="Center" TextAlignment="Center" FontFamily="../assets/Aleo-Regular.otf" Margin="0,48,0,78"><Run Text="Nama Itemnya"/></TextBlock>
-                        <Button  Opacity="1.0" x:Name="loveBtn" Height="40" Width="40" Margin="40,80,40,20" >
-
-                            <Button.Background>
-                                <ImageBrush ImageSource ="../assets/loveBtn.png"  />
-                            </Button.Background>
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Grid>-->
-                </WrapPanel>
+                <WrapPanel x:Name="suggestDisplay" Orientation="Horizontal" Margin="351,286,-889,-110"></WrapPanel>
             </Grid>
-            <Grid x:Name="eCatScreen" RenderTransformOrigin="2.338,0.512">
+            <Grid x:Name="eCatScreen" RenderTransformOrigin="2.338,0.512" Visibility="Collapsed">
                 <Rectangle Fill="WhiteSmoke" Margin="300,90,-939,-258"/>
                 <TextBlock x:Name="eCatText" VerticalAlignment="Center" TextAlignment="Center" FontSize="20" Margin="300,90,-939,225" >Edit Category</TextBlock>
                 <Button x:Name="eExitBtn" Margin="1014,104,-915,217" Click="eExitBtnClicked" MouseEnter="eExitBtnHover" MouseLeave="eExitBtnIdle">Exit</Button>
-                <ListBox x:Name="categoryListBox" Margin="336,207,-903,-141">
-                    <!--<WrapPanel Width="779" Height="317"  >
-                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
-                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
-                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
-                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
-                    </WrapPanel>-->
-                </ListBox>
+                <ListBox x:Name="categoryListBox" Margin="336,207,-903,-141"></ListBox>
                 <Button x:Name="newCatBtn" FontSize="20" FontFamily="Slim Joe" Margin="495,542,-396,-221" Click="newCatBtnClicked" MouseEnter="newCatBtnHover" MouseLeave="newCatBtnIdle">New</Button>
                 <Button x:Name="editCatBtn" FontSize="20" FontFamily="Slim Joe" Margin="687,542,-588,-221" Click="editCatBtnClicked" MouseEnter="editCatBtnHover" MouseLeave="editCatBtnIdle">Edit</Button>
                 <Button x:Name="deleteCatBtn" FontSize="20" FontFamily="Slim Joe" Margin="885,542,-786,-221" Click="deleteCatBtnClicked" MouseEnter="deleteCatBtnHover" MouseLeave="deleteCatBtnIdle">Delete</Button>
@@ -792,22 +755,75 @@
 
             </Grid>
 
-            <Grid x:Name="itemDetail" Width="1000" Background="White" Margin="227,65,-1005,-324">
-                <Button x:Name="exitDetailBtn" Margin="875,18,25,570">
+            <Grid x:Name="itemDetail" Width="1000" Background="White" Margin="227,65,-1005,-324" Visibility="Collapsed">
+                <Button x:Name="exitDetailBtn" Margin="875,18,25,570" Click="exitDetailBtnClicked" >
                     Exit
                 </Button>
-                <Grid x:Name="itemDetailScreen">
-                    <TextBlock x:Name="itemName" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Center">
-                        ItemName
-                    </TextBlock>
-                    <Image Height="350" Width="300"  x:Name="itemImage" Source="../data/0.png" Margin="38,142,662,136"></Image>
+                <Grid x:Name="itemDetailScreen" Visibility="Visible">
+                    <TextBlock x:Name="itemName" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Center"></TextBlock>
+                    <Rectangle Height="350" Width="300"  x:Name="itemImage" Margin="38,142,662,136"></Rectangle>
                     <TextBlock x:Name="itemDesc" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,105,489,0">Description :</TextBlock>
-                    <TextBlock x:Name="itemSize" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,252,489,0">Size :</TextBlock>
-                    <TextBlock x:Name="itemSize" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,252,489,0">Size :</TextBlock>
+                    <TextBlock x:Name="itemSize" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,288,489,0">Size (WxH):</TextBlock>
+                    <TextBlock x:Name="itemSpec" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,408,489,0">Specification :</TextBlock>
+                    <TextBlock x:Name="itemDescText" Height="154" VerticalAlignment="Top" TextAlignment="Left" Margin="411,129,303,0"><!--Ini deskripsi bajunya-->-</TextBlock>
+                    <TextBlock x:Name="itemSizeText" Height="92" VerticalAlignment="Top" TextAlignment="Left" Margin="411,308,303,0"><!--Ini berbagai pilihan ukuran bajunya--></TextBlock>
+                    <TextBlock x:Name="itemSpecText" Height="134" VerticalAlignment="Top" TextAlignment="Left" Margin="411,428,303,0"><!--Ini spesifikasi lebih detail tentang bajunya-->-</TextBlock>
+                    <Button x:Name="mixMatchBtn" Width="100" Height="100" Margin="840,142,60,386" MouseEnter="mixMatchBtnHover" MouseLeave="mixMatchBtnIdle" Click="mixMatchBtnClicked">Mix and Match</Button>
+                    <Button x:Name="addToFavBtn" Width="100" Height="40" Margin="840,274,60,314" Click="addToFavBtnClicked"></Button>
+                    <Button x:Name="addToCatBtn" Width="100" Height="40" Margin="840,338,60,250" Click="addToCatBtnClicked">Add to Category</Button>
+                    <Button x:Name="deleteItemBtn" Width="100" Height="40" Margin="840,396,60,192" Click="deleteItemBtnClicked">Delete</Button>
+                </Grid>
+                <Grid x:Name="mixMatchScreen" Visibility="Collapsed">
+                    <TextBlock x:Name="mixMatchText" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Center">
+                        Mix and Match
+                    </TextBlock>
+
+
+                    <Button x:Name="mBackBtn" Width="40" Height="40" Margin="36,26,924,562" Click="mBackBtnClicked" MouseEnter="mBackBtnHover" MouseLeave="mBackBtnIdle" >Back</Button>
+
+                </Grid>
+                <Grid Margin="564,315,-693,-45" x:Name="selectCategoryScreen" Visibility="Collapsed">
+                    <Rectangle Fill="WhiteSmoke" Margin="92,24,748,281" />
+                    <ComboBox VerticalAlignment="Top" VerticalContentAlignment="Center" Height="27" Width="180" x:Name="selectCategoryOption" Margin="112,36,837,0" />
+                    <Button Margin="317,36,768,295" x:Name="confirmSelectCategory" Click="confirmSelectCategoryClicked">OK</Button>
                 </Grid>
             </Grid>
 
+
+
+            <Grid x:Name="onlineItemDetail" Width="1000" Background="White" Margin="227,65,-1005,-324" Visibility="Collapsed">
+                <Button x:Name="onlineExitDetailBtn" Margin="875,18,25,570" Click="exitDetailBtnClicked" >
+                    Exit
+                </Button>
+                <Grid x:Name="onlineItemDetailScreen" Visibility="Visible">
+                    <TextBlock x:Name="onlineItemName" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Center"></TextBlock>
+                    <Rectangle Height="350" Width="300"  x:Name="onlineItemImage" Margin="38,142,662,136"></Rectangle>
+                    <TextBlock x:Name="onlineItemDesc" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,105,489,0">Description :</TextBlock>
+                    <TextBlock x:Name="onlineItemSize" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,288,489,0">Size (WxH):</TextBlock>
+                    <TextBlock x:Name="onlineItemSpec" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,408,489,0">Specification :</TextBlock>
+                    <TextBlock x:Name="onlineItemDescText" Height="154" VerticalAlignment="Top" TextAlignment="Left" Margin="411,129,303,0"><!--Ini deskripsi bajunya-->-</TextBlock>
+                    <TextBlock x:Name="onlineItemSizeText" Height="92" VerticalAlignment="Top" TextAlignment="Left" Margin="411,308,303,0"><!--Ini berbagai pilihan ukuran bajunya--></TextBlock>
+                    <TextBlock x:Name="onlineItemSpecText" Height="134" VerticalAlignment="Top" TextAlignment="Left" Margin="411,428,303,0"><!--Ini spesifikasi lebih detail tentang bajunya-->-</TextBlock>
+                    <Button x:Name="fittingBtn" Width="100" Height="100" Margin="840,142,60,386" MouseEnter="mixMatchBtnHover" MouseLeave="mixMatchBtnIdle" Click="mixMatchBtnClicked">Fitting</Button>
+                    <Button x:Name="onlineAddToFavBtn" Width="100" Height="40" Margin="840,274,60,314" Click="addToFavBtnClicked"></Button>
+                    <Button x:Name="buyBtn" Width="100" Height="40" Margin="840,274,60,314" Click="addToFavBtnClicked">Buy</Button>
+                </Grid>
+                <Grid x:Name="fittingScreen" Visibility="Collapsed">
+                    <TextBlock x:Name="fittingText" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Center">
+                        Mix and Match
+                    </TextBlock>
+
+
+                    <Button x:Name="fittingBackBtn" Width="40" Height="40" Margin="36,26,924,562" Click="mBackBtnClicked" MouseEnter="mBackBtnHover" MouseLeave="mBackBtnIdle" >Back</Button>
+
+                </Grid>
+            </Grid>
+
+
+
         </Grid>
+
+
 
 
 

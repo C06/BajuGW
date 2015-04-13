@@ -248,5 +248,10 @@ namespace BajuGW
         {
             connectedStore.Remove(id);
         }
+
+        internal bool setClothCategory(int id, string category)
+        {
+            return wardrobe.setClothCategory(id, category);
+        }
     }
 }

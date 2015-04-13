@@ -257,5 +257,10 @@ namespace BajuGW
         {
             return stores[id].getClothes(query, category);
         }
+
+        public bool setClothCategory(int id, string category)
+        {
+            return account.setClothCategory(id, category);
+        }
     }
 }

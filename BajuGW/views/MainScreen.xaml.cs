@@ -57,8 +57,7 @@ namespace BajuGW
             categoryListBox.ItemsSource = categories;
         }
 
-
-        void loveBtn_Click(object sender, RoutedEventArgs e)
+        private void loveBtn_Click(object sender, RoutedEventArgs e)
         {
             Cloth cloth = (Cloth) ((Button) sender).CommandParameter;
             if (cloth.isFavorite == 0)
@@ -67,8 +66,6 @@ namespace BajuGW
                 controller.setUnfavorite(cloth.id);
             this.refresh();
         }
-
-
 
         private void measureBtnClicked(object sender, RoutedEventArgs e)
         {
@@ -494,12 +491,15 @@ namespace BajuGW
                 row.Height = new GridLength(40);
                 grid.RowDefinitions.Add(row);
 
+
                 //hover
-                Rectangle hoverItem = new Rectangle();
+                Button hoverItem = new Button();
                 hoverItem.Height = 140;
                 hoverItem.Width = 120;
-                hoverItem.Opacity = 0.7;
-                //hoverItem.Fill = new SolidColorBrush(Colors.Black);
+                hoverItem.Opacity = 0.1;
+                hoverItem.Background = new SolidColorBrush(Colors.Transparent);
+                hoverItem.CommandParameter = cloth;
+                hoverItem.Click += itemDetailClicked;
 
                 //nama pakaian
                 TextBlock nameItem = new TextBlock();
@@ -717,7 +717,7 @@ namespace BajuGW
             }
         }
 
-        void loveSuggestionBtn_Clicked(object sender, RoutedEventArgs e)
+        private void loveSuggestionBtn_Clicked(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             Cloth cloth = (Cloth)button.CommandParameter;
@@ -760,25 +760,25 @@ namespace BajuGW
         private void suggestBtnClicked(object sender, RoutedEventArgs e)
         {
             popupScreen.Visibility = Visibility.Visible;
-            eCatScreen.Visibility = Visibility.Collapsed;
-            eCatScreen.IsHitTestVisible = false;
+            deactivate.IsHitTestVisible = true;
             suggestionScreen.Visibility = Visibility.Visible;
             List<Cloth> clothes = controller.getSuggestion();
             loadClothesFromSuggestion(clothes, suggestDisplay);
-            deactivate.IsHitTestVisible = true;
         }
 
         private void pExitBtnClicked(object sender, RoutedEventArgs e)
         {
-            popupScreen.Visibility = Visibility.Collapsed;
             suggestDisplay.Children.Clear();
+            popupScreen.Visibility = Visibility.Collapsed;
             deactivate.IsHitTestVisible = false;
+            suggestionScreen.Visibility = Visibility.Collapsed;
         }
 
         private void eExitBtnClicked(object sender, RoutedEventArgs e)
         {
             popupScreen.Visibility = Visibility.Collapsed;
             deactivate.IsHitTestVisible = false;
+            eCatScreen.Visibility = Visibility.Collapsed;
         }
 
         private void eExitBtnHover(object sender, MouseEventArgs e)
@@ -794,7 +794,7 @@ namespace BajuGW
         private void newCatBtnClicked(object sender, RoutedEventArgs e)
         {
             editCategoryTextScreen.Visibility = Visibility.Visible;
-
+            
             confirmEditCategoryText.Click -= confirmEditCatBtnClicked;
             confirmEditCategoryText.Click += confrimAddCatBtnClicked;
         }
@@ -817,6 +817,7 @@ namespace BajuGW
                 return;
             }
             editCategoryTextScreen.Visibility = Visibility.Visible;
+            
 
             confirmEditCategoryText.Click -= confrimAddCatBtnClicked;
             confirmEditCategoryText.Click += confirmEditCatBtnClicked;
@@ -885,8 +886,6 @@ namespace BajuGW
             popupScreen.Visibility = Visibility.Visible;
             deactivate.IsHitTestVisible = true;
             eCatScreen.Visibility = Visibility.Visible;
-            suggestionScreen.Visibility = Visibility.Collapsed;
-            suggestionScreen.IsHitTestVisible = false;
         }
 
         private void catBtnHover(object sender, MouseEventArgs e)
@@ -918,10 +917,124 @@ namespace BajuGW
             
             refreshStore();
         }
-      
+
+        private void mBackBtnClicked(object sender, RoutedEventArgs e)
+        {
+            mixMatchScreen.Visibility = Visibility.Collapsed;
+            itemDetailScreen.Visibility = Visibility.Visible;
+            itemDetailScreen.IsHitTestVisible = true;
+            mixMatchScreen.IsHitTestVisible = false;
+        }
+
+        private void mBackBtnHover(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void mBackBtnIdle(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void mixMatchBtnHover(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void mixMatchBtnIdle(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void mixMatchBtnClicked(object sender, RoutedEventArgs e)
+        {
+            mixMatchScreen.Visibility = Visibility.Visible;
+            itemDetailScreen.Visibility = Visibility.Collapsed;
+            itemDetailScreen.IsHitTestVisible = false;
+            mixMatchScreen.IsHitTestVisible = true;
+        }
+
+        private void exitDetailBtnClicked(object sender, RoutedEventArgs e)
+        {
+            popupScreen.Visibility = Visibility.Collapsed;
+            deactivate.IsHitTestVisible = false;
+            itemDetail.Visibility = Visibility.Collapsed;
+        }
 
 
-     
+        private void itemDetailClicked(object sender, RoutedEventArgs e)
+        {
+            Cloth cloth = (Cloth)((Button)sender).CommandParameter;
+            popupScreen.Visibility = Visibility.Visible;
+            deactivate.IsHitTestVisible = true;
+            itemDetail.Visibility = Visibility.Visible;
+            itemName.Text = cloth.name;
+            itemSizeText.Text = "" + cloth.clothWidth + " x " + cloth.clothHeight;
+            itemImage.Fill = new ImageBrush(cloth.picture);
+
+            addToFavBtn.Content = (cloth.isFavorite == 0) ? "Add to favorites" : "Remove from\nfavorites";
+            addToFavBtn.CommandParameter = cloth;
+            deleteItemBtn.CommandParameter = cloth;
+            addToCatBtn.CommandParameter = cloth;
+            mixMatchBtn.CommandParameter = cloth;
+        }
+
+        private void addToFavBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Cloth cloth = (Cloth)((Button)sender).CommandParameter;
+            if (cloth.isFavorite == 0)
+                controller.setFavorite(cloth.id);
+            else
+                controller.setUnfavorite(cloth.id);
+            this.refresh();
+            addToFavBtn.Content = (cloth.isFavorite == 0) ? "Add to favorites" : "Remove from\nfavorites";
+        }
+
+        private void deleteItemBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Cloth cloth = (Cloth)((Button)sender).CommandParameter;
+            controller.deleteCloth(cloth.id);
+            this.refresh();
+            popupScreen.Visibility = Visibility.Collapsed;
+            deactivate.IsHitTestVisible = false;
+            itemDetail.Visibility = Visibility.Collapsed;
+        }
+
+        private void addToCatBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Cloth cloth = (Cloth)((Button)sender).CommandParameter;
+            
+            selectCategoryScreen.Visibility = Visibility.Visible;
+            List<string> categories = controller.getCategories();
+            List<string> filtered = new List<string>();
+
+            foreach (string cat in categories) {
+                if (!cloth.category.Contains(cat))
+                {
+                    filtered.Add(cat);
+                }
+            }
+            filtered.Remove("all");
+
+            selectCategoryOption.ItemsSource = filtered;
+
+            confirmSelectCategory.CommandParameter = cloth;
+            //String selected = selectCategoryOption.SelectedItem.ToString();
+        }
+
+        private void confirmSelectCategoryClicked(object sender, RoutedEventArgs e)
+        {
+            
+            Cloth cloth = (Cloth)((Button)sender).CommandParameter;
+            if (selectCategoryOption.SelectedItem == null)
+                return;
+
+            selectCategoryScreen.Visibility = Visibility.Collapsed;
+            String selected = selectCategoryOption.SelectedItem.ToString();
+            controller.setClothCategory(cloth.id, selected);
+            selectCategoryOption.SelectedItem = null;
+        }
+
         //======================================== Register Screen ============================================//
 
         //Definisi Event yang terjadi pada addNewAccountBtn
