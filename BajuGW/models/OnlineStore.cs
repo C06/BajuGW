@@ -4,6 +4,7 @@ using System.Windows.Media.Imaging;
 using System.Net;
 using Newtonsoft.Json;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace BajuGW
 {
@@ -13,37 +14,52 @@ namespace BajuGW
         public string address;
         private List<OnlineCloth> clothes;
         public static List<string> categories = new List<string>(new string[] { "all" });
+        private string username;
 
         /**
          * Constructor utama
          * 
          */
-        public OnlineStore(int id, string address)
+        public OnlineStore(int id, string address, string username)
         {
             this.id = id;
             this.address = address;
+            this.username = username;
+            refresh();
+        }
+
+        public void refresh()
+        {
             this.clothes = new List<OnlineCloth>();
 
+            bool exists = System.IO.Directory.Exists("./temp");
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory("./temp");
+
+            
+
+            Directory.SetCurrentDirectory("./temp");
             using (WebClient Client = new WebClient())
             {
-                Client.DownloadFile(address + "/json1.php", "clothes.json");
-                using (System.IO.StreamReader r = new System.IO.StreamReader("clothes.json"))
+                Client.DownloadFile(this.address + "/json1.php", this.id + "_clothes.json");
+                using (System.IO.StreamReader r = new System.IO.StreamReader(this.id + "_clothes.json"))
                 {
                     string json = r.ReadToEnd();
                     clothes = JsonConvert.DeserializeObject<List<OnlineCloth>>(json);
                 }
 
-                //OnlineStore.categories.Add("all");
-                foreach (OnlineCloth cloth in clothes) {
-                    string filename = "."+cloth.picture_path;
+                foreach (OnlineCloth cloth in clothes)
+                {
+                    string filename = cloth.picture_path.Replace("/", this.id + "_");
 
                     if (!File.Exists(filename))
                     {
-                        Client.DownloadFile(address + cloth.picture_path, filename);
-                        
+                        Client.DownloadFile(this.address + cloth.picture_path, filename);
+
                     }
-                    cloth.picture = new BitmapImage(new Uri(filename, UriKind.Relative));
-                    cloth.picture_path = filename;
+                    cloth.picture = new BitmapImage(new Uri("./temp/" + filename, UriKind.Relative));
+                    cloth.picture_path = "./temp/" + filename;
 
                     foreach (string cat in cloth.category)
                     {
@@ -52,6 +68,21 @@ namespace BajuGW
                     }
                 }
             }
+            Directory.SetCurrentDirectory("./..");
+
+            SQLiteManager dbmanager = Controller.dbmanager;
+
+            foreach (OnlineCloth cloth in clothes)
+            {
+                string query = "select cloth_id from favorite_online_cloth where username='" +
+                        this.username + "' and store_id=" + this.id + " and cloth_id=" + cloth.id+";";
+                foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
+                {
+                    cloth.isFavorite = 1;
+                }
+            }
+            
+            
         }
 
 
@@ -97,12 +128,11 @@ namespace BajuGW
 		}
 
 
-        //TODO: selesaikan method ini
         /**
          * Menandakan pakaian yang diinginkan sebagai pakaian favorit
          * 
          */
-		bool setFavorite(Account account, int id)
+		public bool setFavorite(Account account, int id)
         {
             OnlineCloth result = getOnlineCloth(id);
             if (result == null)
@@ -117,9 +147,10 @@ namespace BajuGW
          * Membeli sebuah pakaian yang tersedia di toko online tujuan
          * 
          */
-		bool buy(Account account, int id)
+		public bool buy(Account account, int id)
         {
-            return account.addCloth(getOnlineCloth(id));
+            Cloth newCloth = new Cloth(getOnlineCloth(id));
+            return account.addCloth(newCloth);
 		}
 
 
@@ -139,21 +170,13 @@ namespace BajuGW
 		}
 
 
-        bool connect()
+        public static bool checkConnection(string url)
         {
-            return false;
-        }
-
-
-        bool disconnect()
-        {
-            return false;
-        }
-
-
-        bool checkConnection()
-        {
-            return false;
+            var ping = new System.Net.NetworkInformation.Ping();
+            var result = ping.Send(url);
+            if (result.Status != System.Net.NetworkInformation.IPStatus.Success)
+                return false;
+            return true;
         }
 
         internal List<OnlineCloth> getClothes(string query, string category)
@@ -167,5 +190,21 @@ namespace BajuGW
             }
             return result;
         }
+
+        public void setOnlineFavorite(int cloth)
+        {
+            SQLiteManager dbmanager = Controller.dbmanager;
+            string query = "insert into favorite_online_cloth values ('"+username+"'," +id +", " + cloth+");";
+            dbmanager.queryWithoutReturn(query);
+        }
+
+        public void setOnlineUnfavorite(int cloth)
+        {
+            SQLiteManager dbmanager = Controller.dbmanager;
+            string query = "delete from favorite_online_cloth where username='"+
+                username+"' and store_id=" + id + " and cloth_id="+cloth+";";
+            dbmanager.queryWithoutReturn(query);
+        }
+
     }
 }

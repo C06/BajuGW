@@ -11,9 +11,9 @@ namespace BajuGW
      * ke BajuGW
      * 
      */
-    class Account
+    public class Account
     {
-        private string username;
+        public string username;
         private string email;
         private double clothWidth;
         private double clothHeight;
@@ -47,13 +47,38 @@ namespace BajuGW
             Controller.stores = new List<OnlineStore>();
             for (int i = 0; i < Controller.supportedStore.Length; i++)
             {
-                Controller.stores.Add(null);
+                if (connectedStore.Contains(i))
+                    Controller.stores.Add(new OnlineStore(i, Controller.supportedStore[i], username));
+                else
+                    Controller.stores.Add(null);
             }
+            
         }
 
-        public void addConnectedStore(int id)
+        public bool addConnectedStore(int id)
         {
             connectedStore.Add(id);
+            SQLiteManager manager = Controller.dbmanager;
+
+            string query = "insert into User_Activate_Store values ('" + username + "'," + id + ");";
+            bool result = manager.queryWithoutReturn(query);
+
+            if (result)
+                return true;
+            return false;
+        }
+
+        public bool removeConnectedStore(int id)
+        {
+            connectedStore.Remove(id);
+            SQLiteManager manager = Controller.dbmanager;
+
+            string query = "delete from User_Activate_Store where username='" + username + "' and store_id=" + id + ";";
+            bool result = manager.queryWithoutReturn(query);
+
+            if (result)
+                return true;
+            return false;
         }
 
         /**
@@ -242,11 +267,6 @@ namespace BajuGW
         public List<Cloth> getClothes(string query, string category)
         {
             return wardrobe.getClothes(query, category);
-        }
-
-        internal void removeConnectedStore(int id)
-        {
-            connectedStore.Remove(id);
         }
 
         internal bool setClothCategory(int id, string category)

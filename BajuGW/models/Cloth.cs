@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace BajuGW
@@ -52,8 +53,12 @@ namespace BajuGW
             this.color = cloth.color;
             this.clothWidth = cloth.clothWidth;
             this.clothHeight = cloth.clothHeight;
-            this.picture_path = cloth.picture_path;
+
+            string newPath = cloth.picture_path.Replace("./temp/", "./data/");
+            File.Copy(cloth.picture_path, newPath);
+            this.picture_path = newPath;
             this.picture = new BitmapImage(new Uri(this.picture_path, UriKind.Relative));
+
             this.category = cloth.category;
         }
 
@@ -115,8 +120,8 @@ namespace BajuGW
      */
     public class OnlineCloth : Cloth
     { 
-	    private int store;
-        private int price;
+	    public int store;
+        public int price;
 
 
         /**

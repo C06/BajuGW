@@ -128,7 +128,9 @@ namespace BajuGW
                 "CREATE TABLE User_Activate_Store (username VARCHAR(10),store_id INTEGER,PRIMARY KEY (username, store_id),FOREIGN KEY (username) REFERENCES user(username),FOREIGN KEY (store_id) REFERENCES store(id));" +
                 "CREATE TABLE Cloth (username VARCHAR(10),id INTEGER,name TEXT,brand TEXT,favorite BOOLEAN,color TEXT,cloth_width NUMERIC NOT NULL,cloth_height NUMERIC NOT NULL,picture_path TEXT NOT NULL,PRIMARY KEY (username, id),FOREIGN KEY (username) REFERENCES user(username));" +
                 "CREATE TABLE Category (username VARCHAR(10),id TEXT,PRIMARY KEY (username, id),FOREIGN KEY (username) REFERENCES user(username));" +
-                "CREATE TABLE Cloth_Has_Category (username VARCHAR(10),cloth_id INTEGER,creator VARCHAR(10),category_id TEXT,PRIMARY KEY (username, cloth_id, category_id),FOREIGN KEY (username, cloth_id) REFERENCES cloth(username, id),FOREIGN KEY (creator, category_id) REFERENCES cateogry(username, id));";
+                "CREATE TABLE Cloth_Has_Category (username VARCHAR(10),cloth_id INTEGER,creator VARCHAR(10),category_id TEXT,PRIMARY KEY (username, cloth_id, category_id),FOREIGN KEY (username, cloth_id) REFERENCES cloth(username, id),FOREIGN KEY (creator, category_id) REFERENCES cateogry(username, id));" +
+                "create table favorite_online_cloth (username VARCHAR(10), store_id INTEGER, cloth_id INTEGER, PRIMARY KEY (username, store_id, cloth_id), FOREIGN KEY (username) REFERENCES user(username),FOREIGN KEY (store_id) REFERENCES store(id));"+
+                "insert into store values (0), (1), (2);";
 
             queryWithoutReturn(query);
         }

@@ -29,10 +29,7 @@ namespace BajuGW
         string lastQuery = "";
         string lastOnlineCategory = "";
         string lastOnlineQuery = "";
-
         private Controller controller;
-        
-        //bool isAltLoginBtnClicked = false;
 
         public MainScreen(Controller controller)
         {
@@ -297,9 +294,6 @@ namespace BajuGW
             var bc = new BrushConverter();
             cancelBtn.Foreground = (Brush)bc.ConvertFrom("#ED2F59");
         }
-
-       
-
      
         private void confirmLogoutButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -382,7 +376,6 @@ namespace BajuGW
             brush.ImageSource = (ImageSource)FindResource("exitButton");
             exitLogoutBtn.Background = brush;
         }
-
 
         private void bBackBtnClicked(object sender, RoutedEventArgs e)
         {
@@ -543,9 +536,9 @@ namespace BajuGW
             }
         }
 
-
         public void refreshStore()
         {
+            controller.refreshStore();
             List<OnlineCloth> result = new List<OnlineCloth>();
             foreach (OnlineStore store in Controller.stores)
             {
@@ -563,7 +556,6 @@ namespace BajuGW
             List<string> categories = controller.getOnlineCategories();
             onlineCatDisplayOption.ItemsSource = categories;
         }
-
 
         private void loadClothesFromStore(List<OnlineCloth> clothes, WrapPanel container)
         {
@@ -594,11 +586,13 @@ namespace BajuGW
                 grid.RowDefinitions.Add(row);
 
                 //hover
-                Rectangle hoverItem = new Rectangle();
+                Button hoverItem = new Button();
                 hoverItem.Height = 140;
                 hoverItem.Width = 120;
-                hoverItem.Opacity = 0.7;
-                //hoverItem.Fill = new SolidColorBrush(Colors.Black);
+                hoverItem.Opacity = 0.1;
+                hoverItem.Background = new SolidColorBrush(Colors.Transparent);
+                hoverItem.CommandParameter = cloth;
+                hoverItem.Click += onlineItemDetailClicked;
 
                 //nama pakaian
                 TextBlock nameItem = new TextBlock();
@@ -621,8 +615,7 @@ namespace BajuGW
 
                 loveBtn.Background = brush;
                 loveBtn.CommandParameter = cloth;
-                //loveBtn.Click += loveBtn_Click;
-
+                loveBtn.Click += onlineAddToFavBtnClicked;
 
                 //penempatan elemen gui di grid
                 Grid.SetRow(clothPicture, 1);
@@ -641,7 +634,6 @@ namespace BajuGW
                 container.Children.Add(grid);
             }
         }
-
 
         private void loadClothesFromSuggestion(List<Cloth> clothes, WrapPanel container)
         {
@@ -726,7 +718,6 @@ namespace BajuGW
             ((Grid)button.Parent).Visibility = Visibility.Collapsed;
         }
 
-
         private void catDisplayOption_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String selected = catDisplayOption.SelectedItem.ToString();
@@ -809,7 +800,6 @@ namespace BajuGW
 
         }
 
-
         private void editCatBtnClicked(object sender, RoutedEventArgs e)
         {
             if (categoryListBox.SelectedItem == null)
@@ -861,6 +851,7 @@ namespace BajuGW
         {
 
         }
+
         private void deleteCatBtnClicked(object sender, RoutedEventArgs e)
         {
             string category = categoryListBox.SelectedItem.ToString();
@@ -906,7 +897,7 @@ namespace BajuGW
         {
             if (Controller.stores[0] == null)
             {
-                Controller.stores[0] = new OnlineStore(0, Controller.supportedStore[0]);
+                Controller.stores[0] = new OnlineStore(0, Controller.supportedStore[0], controller.getUsername());
                 controller.addConnectedStore(0);
             }
             else
@@ -961,7 +952,6 @@ namespace BajuGW
             itemDetail.Visibility = Visibility.Collapsed;
         }
 
-
         private void itemDetailClicked(object sender, RoutedEventArgs e)
         {
             Cloth cloth = (Cloth)((Button)sender).CommandParameter;
@@ -979,6 +969,29 @@ namespace BajuGW
             mixMatchBtn.CommandParameter = cloth;
         }
 
+        private void onlineItemDetailClicked(object sender, RoutedEventArgs e)
+        {
+            OnlineCloth cloth = (OnlineCloth)((Button)sender).CommandParameter;
+            popupScreen.Visibility = Visibility.Visible;
+            deactivate.IsHitTestVisible = true;
+            onlineItemDetail.Visibility = Visibility.Visible;
+            onlineItemName.Text = cloth.name;
+            onlineItemSizeText.Text = "" + cloth.clothWidth + " x " + cloth.clothHeight;
+            onlineItemImage.Fill = new ImageBrush(cloth.picture);
+
+            onlineAddToFavBtn.Content = (cloth.isFavorite == 0) ? "Add to favorites" : "Remove from\nfavorites";
+            onlineAddToFavBtn.CommandParameter = cloth;
+            buyBtn.CommandParameter = cloth;
+            fittingBtn.CommandParameter = cloth;
+        }
+
+        private void buyBtnClicked(object sender, RoutedEventArgs e)
+        {
+            OnlineCloth cloth = (OnlineCloth)((Button)sender).CommandParameter;
+            controller.buyCloth(cloth.store, cloth.id);
+            this.refresh();
+        }
+
         private void addToFavBtnClicked(object sender, RoutedEventArgs e)
         {
             Cloth cloth = (Cloth)((Button)sender).CommandParameter;
@@ -988,6 +1001,17 @@ namespace BajuGW
                 controller.setUnfavorite(cloth.id);
             this.refresh();
             addToFavBtn.Content = (cloth.isFavorite == 0) ? "Add to favorites" : "Remove from\nfavorites";
+        }
+
+        private void onlineAddToFavBtnClicked(object sender, RoutedEventArgs e) {
+            OnlineCloth cloth = (OnlineCloth)((Button)sender).CommandParameter;
+            if (cloth.isFavorite == 0)
+                controller.setOnlineFavorite(cloth.store, cloth.id);
+            else
+                controller.setOnlineUnfavorite(cloth.store, cloth.id);
+            this.refresh();
+            addToFavBtn.Content = (cloth.isFavorite == 0) ? "Add to favorites" : "Remove from\nfavorites";
+            this.refreshStore();
         }
 
         private void deleteItemBtnClicked(object sender, RoutedEventArgs e)
@@ -1035,13 +1059,6 @@ namespace BajuGW
             selectCategoryOption.SelectedItem = null;
         }
 
-        //======================================== Register Screen ============================================//
-
-        //Definisi Event yang terjadi pada addNewAccountBtn
-        //Event yang terjadi saat addNewAccountBtn diklik
         
-
-
-
     }
 }

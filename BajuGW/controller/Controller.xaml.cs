@@ -42,11 +42,21 @@ namespace BajuGW
             {
                 dbmanager = new SQLiteManager(DBNAME);
             }
-
+            
             mainScreen = new MainScreen(this);
             loginScreen = new LoginScreen(this);
             this.MainWindow = loginScreen;
             this.MainWindow.Show();
+        }
+
+        public string getUsername()
+        {
+            return account.username;
+        }
+
+        public bool buyCloth(int store, int cloth)
+        {
+            return stores[store].buy(account, cloth);
         }
 
         public List<string> getOnlineCategories()
@@ -261,6 +271,25 @@ namespace BajuGW
         public bool setClothCategory(int id, string category)
         {
             return account.setClothCategory(id, category);
+        }
+
+        public void setOnlineFavorite(int store, int cloth)
+        {
+            stores[store].setOnlineFavorite(cloth);
+        }
+
+        public void setOnlineUnfavorite(int store, int cloth)
+        {
+            stores[store].setOnlineUnfavorite(cloth);
+        }
+
+        internal void refreshStore()
+        {
+            foreach (OnlineStore store in stores)
+            {
+                if (store != null)
+                    store.refresh();
+            }
         }
     }
 }
