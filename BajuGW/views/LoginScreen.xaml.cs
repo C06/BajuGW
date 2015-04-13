@@ -53,10 +53,6 @@ namespace BajuGW
         private Int32 numOfFace;
         private int uid;
         
-        private String user;
-        private String pass;
-        private String e_mail;
-
         bool isLoginBtnClicked=false;
         bool isAuthorizeBtnClicked = false;
         bool isRegisterBtnClicked=false;
@@ -101,7 +97,6 @@ namespace BajuGW
             processingThread = new Thread(new ThreadStart(ProcessingThread));
             processingThread.Start();
 
-            
         }
 
         private void ProcessingThread()
@@ -166,7 +161,11 @@ namespace BajuGW
                     if (numOfFace == 1)
                     {
                         // Retrieve the recognition data instance
-                        PXCMFaceData.Face face = faceData.QueryFaceByIndex(0);
+                        PXCMFaceData.Face face = null;
+                        for (int i = 0; i < 11; i++)
+                        {
+                            face = faceData.QueryFaceByIndex(0);
+                        }
                         if (face != null)
                         {
                             recognitionData = face.QueryRecognition();
@@ -177,8 +176,6 @@ namespace BajuGW
                                     recognitionData.RegisterUser();
                                     SaveDatabaseToFile();
                                     uid = recognitionData.QueryUserID();
-                                    Account.register(username.Text, password.Password, email.Text, uid);
-                                    loginBtn.Content = "saved as id: " + uid;
                                     registerUser = false;
                                 }
                                 else
@@ -188,10 +185,12 @@ namespace BajuGW
                                     if (uid >= 0)
                                     {
                                         loginBtn.Content = "Dikenali " + uid;
+                                        authorizeBtn.Content = "Authorized with uid: " + uid;
                                     }
                                     else
                                     {
                                         loginBtn.Content = "Tidak Dikenali";
+                                        authorizeBtn.Content = "CLICK HERE TO AUTHORIZE";
                                     }
                                 }
                             }
@@ -220,15 +219,16 @@ namespace BajuGW
         //Event yang terjadi saat LoginBtn diklik
         private void loginBtnClicked(object sender, RoutedEventArgs e)
         {
-            var brush = new ImageBrush();
-            brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
-            loginBtn.Background = brush;
+            //var brush = new ImageBrush();
+            //brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
+            //loginBtn.Background = brush;
             String query = "Select Username from user where picture_path = '" + uid + "';";
             String username = "";
             foreach (NameValueCollection row in Controller.dbmanager.queryWithReturn(query)) {
                 username = row["username"];
             }
-            if (username != null)
+            
+            if (username != "")
             {
                 processingThread.Abort();
                 faceModule.Dispose();
@@ -243,6 +243,8 @@ namespace BajuGW
                 main.Show();
                 this.Visibility = System.Windows.Visibility.Hidden;
                 */
+
+                Console.WriteLine(username);
                 controller.login(username);
                 controller.showMainScreen(this);
 
@@ -250,8 +252,7 @@ namespace BajuGW
                 //this.Frame.Navigate(typeof(MainScreen));
                 //Uri uri = new Uri("MainScreen.xaml", UriKind.Relative);
                 //his.NavigationService.Navigate(uri);
-            
-            }
+            }          
         }
 
        
@@ -331,9 +332,7 @@ namespace BajuGW
             if (password.Password == rpassword.Password)
             {
                 //SQLiteManager manager = new SQLiteManager("data.db");
-                user = username.Text;
-                pass = password.Password;
-                e_mail = email.Text;
+                Account.register(username.Text, password.Password, email.Text, uid);
                 warning.Visibility = System.Windows.Visibility.Hidden;
                 username.Text = "";
                 uLabel.Visibility = System.Windows.Visibility.Visible;
@@ -345,7 +344,6 @@ namespace BajuGW
                 rpLabel.Visibility = System.Windows.Visibility.Visible;
                 deactivator.Visibility = System.Windows.Visibility.Collapsed;
                 registerForm.Visibility = System.Windows.Visibility.Hidden;
-                registerUser = true;
             }
             else
             {
@@ -526,9 +524,10 @@ namespace BajuGW
         {
             isAuthorizeBtnClicked = true;
             //loginText.Visibility = System.Windows.Visibility.Hidden;
-            var brush = new ImageBrush();
-            brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
-            authorizeBtn.Background = brush;
+            //var brush = new ImageBrush();
+            //brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
+            //authorizeBtn.Background = brush;
+            registerUser = true;
             //loadingBar.Visibility = System.Windows.Visibility.Visible;
 
         }

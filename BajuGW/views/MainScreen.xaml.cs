@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
 //using System.Windows.Controls.Frame;
 
 
@@ -22,6 +25,15 @@ namespace BajuGW
     /// </summary>
     public partial class MainScreen : Window
     {
+        private Thread processingThread;
+        private PXCMSenseManager senseManager;
+        private PXCMFaceModule faceModule;
+        private PXCMFaceConfiguration faceConfig;
+        private PXCMFaceData faceData;
+
+        private Int32 numOfFace;
+
+        private PXCMTouchlessController touchlessController;
         bool isMeasureBtnClicked = true;
         bool isWardrobeBtnClicked = false;
         bool isStoreBtnClicked = false;
@@ -35,7 +47,92 @@ namespace BajuGW
         {
             InitializeComponent();
             this.controller = controller;
+            /*
+            senseManager = PXCMSenseManager.CreateInstance();
+            senseManager.EnableStream(PXCMCapture.StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
+            senseManager.EnableFace();
+            senseManager.EnableTouchlessController();
+            senseManager.Init();
+
+            // Configure the Touchless Controller
+            touchlessController = senseManager.QueryTouchlessController();
+            touchlessController.SubscribeEvent(OnTouchlessControllerUXEvent);
+
+            // Configure the Face Module
+            faceModule = senseManager.QueryFace();
+            faceConfig = faceModule.CreateActiveConfiguration();
+            faceConfig.EnableAllAlerts();
+
+            // Start the worker thread
+            processingThread = new Thread(new ThreadStart(ProcessingThread));
+            processingThread.Start();
+             */ 
         }
+        /*
+        private void ProcessingThread()
+        {
+            // Start AcquireFrame/ReleaseFrame loop
+            while (senseManager.AcquireFrame(true) >= pxcmStatus.PXCM_STATUS_NO_ERROR)
+            {
+                PXCMCapture.Sample sample = senseManager.QuerySample();
+                System.Drawing.Bitmap colorBitmap = new System.Drawing.Bitmap(640, 480);
+                PXCMImage.ImageData colorData = new PXCMImage.ImageData();
+                PXCMImage image = sample.color;
+
+                // Get color image data
+                if (sample != null)
+                {
+                    sample.color.AcquireAccess(PXCMImage.Access.ACCESS_READ, PXCMImage.PixelFormat.PIXEL_FORMAT_RGB32, out colorData);
+                    colorBitmap = colorData.ToBitmap(0, sample.color.info.width, sample.color.info.height);
+                }
+
+                // Get the face
+                faceModule = senseManager.QueryFace();
+                if (faceModule != null)
+                {
+                    faceData = faceModule.CreateOutput();
+                    faceData.Update();
+                    numOfFace = faceData.QueryNumberOfDetectedFaces();
+                }
+
+                // Update the user interface
+                UpdateUI(colorBitmap);
+
+                // Release the frame
+                if (faceData != null) faceData.Dispose();
+                colorBitmap.Dispose();
+                sample.color.ReleaseAccess(colorData);
+                sample.color.Dispose();
+                senseManager.ReleaseFrame();
+            }
+        }
+        
+        private void UpdateUI(System.Drawing.Bitmap bitmap)
+        {
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate()
+            {
+                if (bitmap != null)
+                {
+                    BitmapSource bitmapSource = ConvertBitmap.BitmapToBitmapSource(bitmap);
+
+                    // Mirror the bitmap
+                    TransformedBitmap mirroredBitmap = new TransformedBitmap();
+                    mirroredBitmap.BeginInit();
+                    mirroredBitmap.Source = bitmapSource;
+                    ScaleTransform transformation = new ScaleTransform(-1, 1);
+                    mirroredBitmap.Transform = transformation;
+                    mirroredBitmap.EndInit();
+                    bitmapSource = mirroredBitmap;
+
+                    // Display the color stream
+                    //imgColorStream.ImageSource = bitmapSource;
+                    //registerStream.ImageSource = bitmapSource;
+
+                    bitmap.Dispose();
+                }
+            }));
+        }
+         */ 
 
         public void refresh()
         {
@@ -1059,6 +1156,50 @@ namespace BajuGW
             selectCategoryOption.SelectedItem = null;
         }
 
-        
+        private void OnTouchlessControllerUXEvent(PXCMTouchlessController.UXEventData data)
+        {
+            if (this.Dispatcher.CheckAccess())
+            {
+                switch (data.type)
+                {
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_Select:
+                        {
+                            Console.WriteLine("Select");
+                            MouseInjection.ClickLeftMouseButton();
+                        }
+                        break;
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_CursorVisible:
+                        {
+                            Console.WriteLine("Cursor Visible");
+                            MainWindow.Cursor = MainWindow.Cursor;
+                            //DisplayArea.Cursor = Cursors.Arrow;
+                        }
+                        break;
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_CursorNotVisible:
+                        {
+                            Console.WriteLine("Cursor Not Visible");
+                        }
+                        break;
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_CursorMove:
+                        {
+                            System.Windows.Point point = new System.Windows.Point();
+                            point.X = Math.Max(Math.Min(1.0F, data.position.x), 0.0F);
+                            point.Y = Math.Max(Math.Min(1.0F, data.position.y), 0.0F);
+
+                            System.Windows.Point LoginWindowPosition = MainWindow.PointToScreen(new System.Windows.Point(0d, 0d));
+
+                            int mouseX = (int)(LoginWindowPosition.X + point.X * MainWindow.ActualWidth);
+                            int mouseY = (int)(LoginWindowPosition.Y + point.Y * MainWindow.ActualHeight);
+
+                            MouseInjection.SetCursorPos(mouseX, mouseY);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                this.Dispatcher.Invoke(new Action(() => OnTouchlessControllerUXEvent(data)));
+            }
+        }
     }
 }
