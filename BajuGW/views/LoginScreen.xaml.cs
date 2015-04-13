@@ -36,92 +36,73 @@ namespace BajuGW
     {
         private Thread processingThread;
         private PXCMSenseManager senseManager;
-        private PXCMHandModule hand;
+        private PXCMFaceModule faceModule;
+        private PXCMFaceConfiguration faceConfig;
+        private PXCMFaceData faceData;
 
+        private PXCMFaceData.RecognitionData recognitionData;
+        private PXCMFaceConfiguration.RecognitionConfiguration recognitionConfig;
+        private PXCMFaceConfiguration.RecognitionConfiguration.RecognitionStorageDesc recogStorageDesc;
+        private bool registerUser = false;
+        private const string DatabaseName = "UserDB";
+        private const string DatabaseFilename = "database.bin";
+        private int DatabaseUsers = 10;
 
-        private PXCMHandConfiguration handConfig;
-        private PXCMHandData handData;
-        private PXCMHandData.GestureData gestureData;
-        PXCMTouchlessController ptc;
+        private PXCMTouchlessController touchlessController;
+
+        private Int32 numOfFace;
+        private int uid;
         
-
-        ScrollViewer myListscrollViwer;
-        double initialScrollPoint;
-        double initialScrollOffest;
-        const double scrollSensitivity = 10f;
-
-        // Scrolling Feature
-       
-
-        private bool handWaving;
-
-        private bool handTrigger;
-
-        private int msgTimer;
-
+        private String user;
+        private String pass;
+        private String e_mail;
 
         bool isLoginBtnClicked=false;
         bool isAuthorizeBtnClicked = false;
         bool isRegisterBtnClicked=false;
         bool isAltLoginBtnClicked=false;
         NavigationService navService;
-        PXCMSenseManager sense;
 
         private Controller controller;
         
         public LoginScreen(Controller controller)
         {
-            //InitializeComponent();
-            //_NavigationFrame.Navigate(new Page());
-
-
             InitializeComponent();
-            /*handWaving = false;
-            handTrigger = false;
-            msgTimer = 0;
+            this.controller = controller;
 
             // Instantiate and initialize the SenseManager
             senseManager = PXCMSenseManager.CreateInstance();
             senseManager.EnableStream(PXCMCapture.StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
-            senseManager.EnableHand();
+            senseManager.EnableFace();
+            senseManager.EnableTouchlessController();
             senseManager.Init();
 
-            // Configure the Hand Module
-            hand = senseManager.QueryHand();
-            handConfig = hand.CreateActiveConfiguration();
-            handConfig.EnableGesture("wave");
-            handConfig.EnableAllAlerts();
-            handConfig.ApplyChanges();
+            // Configure the Touchless Controller
+            touchlessController = senseManager.QueryTouchlessController();
+            touchlessController.SubscribeEvent(OnTouchlessControllerUXEvent);
+
+            // Configure the Face Module
+            faceModule = senseManager.QueryFace();
+            faceConfig = faceModule.CreateActiveConfiguration();
+            faceConfig.EnableAllAlerts();
+
+            // Configure the Face Recognition
+            recognitionConfig = faceConfig.QueryRecognition();
+            recognitionConfig.Enable();
+            recogStorageDesc = new PXCMFaceConfiguration.RecognitionConfiguration.RecognitionStorageDesc();
+            recogStorageDesc.maxUsers = DatabaseUsers;
+            recognitionConfig.CreateStorage(DatabaseName, out recogStorageDesc);
+            recognitionConfig.UseStorage(DatabaseName);
+            LoadDatabaseFromFile();
+            recognitionConfig.SetRegistrationMode(PXCMFaceConfiguration.RecognitionConfiguration.RecognitionRegistrationMode.REGISTRATION_MODE_CONTINUOUS);
+            faceConfig.ApplyChanges();
 
             // Start the worker thread
             processingThread = new Thread(new ThreadStart(ProcessingThread));
-            processingThread.Start();*/
+            processingThread.Start();
 
-            this.controller = controller;
             
-      
-            
-
         }
-
-
-        //=====Touchless Controller==================================================================================//
-
-        //======Touchless controller=============================================================================//
-
-
-        /* private void Window_Loaded(object sender, RoutedEventArgs e)
-         {
-             lblMessage.Content = "(Wave Your Hand)";
-         } 
-
-         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-         {
-             processingThread.Abort();
-             if (handData != null) handData.Dispose();
-             handConfig.Dispose();
-             senseManager.Dispose();
-         }*/
 
         private void ProcessingThread()
         {
@@ -129,31 +110,34 @@ namespace BajuGW
             while (senseManager.AcquireFrame(true) >= pxcmStatus.PXCM_STATUS_NO_ERROR)
             {
                 PXCMCapture.Sample sample = senseManager.QuerySample();
-                Bitmap colorBitmap;
-                PXCMImage.ImageData colorData;
+                Bitmap colorBitmap = new Bitmap(640, 480);
+                PXCMImage.ImageData colorData = new PXCMImage.ImageData();
+                PXCMImage image = sample.color;
 
                 // Get color image data
-                sample.color.AcquireAccess(PXCMImage.Access.ACCESS_READ, PXCMImage.PixelFormat.PIXEL_FORMAT_RGB24, out colorData);
-                colorBitmap = colorData.ToBitmap(0, sample.color.info.width, sample.color.info.height);
-
-                // Retrieve gesture data
-                hand = senseManager.QueryHand();
-
-                if (hand != null)
+                if (sample != null)
                 {
-                    // Retrieve the most recent processed data
-                    handData = hand.CreateOutput();
-                    handData.Update();
-                    handWaving = handData.IsGestureFired("wave", out gestureData);
+                    sample.color.AcquireAccess(PXCMImage.Access.ACCESS_READ, PXCMImage.PixelFormat.PIXEL_FORMAT_RGB32, out colorData);
+                    colorBitmap = colorData.ToBitmap(0, sample.color.info.width, sample.color.info.height);
+                }
+
+                // Get the face
+                faceModule = senseManager.QueryFace();
+                if (faceModule != null)
+                {
+                    faceData = faceModule.CreateOutput();
+                    faceData.Update();
+                    numOfFace = faceData.QueryNumberOfDetectedFaces();
                 }
 
                 // Update the user interface
                 UpdateUI(colorBitmap);
 
                 // Release the frame
-                if (handData != null) handData.Dispose();
+                if (faceData != null) faceData.Dispose();
                 colorBitmap.Dispose();
                 sample.color.ReleaseAccess(colorData);
+                sample.color.Dispose();
                 senseManager.ReleaseFrame();
             }
         }
@@ -164,35 +148,64 @@ namespace BajuGW
             {
                 if (bitmap != null)
                 {
-                    // Mirror the color stream Image control
-                    imgColorStream.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
-                    ScaleTransform mainTransform = new ScaleTransform();
-                    mainTransform.ScaleX = -1;
-                    mainTransform.ScaleY = 1;
-                    imgColorStream.RenderTransform = mainTransform;
+                    BitmapSource bitmapSource = ConvertBitmap.BitmapToBitmapSource(bitmap);
+
+                    // Mirror the bitmap
+                    TransformedBitmap mirroredBitmap = new TransformedBitmap();
+                    mirroredBitmap.BeginInit();
+                    mirroredBitmap.Source = bitmapSource;
+                    ScaleTransform transformation = new ScaleTransform(-1, 1);
+                    mirroredBitmap.Transform = transformation;
+                    mirroredBitmap.EndInit();
+                    bitmapSource = mirroredBitmap;
 
                     // Display the color stream
-                    imgColorStream.Source = ConvertBitmap.BitmapToBitmapSource(bitmap);
+                    imgColorStream.ImageSource = bitmapSource;
+                    registerStream.ImageSource = bitmapSource;
 
-                    // Update the screen message
-                    if (handWaving)
+                    if (numOfFace == 1)
                     {
-                        lblMessage.Content = "Hello World!";
-                        handTrigger = true;
-                    }
-
-                    // Reset the screen message after ~50 frames
-                    if (handTrigger)
-                    {
-                        msgTimer++;
-
-                        if (msgTimer >= 50)
+                        // Retrieve the recognition data instance
+                        PXCMFaceData.Face face = faceData.QueryFaceByIndex(0);
+                        if (face != null)
                         {
-                            lblMessage.Content = "(Wave Your Hand)";
-                            msgTimer = 0;
-                            handTrigger = false;
+                            recognitionData = face.QueryRecognition();
+                            if (recognitionData != null)
+                            {
+                                if (registerUser)
+                                {
+                                    recognitionData.RegisterUser();
+                                    SaveDatabaseToFile();
+                                    uid = recognitionData.QueryUserID();
+                                    Account.register(username.Text, password.Password, email.Text, uid);
+                                    loginBtn.Content = "saved as id: " + uid;
+                                    registerUser = false;
+                                }
+                                else
+                                {
+                                    // Recognize the current face?
+                                    uid = recognitionData.QueryUserID();
+                                    if (uid >= 0)
+                                    {
+                                        loginBtn.Content = "Dikenali " + uid;
+                                    }
+                                    else
+                                    {
+                                        loginBtn.Content = "Tidak Dikenali";
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                loginBtn.Content = "No face detected";
+                            }
                         }
                     }
+                    else
+                    {
+                        loginBtn.Content = "CLICK HERE TO LOGIN";
+                    }
+                    bitmap.Dispose();
                 }
             }));
         }
@@ -207,23 +220,38 @@ namespace BajuGW
         //Event yang terjadi saat LoginBtn diklik
         private void loginBtnClicked(object sender, RoutedEventArgs e)
         {
-            isLoginBtnClicked = true;
-            //loginText.Visibility = System.Windows.Visibility.Hidden;
             var brush = new ImageBrush();
             brush.ImageSource = (ImageSource)FindResource("loginButtonClicked");
             loginBtn.Background = brush;
-            /*loadingBar.Visibility = System.Windows.Visibility.Visible;
-            LoginScreen main = new LoginScreen();
-            main.Show();
-            this.Visibility = System.Windows.Visibility.Hidden;
-            */
-            controller.showMainScreen(this);
+            String query = "Select Username from user where picture_path = '" + uid + "';";
+            String username = "";
+            foreach (NameValueCollection row in Controller.dbmanager.queryWithReturn(query)) {
+                username = row["username"];
+            }
+            if (username != null)
+            {
+                processingThread.Abort();
+                faceModule.Dispose();
+                touchlessController.Dispose();
+                senseManager.Close();
+                senseManager.Dispose();
+                isLoginBtnClicked = true;
+                //loginText.Visibility = System.Windows.Visibility.Hidden;
+                
+                /*loadingBar.Visibility = System.Windows.Visibility.Visible;
+                LoginScreen main = new LoginScreen();
+                main.Show();
+                this.Visibility = System.Windows.Visibility.Hidden;
+                */
+                controller.login(username);
+                controller.showMainScreen(this);
 
-            //this.navService.Navigate(new Uri("MainScreen.xaml", UriKind.RelativeOrAbsolute));
-            //this.Frame.Navigate(typeof(MainScreen));
-            //Uri uri = new Uri("MainScreen.xaml", UriKind.Relative);
-            //his.NavigationService.Navigate(uri);
+                //this.navService.Navigate(new Uri("MainScreen.xaml", UriKind.RelativeOrAbsolute));
+                //this.Frame.Navigate(typeof(MainScreen));
+                //Uri uri = new Uri("MainScreen.xaml", UriKind.Relative);
+                //his.NavigationService.Navigate(uri);
             
+            }
         }
 
        
@@ -232,6 +260,7 @@ namespace BajuGW
         //Event yang terjadi saat Mouse berada di area LoginBtn
         private void loginBtnHover(object sender, MouseEventArgs e)
         {
+            /*
             //Cursor = (Cursors)FindResource("E:/PPL/UItest/Test1/Test1/assets/circleTriple.cur");
             if (isLoginBtnClicked == false)
             {
@@ -240,11 +269,13 @@ namespace BajuGW
                 loginBtn.Background = brush;
                 loginBtn.Opacity = 0.5;
             }
+             * */
         }
 
         //Event yang terjadi saat Mouse berada di luar area LoginBtn
         private void loginBtnIdle(object sender, MouseEventArgs e)
         {
+            /*
             //Cursor = Cursors.Arrow;
             if (isLoginBtnClicked == false)
 
@@ -255,6 +286,7 @@ namespace BajuGW
                 loginBtn.Background = brush;
                 loginBtn.Opacity = 0.8;
             }
+             * */
         }
 
         //Definisikan Event yang terjadi pada registerBtn di sini
@@ -299,7 +331,9 @@ namespace BajuGW
             if (password.Password == rpassword.Password)
             {
                 //SQLiteManager manager = new SQLiteManager("data.db");
-                Account.register(username.Text, password.Password, email.Text);
+                user = username.Text;
+                pass = password.Password;
+                e_mail = email.Text;
                 warning.Visibility = System.Windows.Visibility.Hidden;
                 username.Text = "";
                 uLabel.Visibility = System.Windows.Visibility.Visible;
@@ -311,8 +345,7 @@ namespace BajuGW
                 rpLabel.Visibility = System.Windows.Visibility.Visible;
                 deactivator.Visibility = System.Windows.Visibility.Collapsed;
                 registerForm.Visibility = System.Windows.Visibility.Hidden;
-                
-                
+                registerUser = true;
             }
             else
             {
@@ -504,17 +537,20 @@ namespace BajuGW
         //Event yang terjadi saat Mouse berada di area authorizeBtn
         private void authorizeBtnHover(object sender, MouseEventArgs e)
         {
+            /*
             if (isAuthorizeBtnClicked == false)
             {
                 var brush = new ImageBrush();
                 brush.ImageSource = (ImageSource)FindResource("loginButtonHover");
                 authorizeBtn.Background = brush;
             }
+             * */
         }
 
         //Event yang terjadi saat Mouse berada di luar area authorizeBtn
         private void authorizeBtnIdle(object sender, MouseEventArgs e)
         {
+            /*
             if (isAuthorizeBtnClicked == false)
 
             // loginBtn.Content.Visibility = System.Windows.Visibility.Visible;
@@ -523,6 +559,7 @@ namespace BajuGW
                 brush.ImageSource = (ImageSource)FindResource("loginButton");
                 authorizeBtn.Background = brush;
             }
+             * */
         }
 
 
@@ -720,17 +757,87 @@ namespace BajuGW
 
         private void quitClicked(object sender, RoutedEventArgs e)
         {
+            processingThread.Abort();
+            faceModule.Dispose();
+            touchlessController.Dispose();
+            senseManager.Close();
+            senseManager.Dispose();
             Controller.dbmanager.disconnect();
             controller.Shutdown();
         }
+
+        private void OnTouchlessControllerUXEvent(PXCMTouchlessController.UXEventData data)
+        {
+            if (this.Dispatcher.CheckAccess())
+            {
+                switch (data.type)
+                {
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_Select:
+                        {
+                            Console.WriteLine("Select");
+                            MouseInjection.ClickLeftMouseButton();
+                        }
+                        break;
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_CursorVisible:
+                        {
+                            Console.WriteLine("Cursor Visible");
+                            LoginWindow.Cursor = LoginWindow.Cursor;
+                            //DisplayArea.Cursor = Cursors.Arrow;
+                        }
+                        break;
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_CursorNotVisible:
+                        {
+                            Console.WriteLine("Cursor Not Visible");
+                        }
+                        break;
+                    case PXCMTouchlessController.UXEventData.UXEventType.UXEvent_CursorMove:
+                        {
+                            System.Windows.Point point = new System.Windows.Point();
+                            point.X = Math.Max(Math.Min(1.0F, data.position.x), 0.0F);
+                            point.Y = Math.Max(Math.Min(1.0F, data.position.y), 0.0F);
+
+                            System.Windows.Point LoginWindowPosition = LoginWindow.PointToScreen(new System.Windows.Point(0d, 0d));
+
+                            int mouseX = (int)(LoginWindowPosition.X + point.X * LoginWindow.ActualWidth);
+                            int mouseY = (int)(LoginWindowPosition.Y + point.Y * LoginWindow.ActualHeight);
+
+                            MouseInjection.SetCursorPos(mouseX, mouseY);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                this.Dispatcher.Invoke(new Action(() => OnTouchlessControllerUXEvent(data)));
+            }
+        }
+
+        private void LoadDatabaseFromFile()
+        {
+            if (File.Exists(DatabaseFilename))
+            {
+                Byte[] buffer = File.ReadAllBytes(DatabaseFilename);
+                recognitionConfig.SetDatabaseBuffer(buffer);
+            }
+        }
+
+        private void SaveDatabaseToFile()
+        {
+            // Allocate the buffer to save the database
+            PXCMFaceData.RecognitionModuleData recognitionModuleData = faceData.QueryRecognitionModule();
+            Int32 nBytes = recognitionModuleData.QueryDatabaseSize();
+            Byte[] buffer = new Byte[nBytes];
+
+            // Retrieve the database buffer
+            recognitionModuleData.QueryDatabaseBuffer(buffer);
+
+            // Save the buffer to a file
+            // (NOTE: production software should use file encryption for privacy protection)
+            File.WriteAllBytes(DatabaseFilename, buffer);
+        }
+
     }
-
-    // Realsense Face Recognition
-
-
-
-
-
+    
 }
 
 

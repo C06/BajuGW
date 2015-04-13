@@ -105,6 +105,17 @@ namespace BajuGW
             return false;
         }
 
+        public bool login(String username)
+        {
+            Account account = Account.login(username);
+            if (account != null)
+            {
+                this.account = account;
+                return true;
+            }
+            return false;
+        }
+
         public void logout()
         {
             this.account = null;
@@ -117,9 +128,9 @@ namespace BajuGW
          * Simpan akun yang baru saja diregister ke dalam database
          * 
          */
-        public bool register(string username, string password, string email)
+        public bool register(string username, string password, string email, int uid)
         {
-            if (Account.register(username, password, email))
+            if (Account.register(username, password, email, uid))
             {
                 return true;
             }

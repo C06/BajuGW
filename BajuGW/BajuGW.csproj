@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controller\MouseInjection.cs" />
     <Compile Include="models\misc\ConvertBitmap.cs" />
     <Compile Include="models\Wardrobe.cs" />
     <Compile Include="models\Account.cs" />

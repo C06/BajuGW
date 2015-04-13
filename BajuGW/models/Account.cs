@@ -85,13 +85,13 @@ namespace BajuGW
          * Daftarkan akun yang baru saja melakukan register
          * 
          */
-        public static bool register(string username, string password, string email)
+        public static bool register(string username, string password, string email, int uid)
         {
             SQLiteManager manager = Controller.dbmanager;
             
             string query = "insert into User values ('" + username + "','" +
                 password + "','" + email + "'," + 0.0 + "," +
-                0.0 + ", '', '')";
+                0.0 + ", '" + uid + "', '')";
             
             bool result = manager.queryWithoutReturn(query);
             
@@ -141,7 +141,40 @@ namespace BajuGW
 
             return new Account(username, email, clothWidth, clothHeight, picture_path, theme, connectedStore);
         }
-		
+
+
+        public static Account login(string username)
+        {
+            SQLiteManager manager = Controller.dbmanager;
+
+            string
+                email = "",
+                theme = "",
+                picture_path = "";
+            double
+                clothWidth = 0.0,
+                clothHeight = 0.0;
+            List<int> connectedStore = new List<int>();
+
+            string query = "select * from user where username='" + username + "'";
+            foreach (NameValueCollection row in manager.queryWithReturn(query))
+            {
+                email = row["email"];
+                clothWidth = double.Parse(row["cloth_width"]);
+                clothHeight = double.Parse(row["cloth_height"]);
+                picture_path = row["picture_path"];
+                theme = row["theme"];
+            }
+
+            query = "select store_id from User_Activate_Store where username='" + username + "'";
+            foreach (NameValueCollection row in manager.queryWithReturn(query))
+            {
+                connectedStore.Add(int.Parse(row["store_id"]));
+            }
+
+            return new Account(username, email, clothWidth, clothHeight, picture_path, theme, connectedStore);
+        }
+
 
         /**
          * Kembalikan daftar pakaian yang disarankan oleh BajuGW
