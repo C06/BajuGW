@@ -27,6 +27,8 @@ namespace BajuGW
         bool isStoreBtnClicked = false;
         string lastCategory = "";
         string lastQuery = "";
+        string lastOnlineCategory = "";
+        string lastOnlineQuery = "";
 
         private Controller controller;
         
@@ -51,6 +53,8 @@ namespace BajuGW
 
             List<string> categories = controller.getCategories();
             catDisplayOption.ItemsSource = categories;
+
+            categoryListBox.ItemsSource = categories;
         }
 
 
@@ -128,6 +132,11 @@ namespace BajuGW
             storeBtn.Opacity = 1.0;
             wardrobeBtn.Opacity = 0.5;
             measureBtn.Opacity = 0.5;
+            storeBtn.IsHitTestVisible = true;
+            wardrobeBtn.IsHitTestVisible = true;
+            measureBtn.IsHitTestVisible = true;
+            
+
         }
 
         private void storeBtnHover(object sender, MouseEventArgs e)
@@ -439,20 +448,40 @@ namespace BajuGW
             loadClothesFromWardrobe(clothes, itemDisplay);
         }
 
+        private void onlineSearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            lastOnlineQuery = onlineSearchArea.Text;
+            List<OnlineCloth> result = new List<OnlineCloth>();
+
+            foreach (OnlineStore store in Controller.stores)
+            {
+                if (store == null)
+                    continue;
+                List<OnlineCloth> clothes = store.getClothes(lastOnlineQuery, lastOnlineCategory);
+                foreach (OnlineCloth cloth in clothes)
+                {
+                    result.Add(cloth);
+                }
+            }
+
+            loadClothesFromStore(result, onlineItemDisplay);
+        }
+
         private void loadClothesFromWardrobe(List<Cloth> clothes, WrapPanel container) {
             container.Children.Clear();
 
             foreach (Cloth cloth in clothes)
             {
                 Grid grid = new Grid();
-                grid.Background = new ImageBrush(cloth.picture);
                 grid.Height = 140;
                 grid.Width = 120;
                 grid.Margin = new Thickness(15.0);
-                grid.ShowGridLines = true;
 
                 grid.HorizontalAlignment = HorizontalAlignment.Left;
                 grid.VerticalAlignment = VerticalAlignment.Top;
+
+                Rectangle clothPicture = new Rectangle();
+                clothPicture.Fill = new ImageBrush(cloth.picture);
 
                 //definisi baris dan kolom
                 RowDefinition row = new RowDefinition();
@@ -497,6 +526,108 @@ namespace BajuGW
 
 
                 //penempatan elemen gui di grid
+                Grid.SetRow(clothPicture, 1);
+                Grid.SetRowSpan(clothPicture, 2);
+                grid.Children.Add(clothPicture);
+                Grid.SetRow(nameItem, 0);
+                grid.Children.Add(nameItem);
+                Grid.SetRow(hoverItem, 0);
+                Grid.SetRowSpan(hoverItem, 3);
+                grid.Children.Add(hoverItem);
+                Grid.SetRow(loveBtn, 2);
+                grid.Children.Add(loveBtn);
+                
+
+                //tambahkan grid ke elemen lain sebagai anak
+                container.Children.Add(grid);
+            }
+        }
+
+
+        public void refreshStore()
+        {
+            List<OnlineCloth> result = new List<OnlineCloth>();
+            foreach (OnlineStore store in Controller.stores)
+            {
+                if (store == null)
+                    continue;
+                List<OnlineCloth> clothes = store.getClothes(lastOnlineQuery, lastOnlineCategory);
+                foreach (OnlineCloth cloth in clothes)
+                {
+                    result.Add(cloth);
+                }
+                
+            }
+            loadClothesFromStore(result, onlineItemDisplay);
+
+            List<string> categories = controller.getOnlineCategories();
+            onlineCatDisplayOption.ItemsSource = categories;
+        }
+
+
+        private void loadClothesFromStore(List<OnlineCloth> clothes, WrapPanel container)
+        {
+            container.Children.Clear();
+
+            foreach (OnlineCloth cloth in clothes)
+            {
+                Grid grid = new Grid();
+                grid.Height = 140;
+                grid.Width = 120;
+                grid.Margin = new Thickness(15.0);
+
+                grid.HorizontalAlignment = HorizontalAlignment.Left;
+                grid.VerticalAlignment = VerticalAlignment.Top;
+
+                Rectangle clothPicture = new Rectangle();
+                clothPicture.Fill = new ImageBrush(cloth.picture);
+
+                //definisi baris dan kolom
+                RowDefinition row = new RowDefinition();
+                row.Height = new GridLength(20);
+                grid.RowDefinitions.Add(row);
+                row = new RowDefinition();
+                row.Height = new GridLength(80);
+                grid.RowDefinitions.Add(row);
+                row = new RowDefinition();
+                row.Height = new GridLength(40);
+                grid.RowDefinitions.Add(row);
+
+                //hover
+                Rectangle hoverItem = new Rectangle();
+                hoverItem.Height = 140;
+                hoverItem.Width = 120;
+                hoverItem.Opacity = 0.7;
+                //hoverItem.Fill = new SolidColorBrush(Colors.Black);
+
+                //nama pakaian
+                TextBlock nameItem = new TextBlock();
+                nameItem.Text = cloth.name;
+                nameItem.TextAlignment = System.Windows.TextAlignment.Center;
+                nameItem.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+
+                //tombol favorite
+                Button loveBtn = new Button();
+                loveBtn.Height = 40;
+                loveBtn.Width = 40;
+                loveBtn.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                loveBtn.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+
+                var brush = new ImageBrush();
+                if (cloth.isFavorite == 0)
+                    brush.ImageSource = (ImageSource)FindResource("loveButton");
+                else
+                    brush.ImageSource = (ImageSource)FindResource("hateButton");
+
+                loveBtn.Background = brush;
+                loveBtn.CommandParameter = cloth;
+                //loveBtn.Click += loveBtn_Click;
+
+
+                //penempatan elemen gui di grid
+                Grid.SetRow(clothPicture, 1);
+                Grid.SetRowSpan(clothPicture, 2);
+                grid.Children.Add(clothPicture);
                 Grid.SetRow(nameItem, 0);
                 grid.Children.Add(nameItem);
                 Grid.SetRow(hoverItem, 0);
@@ -511,6 +642,91 @@ namespace BajuGW
             }
         }
 
+
+        private void loadClothesFromSuggestion(List<Cloth> clothes, WrapPanel container)
+        {
+            container.Children.Clear();
+
+            foreach (Cloth cloth in clothes)
+            {
+                Grid grid = new Grid();
+                grid.Height = 140;
+                grid.Width = 120;
+                grid.Margin = new Thickness(15.0);
+
+                grid.HorizontalAlignment = HorizontalAlignment.Left;
+                grid.VerticalAlignment = VerticalAlignment.Top;
+
+                Rectangle clothPicture = new Rectangle();
+                clothPicture.Fill = new ImageBrush(cloth.picture);
+
+                //definisi baris dan kolom
+                RowDefinition row = new RowDefinition();
+                row.Height = new GridLength(20);
+                grid.RowDefinitions.Add(row);
+                row = new RowDefinition();
+                row.Height = new GridLength(80);
+                grid.RowDefinitions.Add(row);
+                row = new RowDefinition();
+                row.Height = new GridLength(40);
+                grid.RowDefinitions.Add(row);
+
+                //hover
+                Rectangle hoverItem = new Rectangle();
+                hoverItem.Height = 140;
+                hoverItem.Width = 120;
+                hoverItem.Opacity = 0.7;
+                //hoverItem.Fill = new SolidColorBrush(Colors.Black);
+
+                //nama pakaian
+                TextBlock nameItem = new TextBlock();
+                nameItem.Text = cloth.name;
+                nameItem.TextAlignment = System.Windows.TextAlignment.Center;
+                nameItem.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+
+                //tombol favorite
+                Button loveBtn = new Button();
+                loveBtn.Height = 40;
+                loveBtn.Width = 40;
+                loveBtn.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                loveBtn.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+
+                var brush = new ImageBrush();
+                brush.ImageSource = (ImageSource)FindResource("loveButton");
+
+                loveBtn.Background = brush;
+                loveBtn.CommandParameter = cloth;
+                loveBtn.Click += loveSuggestionBtn_Clicked;
+
+
+                //penempatan elemen gui di grid
+                Grid.SetRow(clothPicture, 1);
+                Grid.SetRowSpan(clothPicture, 2);
+                grid.Children.Add(clothPicture);
+                Grid.SetRow(nameItem, 0);
+                grid.Children.Add(nameItem);
+                Grid.SetRow(hoverItem, 0);
+                Grid.SetRowSpan(hoverItem, 3);
+                grid.Children.Add(hoverItem);
+                Grid.SetRow(loveBtn, 2);
+                grid.Children.Add(loveBtn);
+
+
+                //tambahkan grid ke elemen lain sebagai anak
+                container.Children.Add(grid);
+            }
+        }
+
+        void loveSuggestionBtn_Clicked(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Cloth cloth = (Cloth)button.CommandParameter;
+            controller.setFavorite(cloth.id);
+            this.refresh();
+            ((Grid)button.Parent).Visibility = Visibility.Collapsed;
+        }
+
+
         private void catDisplayOption_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String selected = catDisplayOption.SelectedItem.ToString();
@@ -520,6 +736,188 @@ namespace BajuGW
             loadClothesFromWardrobe(clothes, itemDisplay);
         }
 
+        private void onlineCatDisplayOption_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            String selected = onlineCatDisplayOption.SelectedItem.ToString();
+            selected = selected.Equals("all") ? "" : selected;
+            lastOnlineCategory = selected;
+
+            List<OnlineCloth> result = new List<OnlineCloth>();
+            foreach (OnlineStore store in Controller.stores)
+            {
+                if (store == null)
+                    continue;
+                List<OnlineCloth> clothes = store.getClothes(lastOnlineQuery, lastOnlineCategory);
+                foreach (OnlineCloth cloth in clothes)
+                {
+                    result.Add(cloth);
+                }
+
+            }
+            loadClothesFromStore(result, onlineItemDisplay);
+        }
+
+        private void suggestBtnClicked(object sender, RoutedEventArgs e)
+        {
+            popupScreen.Visibility = Visibility.Visible;
+            eCatScreen.Visibility = Visibility.Collapsed;
+            eCatScreen.IsHitTestVisible = false;
+            suggestionScreen.Visibility = Visibility.Visible;
+            List<Cloth> clothes = controller.getSuggestion();
+            loadClothesFromSuggestion(clothes, suggestDisplay);
+            deactivate.IsHitTestVisible = true;
+        }
+
+        private void pExitBtnClicked(object sender, RoutedEventArgs e)
+        {
+            popupScreen.Visibility = Visibility.Collapsed;
+            suggestDisplay.Children.Clear();
+            deactivate.IsHitTestVisible = false;
+        }
+
+        private void eExitBtnClicked(object sender, RoutedEventArgs e)
+        {
+            popupScreen.Visibility = Visibility.Collapsed;
+            deactivate.IsHitTestVisible = false;
+        }
+
+        private void eExitBtnHover(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void eExitBtnIdle(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void newCatBtnClicked(object sender, RoutedEventArgs e)
+        {
+            editCategoryTextScreen.Visibility = Visibility.Visible;
+
+            confirmEditCategoryText.Click -= confirmEditCatBtnClicked;
+            confirmEditCategoryText.Click += confrimAddCatBtnClicked;
+        }
+
+        private void newCatBtnHover(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void newCatBtnIdle(object sender, MouseEventArgs e)
+        {
+
+        }
+
+
+        private void editCatBtnClicked(object sender, RoutedEventArgs e)
+        {
+            if (categoryListBox.SelectedItem == null)
+            {
+                return;
+            }
+            editCategoryTextScreen.Visibility = Visibility.Visible;
+
+            confirmEditCategoryText.Click -= confrimAddCatBtnClicked;
+            confirmEditCategoryText.Click += confirmEditCatBtnClicked;
+            
+            confirmEditCategoryText.CommandParameter = categoryListBox.SelectedItem.ToString();
+        }
+
+        private void confrimAddCatBtnClicked(object sender, RoutedEventArgs e)
+        {
+            string newName = editCategoryTextField.Text;
+            if (newName != null && !newName.Equals("all") && !newName.Equals(""))
+            {
+                controller.addCategory(newName);
+                editCategoryTextField.Text = "";
+                editCategoryTextScreen.Visibility = Visibility.Hidden;
+                confirmEditCategoryText.CommandParameter = null;
+                this.refresh();
+            }
+        }
+
+        private void confirmEditCatBtnClicked(object sender, RoutedEventArgs e)
+        {
+            string category = confirmEditCategoryText.CommandParameter.ToString();
+            string newName = editCategoryTextField.Text;
+            if (category != null && !category.Equals("all") && newName != null && !newName.Equals("all") && !newName.Equals(""))
+            {
+                controller.editCategory(category, newName);
+                editCategoryTextField.Text = "";
+                editCategoryTextScreen.Visibility = Visibility.Hidden;
+                confirmEditCategoryText.CommandParameter = null;
+                this.refresh();
+            }
+        } 
+
+        private void editCatBtnHover(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void editCatBtnIdle(object sender, MouseEventArgs e)
+        {
+
+        }
+        private void deleteCatBtnClicked(object sender, RoutedEventArgs e)
+        {
+            string category = categoryListBox.SelectedItem.ToString();
+            if (category != null && !category.Equals("all"))
+            {
+                controller.deleteCategory(category);
+                this.refresh();
+            }
+        }
+
+        private void deleteCatBtnHover(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void deleteCatBtnIdle(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void catBtnClicked(object sender, RoutedEventArgs e)
+        {
+            popupScreen.Visibility = Visibility.Visible;
+            deactivate.IsHitTestVisible = true;
+            eCatScreen.Visibility = Visibility.Visible;
+            suggestionScreen.Visibility = Visibility.Collapsed;
+            suggestionScreen.IsHitTestVisible = false;
+        }
+
+        private void catBtnHover(object sender, MouseEventArgs e)
+        {
+            var brush = new ImageBrush();
+            brush.ImageSource = (ImageSource)FindResource("catButtonHover");
+            catBtn.Background = brush;
+        }
+
+        private void catBtnIdle(object sender, MouseEventArgs e)
+        {
+            var brush = new ImageBrush();
+            brush.ImageSource = (ImageSource)FindResource("catButton");
+            catBtn.Background = brush;
+        }
+
+        private void store1Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Controller.stores[0] == null)
+            {
+                Controller.stores[0] = new OnlineStore(0, Controller.supportedStore[0]);
+                controller.addConnectedStore(0);
+            }
+            else
+            {
+                Controller.stores[0] = null;
+                controller.removeConnectedStore(0);
+            }
+            
+            refreshStore();
+        }
       
 
 

@@ -43,9 +43,19 @@ namespace BajuGW
             this.theme = theme;
             this.wardrobe = new Wardrobe(username);
             this.connectedStore = connectedStore;
+
+            Controller.stores = new List<OnlineStore>();
+            for (int i = 0; i < Controller.supportedStore.Length; i++)
+            {
+                Controller.stores.Add(null);
+            }
         }
 
-        
+        public void addConnectedStore(int id)
+        {
+            connectedStore.Add(id);
+        }
+
         /**
          * Daftarkan akun yang baru saja melakukan register
          * 
@@ -232,6 +242,11 @@ namespace BajuGW
         public List<Cloth> getClothes(string query, string category)
         {
             return wardrobe.getClothes(query, category);
+        }
+
+        internal void removeConnectedStore(int id)
+        {
+            connectedStore.Remove(id);
         }
     }
 }

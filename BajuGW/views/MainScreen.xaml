@@ -1,4 +1,4 @@
-﻿<Window Cursor="../assets/circleDouble.cur" x:Class="BajuGW.MainScreen"
+﻿<Window Cursor="../assets/arrow.cur" x:Class="BajuGW.MainScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"       
         Title="MainScreen" Height="768" Width="1366" 
@@ -64,7 +64,10 @@
             <ImageSource x:Key="loveButton">../assets/loveBtn.png</ImageSource>
 
             <ImageSource x:Key="hateButton">../assets/hateBtn.png</ImageSource>
+            <ImageSource x:Key="hateButtonHover">../assets/hateBtnHover.png</ImageSource>
 
+            <ImageSource x:Key="catButton">../assets/catBtn.png</ImageSource>
+            <ImageSource x:Key="catButtonHover">../assets/catBtnHover.png</ImageSource>
 
         </ResourceDictionary>
     </Window.Resources >
@@ -75,14 +78,15 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="111*"/>
-            <ColumnDefinition Width="572*"/>
+            <ColumnDefinition Width="222*"/>
+            <ColumnDefinition Width="381*"/>
+            <ColumnDefinition Width="763*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Margin="-11,-67,-123,-186" Height="1021" Source="../assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Image Margin="-11,-67,-123,-186" Height="1021" Source="../assets/wardrobe.jpg" Stretch="Fill" Width="1500" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
 
-        <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Rectangle IsHitTestVisible="False" StrokeThickness="4" Fill="Transparent" Opacity="1.0" HorizontalAlignment="Left" Height="697" Margin="29,53,0,0" Stroke="#ED2F59" VerticalAlignment="Top" Width="971" Grid.Column="1" Grid.RowSpan="2"/>
+        <Rectangle Opacity="0.8" Fill="#4B4B4D" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+        <Rectangle IsHitTestVisible="False" StrokeThickness="4" Fill="Transparent" Opacity="1.0" HorizontalAlignment="Left" Height="697" Margin="29,53,0,0" Stroke="#ED2F59" VerticalAlignment="Top" Width="971" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <Rectangle Opacity="0.4" Fill="Black" HorizontalAlignment="Left" Height="865" Margin="-66,-47,0,-50" Stroke="Transparent" VerticalAlignment="Top" Width="278" Grid.RowSpan="2"/>
         <Rectangle Fill="Black" Opacity="0.5" HorizontalAlignment="Left" Height="100" Margin="-11,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="223"/>
 
@@ -173,7 +177,7 @@
 
         </Button>
         <TextBlock Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="66,365,75,0" TextWrapping="Wrap" Text="store" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="81" Grid.Row="1"/>
-        <TextBlock x:Name="title"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,881,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
+        <TextBlock x:Name="title"  Foreground="White" FontFamily="../assets/#Big John" FontSize="20" HorizontalAlignment="Center" Margin="27,10,118,0" TextWrapping="Wrap" Text="size measurement" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="236" Grid.Column="1"/>
         <!-- Measure Screen -->
         <Grid x:Name="measureScreen" Visibility="Collapsed" Grid.RowSpan="2">
             <Grid x:Name="homeMeasureScreen" Visibility="Visible" Grid.RowSpan="2">
@@ -294,48 +298,17 @@
 
 
         <!-- Wardrobe Screen -->
-        <Grid x:Name="wardrobeScreen" Visibility="Visible" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2">
+        <Grid x:Name="wardrobeScreen" Visibility="Visible" Margin="29,53,144,18" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <StackPanel Orientation="Vertical">
                 <Grid Height="40">
                     <Image x:Name="favImage" Source="../assets/loveBtn.png" Margin="14,9,911,6"/>
                     <TextBlock x:Name="favText"  Foreground="White" FontFamily="../assets/Big John.otf" FontSize="20" HorizontalAlignment="Center" Margin="71,9,392,0" TextWrapping="Wrap" Text="favorit" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
                 </Grid>
-                <ScrollViewer Name="favGallery" VerticalScrollBarVisibility="Auto">
-                    <WrapPanel Name="favDisplay" Orientation="Horizontal" Margin="10">
-                        <!--<Grid x:Name="favItem">
-                            <Image x:Name="iFavItem" Height="140" Width="120"></Image>
-                            <Button x:Name="hoverFavItem" Background="Black" Opacity="0.7" Height="140" Width="120"></Button>
-                            <TextBlock x:Name="nameFavItem" Foreground="White" IsHitTestVisible="False" VerticalAlignment="Center" TextAlignment="Center" FontFamily="../assets/Aleo-Regular.otf" Margin="0,48,0,78">Nama Itemnya</TextBlock>
-                            <Button  Opacity="1.0" x:Name="hateBtn" Height="40" Width="40" Margin="40,80,40,20" >
-
-                                <Button.Background>
-                                    <ImageBrush ImageSource ="../assets/hateBtn.png"  />
-                                </Button.Background>
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Grid>-->
-                    </WrapPanel>
+                <ScrollViewer Name="favGallery" VerticalScrollBarVisibility="Auto" Height="190">
+                    <WrapPanel Name="favDisplay" Orientation="Horizontal" Margin="10"></WrapPanel>
                 </ScrollViewer>
-                <Grid Height="180">
-                    <Button VerticalAlignment="Top" FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="14" HorizontalAlignment="Right" Opacity="1.0" x:Name="suggestBtn" Height="40" Width="140" Margin="0,10,30,10"  >
-
+                <Grid Height="84" VerticalAlignment="Top">
+                    <Button VerticalAlignment="Top" FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="14" HorizontalAlignment="Right" Opacity="1.0" x:Name="suggestBtn" Height="40" Width="114" Margin="0,16,24,0"  Click="suggestBtnClicked">
                         <Button.Background>
                             <ImageBrush ImageSource ="../assets/suggestBtn.png"  />
                         </Button.Background>
@@ -359,12 +332,10 @@
                         </Button.Style>
                         Suggest Fashion
                     </Button>
-                    <TextBlock x:Name="catDisplayText" Height="40" Width="240"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="48,79,683,61">DISPLAY CATEGORY</TextBlock>
-                    <ComboBox VerticalContentAlignment="Center" Margin="288,73,454,67" x:Name="catDisplayOption" FontFamily="../assets/Slim Joe.otf" FontSize="20" SelectionChanged="catDisplayOption_SelectionChanged">
-                        <!--<ComboBoxItem>all</ComboBoxItem>-->
-                    </ComboBox>
-                    <TextBlock x:Name="searchText" Height="40"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="564,79,296,61">SEARCH</TextBlock>
-                    <TextBox x:Name="searchArea" Margin="690,73,52,67" FontFamily="../assets/BIG JOHN.otf"  FontSize="24" GotFocus="searchAreaActive" LostFocus="searchAreaInactive" >
+                    <TextBlock VerticalAlignment="Top" x:Name="catDisplayText" Height="40"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="18,23,733,0" >DISPLAY CATEGORY</TextBlock>
+                    <ComboBox VerticalAlignment="Top" VerticalContentAlignment="Center" Height="40" Width="200" x:Name="catDisplayOption" FontFamily="../assets/Slim Joe.otf" FontSize="20" SelectionChanged="catDisplayOption_SelectionChanged" Margin="259,14,512,0" ></ComboBox>
+                    <TextBlock x:Name="searchText" VerticalAlignment="Top" Height="40"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="496,23,388,0">SEARCH</TextBlock>
+                    <TextBox x:Name="searchArea" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  VerticalAlignment="Top" Width="200" Height="40"   FontFamily="../assets/BIG JOHN.otf"  FontSize="24" GotFocus="searchAreaActive" LostFocus="searchAreaInactive" Margin="606,16,165,0" >
                         <TextBox.Background>
                             <ImageBrush ImageSource="../assets/formFieldInactive.png" />
                         </TextBox.Background>
@@ -379,7 +350,7 @@
                         </TextBox.Style>
 
                     </TextBox>
-                    <Button Opacity="1.0" x:Name="searchBtn" Height="40" Width="40" Margin="879,73,52,67" Click="searchBtn_Click"  >
+                    <Button VerticalAlignment="Top" Opacity="1.0" x:Name="searchBtn" Height="40" Width="40"  Click="searchBtn_Click" RenderTransformOrigin="-2.25,0.6" Margin="768,16,163,0"  >
 
                         <Button.Background>
                             <ImageBrush ImageSource ="../assets/searchBtn.png"  />
@@ -402,55 +373,114 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-                        
+
                     </Button>
-                    <TextBlock x:Name="catNameDisplayText" Height="30" Width="240"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="21,130,710,10">all</TextBlock>
 
                 </Grid>
-                <ScrollViewer x:Name="gallery" VerticalScrollBarVisibility="Auto" Height="295">
-                    <WrapPanel x:Name="itemDisplay" Orientation="Horizontal" Margin="10">
-                        <!--<Grid x:Name="item">
-                            <Image x:Name="iItem" Height="140" Width="120"/>
-                            <Rectangle x:Name="hoverItem" Fill="Black" Opacity="0.7" Height="140" Width="120"/>
-                            <TextBlock x:Name="nameItem" Foreground="White" IsHitTestVisible="False" VerticalAlignment="Center" TextAlignment="Center" FontFamily="../assets/Aleo-Regular.otf" Margin="0,48,0,78"><Run Text="Nama Itemnya"/></TextBlock>
-                            <Button  Opacity="1.0" x:Name="loveBtn" Height="40" Width="40" Margin="40,80,40,20" >
-
-                                <Button.Background>
-                                    <ImageBrush ImageSource ="../assets/loveBtn.png"  />
-                                </Button.Background>
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Grid>-->
-                    </WrapPanel>
+                <ScrollViewer x:Name="gallery" VerticalScrollBarVisibility="Auto" Height="370">
+                    <WrapPanel x:Name="itemDisplay" Orientation="Horizontal" Margin="10"></WrapPanel>
                 </ScrollViewer>
 
 
             </StackPanel>
+            <Button x:Name="catBtn" Height="100" Width="100" Margin="1007,278,-136,319" Click="catBtnClicked" MouseEnter="catBtnHover" MouseLeave="catBtnIdle" >
+                <Button.Background>
+                    <ImageBrush ImageSource ="../assets/catBtn.png" />
+                </Button.Background>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </Grid>
+
+
+
+
 
         <!-- Store Screen -->
-        <Grid x:Name="storeScreen" Visibility="Collapsed" Grid.RowSpan="2">
+        <Grid x:Name="storeScreen" Visibility="Collapsed" Grid.RowSpan="2" RenderTransformOrigin="1,0.512" Margin="27,53,144,18" Grid.Column="1" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Vertical">
+                <Button Content="Store 1" Grid.Column="1" HorizontalAlignment="Left" Margin="50,50,50,50" VerticalAlignment="Top" Width="123" Height="101" Click="store1Button_Click"/>
+                <!--<Grid Height="40">
+                    <Image x:Name="onlineFavImage" Source="../assets/loveBtn.png" Margin="14,9,911,6"/>
+                    <TextBlock x:Name="onlineFavText"  Foreground="White" FontFamily="../assets/Big John.otf" FontSize="20" HorizontalAlignment="Center" Margin="71,9,392,0" TextWrapping="Wrap" Text="favorit" VerticalAlignment="Top" RenderTransformOrigin="-4.031,-7.196" Width="508"/>
+                </Grid>
+                <ScrollViewer x:Name="onlineFavGallery" VerticalScrollBarVisibility="Auto" Height="190">
+                    <WrapPanel x:Name="onlineFavDisplay" Orientation="Horizontal" Margin="10"></WrapPanel>
+                </ScrollViewer>-->
+                <Grid Height="84" VerticalAlignment="Top">
+                    <TextBlock VerticalAlignment="Top" x:Name="onlineCatDisplayText" Height="40"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="18,23,733,0" >DISPLAY CATEGORY</TextBlock>
+                    <ComboBox VerticalAlignment="Top" VerticalContentAlignment="Center" Height="40" Width="200" x:Name="onlineCatDisplayOption" FontFamily="../assets/Slim Joe.otf" FontSize="20" SelectionChanged="onlineCatDisplayOption_SelectionChanged" Margin="259,14,512,0" ></ComboBox>
+                    <TextBlock x:Name="onlineSearchText" VerticalAlignment="Top" Height="40"  FontFamily="../assets/BIG JOHN.otf" Foreground="White" FontSize="24" Margin="496,23,388,0">SEARCH</TextBlock>
+                    <TextBox x:Name="onlineSearchArea" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  VerticalAlignment="Top" Width="200" Height="40"   FontFamily="../assets/BIG JOHN.otf"  FontSize="24" GotFocus="searchAreaActive" LostFocus="searchAreaInactive" Margin="606,16,165,0" >
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="../assets/formFieldInactive.png" />
+                        </TextBox.Background>
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
 
+                    </TextBox>
+                    <Button VerticalAlignment="Top" Opacity="1.0" x:Name="onlineSearchBtn" Height="40" Width="40"  Click="onlineSearchBtn_Click" RenderTransformOrigin="-2.25,0.6" Margin="768,16,163,0"  >
+                        <Button.Background>
+                            <ImageBrush ImageSource ="../assets/searchBtn.png"  />
+                        </Button.Background>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                    </Button>
+
+                </Grid>
+                <ScrollViewer x:Name="onlineGallery" VerticalScrollBarVisibility="Auto" Height="370">
+                    <WrapPanel x:Name="onlineItemDisplay" Orientation="Horizontal" Margin="10"></WrapPanel>
+                </ScrollViewer>
+            </StackPanel>
         </Grid>
 
-        <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="1043,299,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="1" Grid.Row="1" >
+        <!-- -->
+
+
+
+
+        <Button Opacity="1.0" x:Name="settingBtn" Height="100" Width="100" Margin="662,299,1,0" MouseEnter="settingBtnHover" MouseLeave="settingBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="settingBtnClicked" Grid.Column="2" Grid.Row="1" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/settingBtn.png"  />
@@ -476,7 +506,7 @@
             </Button.Style>
 
         </Button>
-        <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="1052,8,12,281" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="1" >
+        <Button Opacity="1.0" x:Name="logoutBtn" Height="80" Width="80" Margin="671,8,12,281" MouseEnter="logoutBtnHover" MouseLeave="logoutBtnIdle" FontFamily="../assets/#Big John" Foreground="#3498db" Click="logoutBtnClicked" Grid.Column="2" >
 
             <Button.Background>
                 <ImageBrush ImageSource ="../assets/logoutBtn.png"  />
@@ -502,9 +532,9 @@
             </Button.Style>
 
         </Button>
-        <Rectangle x:Name="deactivator" Visibility="Collapsed" Opacity="0.8" Fill="Black" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Rectangle x:Name="deactivator" Visibility="Collapsed" Opacity="0.8" Fill="Black" HorizontalAlignment="Center" Height="825"  Stroke="Black" VerticalAlignment="Center" Width="1411" Margin="-27,-28,-18,-29" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
 
-        <Grid x:Name="settingScreen" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9" Grid.RowSpan="2">
+        <Grid x:Name="settingScreen" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="101*"/>
                 <RowDefinition Height="91*"/>
@@ -609,7 +639,7 @@
             </Button>
         </Grid>
 
-        <Grid x:Name="logoutConfirm" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9" Grid.RowSpan="2">
+        <Grid x:Name="logoutConfirm" Visibility="Collapsed" Grid.Column="1" Margin="325,9,334,-9" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="101*"/>
                 <RowDefinition Height="91*"/>
@@ -698,6 +728,89 @@
             </Button>
             <Label HorizontalContentAlignment="Center" IsHitTestVisible="False" Foreground="White" FontFamily="../assets/#Slim Joe" FontSize="36" Content="are you sure want to logout&#xD;&#xA;from your account?" Margin="-150,282,-64,6"/>
         </Grid>
+
+        <Grid x:Name="popupScreen" Visibility="Visible">
+            <Rectangle x:Name="deactivate" IsHitTestVisible="False"  Fill="Black" Opacity="0.7" Margin="-90,-45,-1173,-441"></Rectangle>
+            <Grid x:Name="suggestionScreen" Visibility="Collapsed">
+
+                <Rectangle Fill="WhiteSmoke" Opacity="0.8" Margin="282,213,-957,-135"/>
+                <TextBlock x:Name="suggestText" TextAlignment="Center"  Margin="309,233,-942,111">Fashion Suggestion</TextBlock>
+                <Button x:Name="pExitBtn" Margin="1044,225,-942,111" Click="pExitBtnClicked">Exit</Button>
+                <WrapPanel x:Name="suggestDisplay" Orientation="Horizontal" Margin="351,286,-889,-110">
+                    <!-- <Grid x:Name="item">
+                        <Image x:Name="iItem" Height="140" Width="120"/>
+                        <Rectangle x:Name="hoverItem" Fill="Black" Opacity="0.7" Height="140" Width="120"/>
+                        <TextBlock x:Name="nameItem" Foreground="White" IsHitTestVisible="False" VerticalAlignment="Center" TextAlignment="Center" FontFamily="../assets/Aleo-Regular.otf" Margin="0,48,0,78"><Run Text="Nama Itemnya"/></TextBlock>
+                        <Button  Opacity="1.0" x:Name="loveBtn" Height="40" Width="40" Margin="40,80,40,20" >
+
+                            <Button.Background>
+                                <ImageBrush ImageSource ="../assets/loveBtn.png"  />
+                            </Button.Background>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>-->
+                </WrapPanel>
+            </Grid>
+            <Grid x:Name="eCatScreen" RenderTransformOrigin="2.338,0.512">
+                <Rectangle Fill="WhiteSmoke" Margin="300,90,-939,-258"/>
+                <TextBlock x:Name="eCatText" VerticalAlignment="Center" TextAlignment="Center" FontSize="20" Margin="300,90,-939,225" >Edit Category</TextBlock>
+                <Button x:Name="eExitBtn" Margin="1014,104,-915,217" Click="eExitBtnClicked" MouseEnter="eExitBtnHover" MouseLeave="eExitBtnIdle">Exit</Button>
+                <ListBox x:Name="categoryListBox" Margin="336,207,-903,-141">
+                    <!--<WrapPanel Width="779" Height="317"  >
+                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
+                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
+                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
+                        <ListBoxItem Margin="15"  FontSize="20">AAAAAAAAAAAAAAAAA</ListBoxItem>
+                    </WrapPanel>-->
+                </ListBox>
+                <Button x:Name="newCatBtn" FontSize="20" FontFamily="Slim Joe" Margin="495,542,-396,-221" Click="newCatBtnClicked" MouseEnter="newCatBtnHover" MouseLeave="newCatBtnIdle">New</Button>
+                <Button x:Name="editCatBtn" FontSize="20" FontFamily="Slim Joe" Margin="687,542,-588,-221" Click="editCatBtnClicked" MouseEnter="editCatBtnHover" MouseLeave="editCatBtnIdle">Edit</Button>
+                <Button x:Name="deleteCatBtn" FontSize="20" FontFamily="Slim Joe" Margin="885,542,-786,-221" Click="deleteCatBtnClicked" MouseEnter="deleteCatBtnHover" MouseLeave="deleteCatBtnIdle">Delete</Button>
+
+                <Grid Margin="564,315,-693,-45" x:Name="editCategoryTextScreen" Visibility="Collapsed">
+                    <Rectangle Fill="WhiteSmoke" />
+                    <TextBox HorizontalAlignment="Left" x:Name="editCategoryTextField" Height="27" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Margin="45,36,0,0"/>
+                    <Button Margin="259,26,10,10" x:Name="confirmEditCategoryText">OK</Button>
+                </Grid>
+
+            </Grid>
+
+            <Grid x:Name="itemDetail" Width="1000" Background="White" Margin="227,65,-1005,-324">
+                <Button x:Name="exitDetailBtn" Margin="875,18,25,570">
+                    Exit
+                </Button>
+                <Grid x:Name="itemDetailScreen">
+                    <TextBlock x:Name="itemName" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Center">
+                        ItemName
+                    </TextBlock>
+                    <Image Height="350" Width="300"  x:Name="itemImage" Source="../data/0.png" Margin="38,142,662,136"></Image>
+                    <TextBlock x:Name="itemDesc" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,105,489,0">Description :</TextBlock>
+                    <TextBlock x:Name="itemSize" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,252,489,0">Size :</TextBlock>
+                    <TextBlock x:Name="itemSize" Width="100" Height="20" VerticalAlignment="Top" TextAlignment="Left" Margin="411,252,489,0">Size :</TextBlock>
+                </Grid>
+            </Grid>
+
+        </Grid>
+
+
+
 
     </Grid>
 

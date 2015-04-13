@@ -3,43 +3,55 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Net;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace BajuGW
 {
-    class OnlineStore
+    public class OnlineStore
     {
-        private string name;
-        private string address;
+        public int id;
+        public string address;
         private List<OnlineCloth> clothes;
-
+        public static List<string> categories = new List<string>(new string[] { "all" });
 
         /**
          * Constructor utama
          * 
          */
-        public OnlineStore(string name, string address)
+        public OnlineStore(int id, string address)
         {
-            this.name = name;
+            this.id = id;
             this.address = address;
             this.clothes = new List<OnlineCloth>();
 
             using (WebClient Client = new WebClient())
             {
-                Client.DownloadFile(address, "clothes.json");
-                using (System.IO.StreamReader r = new System.IO.StreamReader("file.json"))
+                Client.DownloadFile(address + "/json1.php", "clothes.json");
+                using (System.IO.StreamReader r = new System.IO.StreamReader("clothes.json"))
                 {
                     string json = r.ReadToEnd();
                     clothes = JsonConvert.DeserializeObject<List<OnlineCloth>>(json);
                 }
-                
+
+                //OnlineStore.categories.Add("all");
                 foreach (OnlineCloth cloth in clothes) {
-                    string filename = this.name + "_" +cloth.id+".png";
-                    Client.DownloadFile(address+cloth.picture_path, filename);
+                    string filename = "."+cloth.picture_path;
+
+                    if (!File.Exists(filename))
+                    {
+                        Client.DownloadFile(address + cloth.picture_path, filename);
+                        
+                    }
                     cloth.picture = new BitmapImage(new Uri(filename, UriKind.Relative));
+                    cloth.picture_path = filename;
+
+                    foreach (string cat in cloth.category)
+                    {
+                        if (!OnlineStore.categories.Contains(cat))
+                            OnlineStore.categories.Add(cat);
+                    }
                 }
             }
-
-            
         }
 
 
@@ -75,7 +87,7 @@ namespace BajuGW
 
             foreach (OnlineCloth cloth in clothes)
             {
-                if (cloth.categories.Equals(category))
+                if (cloth.category.Contains(category))
                 {
                     result.Add(cloth);
                 }
@@ -142,6 +154,18 @@ namespace BajuGW
         bool checkConnection()
         {
             return false;
+        }
+
+        internal List<OnlineCloth> getClothes(string query, string category)
+        {
+            List<OnlineCloth> clothes = getOnlineClothes(category);
+            List<OnlineCloth> result = new List<OnlineCloth>();
+            foreach (OnlineCloth cloth in clothes)
+            {
+                if (cloth.name.Contains(query))
+                    result.Add(cloth);
+            }
+            return result;
         }
     }
 }

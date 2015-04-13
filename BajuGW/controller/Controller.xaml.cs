@@ -23,8 +23,9 @@ namespace BajuGW
         private MainScreen mainScreen;
         private Account account;
         public static SQLiteManager dbmanager;
+        public static List<OnlineStore> stores;
         public static string DBNAME = "data.db";
-
+        public static string[] supportedStore = { "http://ppl-c06.cs.ui.ac.id" };
 
         /**
          * Constructor utama
@@ -48,6 +49,10 @@ namespace BajuGW
             this.MainWindow.Show();
         }
 
+        public List<string> getOnlineCategories()
+        {
+            return OnlineStore.categories;
+        }
 
         /**
          * Tampilkan halaman login
@@ -67,6 +72,7 @@ namespace BajuGW
         public void showMainScreen(Window caller) {
             this.MainWindow = mainScreen;
             mainScreen.refresh();
+            mainScreen.refreshStore();
             this.MainWindow.Show();
             caller.Hide();
         }
@@ -92,6 +98,8 @@ namespace BajuGW
         public void logout()
         {
             this.account = null;
+            mainScreen = new MainScreen(this);
+            loginScreen = new LoginScreen(this);
         }
 
 
@@ -152,6 +160,18 @@ namespace BajuGW
         public List<Cloth> getClothes(String category)
         {
             return account.getClothes(category);
+        }
+
+
+        public void addConnectedStore(int id)
+        {
+            account.addConnectedStore(id);
+        }
+
+
+        public void removeConnectedStore(int id)
+        {
+            account.removeConnectedStore(id);
         }
 
 
@@ -230,6 +250,12 @@ namespace BajuGW
         public List<Cloth> getClothesFromWardrobe(string query, string category)
         {
             return account.getClothes(query, category);
+        }
+
+
+        public List<OnlineCloth> getClothesFromOnlineStore(int id, string query, string category)
+        {
+            return stores[id].getClothes(query, category);
         }
     }
 }

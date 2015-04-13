@@ -1,4 +1,4 @@
-﻿<Window KeyDown="esc" Cursor="../assets/circleDouble.cur" x:Class="BajuGW.LoginScreen"
+﻿<Window KeyDown="esc" Cursor="../assets/arrow.cur" x:Class="BajuGW.LoginScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"       
         Title="LoginScreen" Height="768" Width="1366" 

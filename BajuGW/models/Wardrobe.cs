@@ -65,6 +65,7 @@ namespace BajuGW
                 }
             }
 
+            categories.Add("all"); //nilai default
             query = "select id from category where username='" + this.username + "'";
             foreach (NameValueCollection row in dbmanager.queryWithReturn(query))
             {
@@ -92,7 +93,7 @@ namespace BajuGW
                 {
                     suggestion.Add(clothes[n]);
                     blacklist.Add(n);
-                    n--;
+                    i--;
                 }
             }
             
@@ -123,7 +124,7 @@ namespace BajuGW
 
             foreach (Cloth cloth in clothes)
             {
-                if (cloth.categories.Contains(category))
+                if (cloth.category.Contains(category))
                 {
                     result.Add(cloth);
                 }
@@ -275,11 +276,16 @@ namespace BajuGW
         public bool deleteCategory(String category)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            
 
-            string query = "delete from category where username='" + username +
-                "' and id='" + category + "'";
+            string query = "delete from cloth_has_category where username='" +
+                username + "' and category_id='" + category + "'";
             bool status = dbmanager.queryWithoutReturn(query);
+            if (!status)
+                return false;
+
+            query = "delete from category where username='" + username +
+                "' and id='" + category + "'";
+            status = dbmanager.queryWithoutReturn(query);
             
 
             if (!status)
@@ -306,11 +312,24 @@ namespace BajuGW
         public bool editCategory(String category, String newName)
         {
             SQLiteManager dbmanager = Controller.dbmanager;
-            
 
-            string query = "update category set id='"+ newName + "' where username='" +
-                username + "' and id='" + category + "'";
+            string query = "insert into category values('" + username + "', '" +
+                newName + "')";
             bool status = dbmanager.queryWithoutReturn(query);
+
+            if (!status)
+                return false;
+
+            query = "update cloth_has_category set category_id='" + newName +
+                "' where username='" + username + "' and category_id='" + category +"'";
+            status = dbmanager.queryWithoutReturn(query);
+
+            if (!status)
+                return false;
+
+            query = "delete from category where username='" + username +
+                "' and id='" + category + "'";
+            status = dbmanager.queryWithoutReturn(query);
             
 
             if (!status)

@@ -20,7 +20,7 @@ namespace BajuGW
         public string brand;
         public BitmapSource picture;
         public string picture_path;
-        public List<string> categories;
+        public List<string> category;
 
 
         /**
@@ -28,7 +28,7 @@ namespace BajuGW
          * 
          */
         public Cloth(int id, string name, string brand, int isFavorite, string color,
-            double clothWidth, double clothHeight, string picture_path, List<string> categories)
+            double clothWidth, double clothHeight, string picture_path, List<string> category)
         {
             this.id = id;
             this.name = name;
@@ -39,7 +39,7 @@ namespace BajuGW
             this.clothHeight = clothHeight;
             this.picture_path = picture_path;
             this.picture = new BitmapImage(new Uri(picture_path, UriKind.Relative));
-            this.categories = categories;
+            this.category = category;
         }
 
 
@@ -54,7 +54,7 @@ namespace BajuGW
             this.clothHeight = cloth.clothHeight;
             this.picture_path = cloth.picture_path;
             this.picture = new BitmapImage(new Uri(this.picture_path, UriKind.Relative));
-            this.categories = cloth.categories;
+            this.category = cloth.category;
         }
 
 
@@ -94,7 +94,7 @@ namespace BajuGW
          */
         public void addCategory(string category)
         {
-            categories.Add(category);
+            this.category.Add(category);
         }
 
 
@@ -104,7 +104,7 @@ namespace BajuGW
          */
         public void removeCategory(string category)
         {
-            categories.Remove(category);
+            this.category.Remove(category);
         }
     }
 
@@ -125,9 +125,9 @@ namespace BajuGW
          */
         public OnlineCloth(int id, string name, string brand, int isFavorite,
             string color, double clothWidth, double clothHeight, string picture_path,
-            List<string> categories, int store, int price) :
+            List<string> category, int store, int price) :
             base (id, name, brand, isFavorite, color, clothWidth, clothHeight,
-            picture_path, categories)
+            picture_path, category)
         {
             this.store = store;
             this.price = price;
