@@ -41,6 +41,8 @@ namespace BajuGW
         private PXCMFaceConfiguration faceConfig;
         private PXCMFaceData faceData;
 
+        private PXCM3DSeg segmentation;
+
         private PXCMFaceData.RecognitionData recognitionData;
         private PXCMFaceConfiguration.RecognitionConfiguration recognitionConfig;
         private PXCMFaceConfiguration.RecognitionConfiguration.RecognitionStorageDesc recogStorageDesc;
@@ -99,25 +101,6 @@ namespace BajuGW
 
         }
 
-
-        //=====Touchless Controller==================================================================================//
-
-        //======Touchless controller=============================================================================//
-
-
-        /* private void Window_Loaded(object sender, RoutedEventArgs e)
-         {
-             lblMessage.Content = "(Wave Your Hand)";
-         } 
-
-         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-         {
-             processingThread.Abort();
-             if (handData != null) handData.Dispose();
-             handConfig.Dispose();
-             senseManager.Dispose();
-         }*/
-
         private void ProcessingThread()
         {
             // Start AcquireFrame/ReleaseFrame loop
@@ -127,13 +110,13 @@ namespace BajuGW
                     Bitmap colorBitmap = new Bitmap(640, 480);
                     PXCMImage.ImageData colorData = new PXCMImage.ImageData();
                     PXCMImage image = sample.color;
-
+                    
                     // Get color image data
                     if (sample != null)
                     {
                         sample.color.AcquireAccess(PXCMImage.Access.ACCESS_READ, PXCMImage.PixelFormat.PIXEL_FORMAT_RGB32, out colorData);
                         colorBitmap = colorData.ToBitmap(0, sample.color.info.width, sample.color.info.height);
-                    }                    
+                    }                  
 
                     // Get the face
                     faceModule = senseManager.QueryFace();
@@ -217,10 +200,10 @@ namespace BajuGW
                     else
                     {
                         loginBtn.Content = "CLICK HERE TO LOGIN";
-                    }                    
+                    }
+                    bitmap.Dispose();
                 }
             }));
-            bitmap.Dispose();
         }
          
 
