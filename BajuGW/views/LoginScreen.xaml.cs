@@ -45,6 +45,9 @@ namespace BajuGW
         private PXCMFaceConfiguration.RecognitionConfiguration recognitionConfig;
         private PXCMFaceConfiguration.RecognitionConfiguration.RecognitionStorageDesc recogStorageDesc;
         private bool registerUser;
+        private const string DatabaseName = "UserDB";
+        private const string DatabaseFilename = "database.bin";
+        private int DatabaseUsers = 10;
 
         private PXCMTouchlessController touchlessController;
 
@@ -83,9 +86,10 @@ namespace BajuGW
             recognitionConfig = faceConfig.QueryRecognition();
             recognitionConfig.Enable();
             recogStorageDesc = new PXCMFaceConfiguration.RecognitionConfiguration.RecognitionStorageDesc();
-            recogStorageDesc.maxUsers = 10;
-            recognitionConfig.CreateStorage("MyDB", out recogStorageDesc);
-            recognitionConfig.UseStorage("MyDB");
+            recogStorageDesc.maxUsers = DatabaseUsers;
+            recognitionConfig.CreateStorage(DatabaseName, out recogStorageDesc);
+            recognitionConfig.UseStorage(DatabaseName);
+            LoadDatabaseFromFile();
             recognitionConfig.SetRegistrationMode(PXCMFaceConfiguration.RecognitionConfiguration.RecognitionRegistrationMode.REGISTRATION_MODE_CONTINUOUS);
             faceConfig.ApplyChanges();
 
@@ -121,7 +125,7 @@ namespace BajuGW
                 {
                     PXCMCapture.Sample sample = senseManager.QuerySample();
                     Bitmap colorBitmap = new Bitmap(640, 480);
-                    PXCMImage.ImageData colorData;
+                    PXCMImage.ImageData colorData = new PXCMImage.ImageData();
                     PXCMImage image = sample.color;
 
                     // Get color image data
@@ -146,6 +150,8 @@ namespace BajuGW
                     // Release the frame
                     if (faceData != null) faceData.Dispose();
                     colorBitmap.Dispose();
+                    sample.color.ReleaseAccess(colorData);
+                    sample.color.Dispose();
                     senseManager.ReleaseFrame();
                 }
         }
@@ -174,7 +180,7 @@ namespace BajuGW
                     if (numOfFace == 1)
                     {
                             // Retrieve the recognition data instance
-                            PXCMFaceData.Face face = faceData.QueryFaceByID(0);
+                            PXCMFaceData.Face face = faceData.QueryFaceByIndex(0);
                             if (face != null)
                             {
                                 recognitionData = face.QueryRecognition();
@@ -183,18 +189,23 @@ namespace BajuGW
                                     if (registerUser)
                                     {
                                         recognitionData.RegisterUser();
+                                        SaveDatabaseToFile();
+                                        Int32 uid = recognitionData.QueryUserID();
+                                        loginBtn.Content = "saved as id: " + uid;
                                         registerUser = false;
-                                    }
-
-                                    // Recognize the current face?
-                                    Int32 uid = recognitionData.QueryUserID();
-                                    if (uid >= 0)
-                                    {
-                                        loginBtn.Content = "Dikenali" + uid;
                                     }
                                     else
                                     {
-                                        loginBtn.Content = "Tidak Dikenali";
+                                        // Recognize the current face?
+                                        Int32 uid = recognitionData.QueryUserID();
+                                        if (uid >= 0)
+                                        {
+                                            loginBtn.Content = "Dikenali " + uid;
+                                        }
+                                        else
+                                        {
+                                            loginBtn.Content = "Tidak Dikenali";
+                                        }
                                     }
                                 }
                                 else
@@ -206,10 +217,10 @@ namespace BajuGW
                     else
                     {
                         loginBtn.Content = "CLICK HERE TO LOGIN";
-                    }
-                    
+                    }                    
                 }
             }));
+            bitmap.Dispose();
         }
          
 
@@ -795,6 +806,30 @@ namespace BajuGW
             {
                 this.Dispatcher.Invoke(new Action(() => OnTouchlessControllerUXEvent(data)));
             }
+        }
+
+        private void LoadDatabaseFromFile()
+        {
+            if (File.Exists(DatabaseFilename))
+            {
+                Byte[] buffer = File.ReadAllBytes(DatabaseFilename);
+                recognitionConfig.SetDatabaseBuffer(buffer);
+            }
+        }
+
+        private void SaveDatabaseToFile()
+        {
+            // Allocate the buffer to save the database
+            PXCMFaceData.RecognitionModuleData recognitionModuleData = faceData.QueryRecognitionModule();
+            Int32 nBytes = recognitionModuleData.QueryDatabaseSize();
+            Byte[] buffer = new Byte[nBytes];
+
+            // Retrieve the database buffer
+            recognitionModuleData.QueryDatabaseBuffer(buffer);
+
+            // Save the buffer to a file
+            // (NOTE: production software should use file encryption for privacy protection)
+            File.WriteAllBytes(DatabaseFilename, buffer);
         }
     }
 
