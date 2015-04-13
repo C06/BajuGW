@@ -25,8 +25,8 @@ namespace BajuGW
 
             using (WebClient Client = new WebClient())
             {
-                Client.DownloadFile(address + "/json1.php", "clothes.json");
-                using (System.IO.StreamReader r = new System.IO.StreamReader("clothes.json"))
+                Client.DownloadFile(address, "clothes.json");
+                using (System.IO.StreamReader r = new System.IO.StreamReader("file.json"))
                 {
                     string json = r.ReadToEnd();
                     clothes = JsonConvert.DeserializeObject<List<OnlineCloth>>(json);
@@ -34,8 +34,6 @@ namespace BajuGW
                 
                 foreach (OnlineCloth cloth in clothes) {
                     string filename = this.name + "_" +cloth.id+".png";
-                    
-
                     Client.DownloadFile(address+cloth.picture_path, filename);
                     cloth.picture = new BitmapImage(new Uri(filename, UriKind.Relative));
                 }

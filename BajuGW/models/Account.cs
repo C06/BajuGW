@@ -204,6 +204,12 @@ namespace BajuGW
         }
 
 
+        public bool setUnfavorite(int id)
+        {
+            return wardrobe.setUnfavorite(id);
+        }
+
+
         /**
          * Kembalikan daftar pakaian yang sesuai dengan kriteria pencarian
          * 
@@ -211,6 +217,21 @@ namespace BajuGW
         public List<Cloth> search(string query)
         {
             return wardrobe.search(query);
+        }
+
+        public void refresh()
+        {
+            wardrobe.refresh();
+        }
+
+        public List<Cloth> getFavorites()
+        {
+            return wardrobe.getFavorites();
+        }
+
+        public List<Cloth> getClothes(string query, string category)
+        {
+            return wardrobe.getClothes(query, category);
         }
     }
 }
